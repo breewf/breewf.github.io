@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-03T01:59:28.264Z</updated>
+  <updated>2016-03-03T03:26:49.066Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试Blog</title>
+    <link href="http://yoursite.com/2016/03/03/my-first-blog/"/>
+    <id>http://yoursite.com/2016/03/03/my-first-blog/</id>
+    <published>2016-03-03T03:17:30.000Z</published>
+    <updated>2016-03-03T03:26:49.066Z</updated>
+    
+    <content type="html">&lt;p&gt;这是一篇测试Blog&lt;/p&gt;
+&lt;p&gt;这是一篇成功建立个人博客站点并能正常访问的测试Blog&lt;/p&gt;
+&lt;p&gt;使用工具：&lt;br&gt;&lt;a href=&quot;https://pages.github.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Github Pages&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://hexo.io/zh-cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;&lt;br&gt;博客主题&lt;a href=&quot;http://theme-next.iissnan.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;NexT&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/05289a4bc8b2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何搭建一个独立博客——简明Github Pages与Hexo教程&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://opiece.me/2015/04/09/hexo-guide/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用Hexo搭建个人博客&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/99665608d295?utm_campaign=haruki&amp;amp;utm_content=note&amp;amp;utm_medium=reader_share&amp;amp;utm_source=qq#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何在一天之内搭建以你自己名字为域名且具备cool属性的个人博客&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一篇测试Blog&lt;/p&gt;
+&lt;p&gt;这是一篇成功建立个人博客站点并能正常访问的测试Blog&lt;/p&gt;
+&lt;p&gt;使用工具：&lt;br&gt;&lt;a href=&quot;https://pages.github.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Github P
+    
+    </summary>
+    
+    
+      <category term="文章" scheme="http://yoursite.com/tags/%E6%96%87%E7%AB%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
