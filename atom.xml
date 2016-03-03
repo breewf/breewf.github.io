@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-03T06:23:51.880Z</updated>
+  <updated>2016-03-03T06:36:25.251Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/03/03/android-studio-plugin/"/>
     <id>http://yoursite.com/2016/03/03/android-studio-plugin/</id>
     <published>2016-03-03T05:18:10.000Z</published>
-    <updated>2016-03-03T06:23:51.880Z</updated>
+    <updated>2016-03-03T06:36:25.251Z</updated>
     
     <content type="html">&lt;p&gt;Android studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
 &lt;font color=&quot;#ff0000&quot; size=&quot;3&quot;&gt;注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
@@ -51,7 +51,9 @@
     </summary>
     
     
-      <category term="Android studio，工具" scheme="http://yoursite.com/tags/Android-studio%EF%BC%8C%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
     
   </entry>
   
