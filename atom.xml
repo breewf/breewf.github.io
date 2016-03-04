@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-03T06:41:01.833Z</updated>
+  <updated>2016-03-04T01:47:15.073Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Android studio 实用插件推荐</title>
+    <title>RxJava、Retrofit学习资料</title>
+    <link href="http://yoursite.com/2016/03/04/RxJava-Retrofit/"/>
+    <id>http://yoursite.com/2016/03/04/RxJava-Retrofit/</id>
+    <published>2016-03-04T01:28:04.000Z</published>
+    <updated>2016-03-04T01:47:15.073Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;strong&gt;RxJava、Retrofit学习资料总结：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://gold.xitu.io/entry/561b2c1860b2b90b56881f83&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;给Android开发者的RxJava详解&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://gold.xitu.io/entry/56ce811171cfe4005408447e&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;学习Retrofit和RxJava小记&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/90b1f20b123d#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Retrofit笔记&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0430/2815.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RxJava专题_泡在网上的日子&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/lzyzsd/article/category/2767743&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RxJava_大头鬼Bruce&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0915/3460.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Retrofit2.0：有史以来最大的改进&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/u012301841/article/details/49685677&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Retrofit2.0使用详解，配合OkHttp、Gson，Android最强网络请求框架&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/u014165119/article/details/49280779&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Retrofit2.0使用详解&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/qq_17766199/article/details/49946429&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Retrofit2.0使用&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;RxJava、Retrofit学习资料总结：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://gold.xitu.io/entry/561b2c1860b2b90b56881f83&quot; target=&quot;_blank&quot; rel=&quot;external
+    
+    </summary>
+    
+    
+      <category term="RxJava" scheme="http://yoursite.com/tags/RxJava/"/>
+    
+      <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android Studio 实用插件推荐</title>
     <link href="http://yoursite.com/2016/03/03/android-studio-plugin/"/>
     <id>http://yoursite.com/2016/03/03/android-studio-plugin/</id>
     <published>2016-03-03T05:18:10.000Z</published>
-    <updated>2016-03-03T06:41:01.833Z</updated>
+    <updated>2016-03-04T01:48:21.353Z</updated>
     
-    <content type="html">&lt;p&gt;Android studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
+    <content type="html">&lt;p&gt;Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
 &lt;font color=&quot;#ff0000&quot; size=&quot;3&quot;&gt;注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
 
 &lt;h3 id=&quot;1-ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#1-ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;1.ButterKnife Zelezny&quot;&gt;&lt;/a&gt;1.ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -43,7 +76,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Android studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
+      &lt;p&gt;Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
 &lt;font color=#ff0000 size=3&gt;注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
 
 &lt;h3 id=&quot;1-ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#1-ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;1.ButterKnife Zelezny&quot;&gt;&lt;/a&gt;1.ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;

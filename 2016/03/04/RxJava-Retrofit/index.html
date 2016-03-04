@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="AndroidStudio,Androidstudio,工具," />
+  <meta name="keywords" content="RxJava,Retrofit," />
 
 
 
@@ -57,28 +57,43 @@
 
 
 
-<meta name="description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名">
+<meta name="description" content="RxJava、Retrofit学习资料总结：
+给Android开发者的RxJava详解
+学习Retrofit和RxJava小记
+Retrofit笔记
+RxJava专题_泡在网上的日子
+RxJava_大头鬼Bruce
+Retrofit2.0：有史以来最大的改进
+Retrofit2.0使用详解，配合OkHttp、Gson，Android最强网络请求框架
+Retrofit2.0使用详解
+Retrofit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Studio 实用插件推荐">
-<meta property="og:url" content="http://yoursite.com/2016/03/03/android-studio-plugin/index.html">
+<meta property="og:title" content="RxJava、Retrofit学习资料">
+<meta property="og:url" content="http://yoursite.com/2016/03/04/RxJava-Retrofit/index.html">
 <meta property="og:site_name" content="那一抹、记忆">
-<meta property="og:description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名">
-<meta property="og:image" content="http://stormzhang.com/image/zelezny_animated.gif">
-<meta property="og:image" content="http://stormzhang.com/image/gson_format.gif">
-<meta property="og:image" content="http://stormzhang.com/image/select_option.png">
-<meta property="og:image" content="http://stormzhang.com/image/parcelable_generator.png">
-<meta property="og:image" content="http://stormzhang.com/image/leakcaneray.png">
-<meta property="og:image" content="http://www.jcodecraeer.com/uploads/20151009/1444358722597969.gif">
-<meta property="og:image" content="http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif">
-<meta property="og:image" content="http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif">
-<meta property="og:updated_time" content="2016-03-04T01:48:21.353Z">
+<meta property="og:description" content="RxJava、Retrofit学习资料总结：
+给Android开发者的RxJava详解
+学习Retrofit和RxJava小记
+Retrofit笔记
+RxJava专题_泡在网上的日子
+RxJava_大头鬼Bruce
+Retrofit2.0：有史以来最大的改进
+Retrofit2.0使用详解，配合OkHttp、Gson，Android最强网络请求框架
+Retrofit2.0使用详解
+Retrofit">
+<meta property="og:updated_time" content="2016-03-04T01:47:15.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Studio 实用插件推荐">
-<meta name="twitter:description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名">
-<meta name="twitter:image" content="http://stormzhang.com/image/zelezny_animated.gif">
+<meta name="twitter:title" content="RxJava、Retrofit学习资料">
+<meta name="twitter:description" content="RxJava、Retrofit学习资料总结：
+给Android开发者的RxJava详解
+学习Retrofit和RxJava小记
+Retrofit笔记
+RxJava专题_泡在网上的日子
+RxJava_大头鬼Bruce
+Retrofit2.0：有史以来最大的改进
+Retrofit2.0使用详解，配合OkHttp、Gson，Android最强网络请求框架
+Retrofit2.0使用详解
+Retrofit">
 
 
 
@@ -96,7 +111,7 @@
   };
 </script>
 
-  <title> Android Studio 实用插件推荐 | 那一抹、记忆 </title>
+  <title> RxJava、Retrofit学习资料 | 那一抹、记忆 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -238,7 +253,7 @@
             
             
               
-                Android Studio 实用插件推荐
+                RxJava、Retrofit学习资料
               
             
           </h1>
@@ -250,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-03T13:18:10+08:00" content="2016-03-03">
-              2016-03-03
+            <time itemprop="dateCreated" datetime="2016-03-04T09:28:04+08:00" content="2016-03-04">
+              2016-03-04
             </time>
           </span>
 
@@ -261,8 +276,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/03/android-studio-plugin/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/03/android-studio-plugin/" itemprop="commentsCount"></span>
+                <a href="/2016/03/04/RxJava-Retrofit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/04/RxJava-Retrofit/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -284,23 +299,16 @@
       
 
       
-        <p>Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。</p>
-<font color="#ff0000" size="3">注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。</font>
-
-<h3 id="1-ButterKnife-Zelezny"><a href="#1-ButterKnife-Zelezny" class="headerlink" title="1.ButterKnife Zelezny"></a>1.ButterKnife Zelezny</h3><p>ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。<br><img src="http://stormzhang.com/image/zelezny_animated.gif" alt=""></p>
-<a id="more"></a>
-<h3 id="2-GsonFormat"><a href="#2-GsonFormat" class="headerlink" title="2.GsonFormat"></a>2.GsonFormat</h3><p>现在大多数服务端api都以json数据格式返回，而客户端需要根据api接口生成相应的实体类，这个插件把这个过程自动化了，赶紧使用起来吧。<br><img src="http://stormzhang.com/image/gson_format.gif" alt=""></p>
-<h3 id="3-SelectorChapek"><a href="#3-SelectorChapek" class="headerlink" title="3.SelectorChapek"></a>3.SelectorChapek</h3><p>设计师给我们提供好了各种资源，每个按钮都要写一个selector是不是很麻烦？这么这个插件就为解决这个问题而生，你只需要做的是告诉设计师们按照规范命名就好了，其它一键搞定。<br><img src="http://stormzhang.com/image/select_option.png" alt=""></p>
-<h3 id="4-ParcelableGenerator"><a href="#4-ParcelableGenerator" class="headerlink" title="4.ParcelableGenerator"></a>4.ParcelableGenerator</h3><p>Android中的序列化有两种方式，分别是实现Serializable接口和Parcelable接口，但在Android中是推荐使用Parcelable，只不过我们这种方式要比Serializable方式要繁琐，那么有了这个插件一切就ok了。<br><img src="http://stormzhang.com/image/parcelable_generator.png" alt=""></p>
-<h3 id="5-LeakCanary"><a href="#5-LeakCanary" class="headerlink" title="5.LeakCanary"></a>5.LeakCanary</h3><p>良心企业Square最近刚开源的一个非常有用的工具，强烈推荐，帮助你在开发阶段方便的检测出内存泄露的问题，使用起来简单方便。</p>
-<p>中文版<a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="external">LeakCanary 中文使用说明</a></p>
-<p><img src="http://stormzhang.com/image/leakcaneray.png" alt=""></p>
-<h3 id="6-Genymotion"><a href="#6-Genymotion" class="headerlink" title="6.Genymotion"></a>6.Genymotion</h3><p>强大的安卓模拟器！<br>中文官网：<a href="http://www.genymotion.net/" target="_blank" rel="external">Genymotion</a></p>
-<h3 id="7-Lifecycle-Sorter"><a href="#7-Lifecycle-Sorter" class="headerlink" title="7.Lifecycle-Sorter"></a>7.Lifecycle-Sorter</h3><p>可以根据Activity或者fragment的生命周期对其生命周期方法位置进行先后排序， 快捷键Ctrl + alt + K<br><img src="http://www.jcodecraeer.com/uploads/20151009/1444358722597969.gif" alt=""></p>
-<h3 id="8-CodeGlance"><a href="#8-CodeGlance" class="headerlink" title="8.CodeGlance"></a>8.CodeGlance</h3><p>可用于快速定位代码，类似于Sublime编辑器右侧定位视图。<br><img src="http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif" alt=""></p>
-<h3 id="9-JsonOnlineViewer"><a href="#9-JsonOnlineViewer" class="headerlink" title="9.JsonOnlineViewer"></a>9.JsonOnlineViewer</h3><p>可实现直接在android studio中调试接口数据，可以选择请求类型，自定义请求头及请求体，json数据格式化后展示，配合着Gsonformat会不会不错呢？<br><img src="http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif" alt=""></p>
-<h3 id="10-lint-cleaner-plugin"><a href="#10-lint-cleaner-plugin" class="headerlink" title="10.lint-cleaner-plugin"></a>10.lint-cleaner-plugin</h3><p><a href="https://github.com/marcoRS/lint-cleaner-plugin" target="_blank" rel="external">lint-cleaner-plugin</a><br>移除Android中无用资源。</p>
-<p>参考文章：<br><a href="http://stormzhang.com/android/2015/05/26/android-tools/" target="_blank" rel="external">推荐几个非常有用的工具</a><br><a href="https://www.zhihu.com/question/28026027" target="_blank" rel="external">有什么好用的Android Studio的插件值得推荐？</a><br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/Android_Studio/2015/1009/3557.html" target="_blank" rel="external">推荐几款实用的Android Studio 插件</a></p>
+        <p><strong>RxJava、Retrofit学习资料总结：</strong></p>
+<p><a href="http://gold.xitu.io/entry/561b2c1860b2b90b56881f83" target="_blank" rel="external">给Android开发者的RxJava详解</a></p>
+<p><a href="http://gold.xitu.io/entry/56ce811171cfe4005408447e" target="_blank" rel="external">学习Retrofit和RxJava小记</a></p>
+<p><a href="http://www.jianshu.com/p/90b1f20b123d#" target="_blank" rel="external">Retrofit笔记</a></p>
+<p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0430/2815.html" target="_blank" rel="external">RxJava专题_泡在网上的日子</a></p>
+<p><a href="http://blog.csdn.net/lzyzsd/article/category/2767743" target="_blank" rel="external">RxJava_大头鬼Bruce</a></p>
+<p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0915/3460.html" target="_blank" rel="external">Retrofit2.0：有史以来最大的改进</a></p>
+<p><a href="http://blog.csdn.net/u012301841/article/details/49685677" target="_blank" rel="external">Retrofit2.0使用详解，配合OkHttp、Gson，Android最强网络请求框架</a></p>
+<p><a href="http://blog.csdn.net/u014165119/article/details/49280779" target="_blank" rel="external">Retrofit2.0使用详解</a></p>
+<p><a href="http://blog.csdn.net/qq_17766199/article/details/49946429" target="_blank" rel="external">Retrofit2.0使用</a></p>
 
       
     </div>
@@ -315,11 +323,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AndroidStudio/" rel="tag">#AndroidStudio</a>
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
           
-            <a href="/tags/Androidstudio/" rel="tag">#Androidstudio</a>
-          
-            <a href="/tags/工具/" rel="tag">#工具</a>
+            <a href="/tags/Retrofit/" rel="tag">#Retrofit</a>
           
         </div>
       
@@ -328,17 +334,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/03/my-first-blog/" rel="next" title="测试Blog">
-                <i class="fa fa-chevron-left"></i> 测试Blog
+              <a href="/2016/03/03/android-studio-plugin/" rel="next" title="Android Studio 实用插件推荐">
+                <i class="fa fa-chevron-left"></i> Android Studio 实用插件推荐
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/04/RxJava-Retrofit/" rel="prev" title="RxJava、Retrofit学习资料">
-                RxJava、Retrofit学习资料 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -364,8 +366,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/03/android-studio-plugin/"
-           data-title="Android Studio 实用插件推荐" data-url="http://yoursite.com/2016/03/03/android-studio-plugin/">
+      <div class="ds-thread" data-thread-key="2016/03/04/RxJava-Retrofit/"
+           data-title="RxJava、Retrofit学习资料" data-url="http://yoursite.com/2016/03/04/RxJava-Retrofit/">
       </div>
     
   </div>
@@ -522,7 +524,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ButterKnife-Zelezny"><span class="nav-number">1.</span> <span class="nav-text">1.ButterKnife Zelezny</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GsonFormat"><span class="nav-number">2.</span> <span class="nav-text">2.GsonFormat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SelectorChapek"><span class="nav-number">3.</span> <span class="nav-text">3.SelectorChapek</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-ParcelableGenerator"><span class="nav-number">4.</span> <span class="nav-text">4.ParcelableGenerator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-LeakCanary"><span class="nav-number">5.</span> <span class="nav-text">5.LeakCanary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Genymotion"><span class="nav-number">6.</span> <span class="nav-text">6.Genymotion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Lifecycle-Sorter"><span class="nav-number">7.</span> <span class="nav-text">7.Lifecycle-Sorter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-CodeGlance"><span class="nav-number">8.</span> <span class="nav-text">8.CodeGlance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-JsonOnlineViewer"><span class="nav-number">9.</span> <span class="nav-text">9.JsonOnlineViewer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-lint-cleaner-plugin"><span class="nav-number">10.</span> <span class="nav-text">10.lint-cleaner-plugin</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
