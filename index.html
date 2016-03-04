@@ -234,6 +234,107 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/04/code-snippets/" itemprop="url">
+                  Android开发常用代码片段
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-04T12:58:46+08:00" content="2016-03-04">
+              2016-03-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/04/code-snippets/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/04/code-snippets/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="拨打电话"><a href="#拨打电话" class="headerlink" title="拨打电话"></a>拨打电话</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> call(Context context, <span class="built_in">String</span> phoneNumber) &#123;</span><br><span class="line">        context.startActivity(<span class="keyword">new</span> Intent(Intent.ACTION_CALL, Uri.parse(<span class="string">"tel:"</span> + phoneNumber)));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="跳转至拨号界面"><a href="#跳转至拨号界面" class="headerlink" title="跳转至拨号界面"></a>跳转至拨号界面</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> callDial(Context context, <span class="built_in">String</span> phoneNumber) &#123;</span><br><span class="line">        context.startActivity(<span class="keyword">new</span> Intent(Intent.ACTION_DIAL, Uri.parse(<span class="string">"tel:"</span> + phoneNumber)));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="发送短信"><a href="#发送短信" class="headerlink" title="发送短信"></a>发送短信</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> sendSms(Context context, <span class="built_in">String</span> phoneNumber, <span class="built_in">String</span> content) &#123;</span><br><span class="line">	Uri uri = Uri.parse(<span class="string">"smsto:"</span> + (TextUtils.isEmpty(phoneNumber) ? <span class="string">""</span> : phoneNumber));</span><br><span class="line">	Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SENDTO, uri);</span><br><span class="line">	intent.putExtra(<span class="string">"sms_body"</span>, TextUtils.isEmpty(content) ? <span class="string">""</span> : content);</span><br><span class="line">	context.startActivity(intent);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="判断当前App处于前台还是后台状态"><a href="#判断当前App处于前台还是后台状态" class="headerlink" title="判断当前App处于前台还是后台状态"></a>判断当前App处于前台还是后台状态</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> boolean isApplicationBackground(final Context context) &#123;</span><br><span class="line">        ActivityManager am = (ActivityManager) context</span><br><span class="line">                .getSystemService(Context.ACTIVITY_SERVICE);</span><br><span class="line">        @SuppressWarnings(<span class="string">"deprecation"</span>)</span><br><span class="line">        List&lt;ActivityManager.RunningTaskInfo&gt; tasks = am.getRunningTasks(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (!tasks.isEmpty()) &#123;</span><br><span class="line">            ComponentName topActivity = tasks.get(<span class="number">0</span>).topActivity;</span><br><span class="line">            <span class="keyword">if</span> (!topActivity.getPackageName().equals(context.getPackageName())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/04/code-snippets/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/04/RxJava-Retrofit/" itemprop="url">
                   RxJava、Retrofit学习资料
                 </a>
@@ -340,7 +441,7 @@
               
                 
                 <a class="post-title-link" href="/2016/03/03/android-studio-plugin/" itemprop="url">
-                  Android Studio 实用插件推荐
+                  Android Studio实用插件推荐
                 </a>
               
             
@@ -560,7 +661,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -570,7 +671,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
