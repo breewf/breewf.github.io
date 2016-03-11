@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-04T06:30:51.346Z</updated>
+  <updated>2016-03-11T01:25:01.501Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,174 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Android使用Retrofit+RxJava网络请求小结</title>
+    <link href="http://yoursite.com/2016/03/10/first-use-Retrofit-and-RxJava/"/>
+    <id>http://yoursite.com/2016/03/10/first-use-Retrofit-and-RxJava/</id>
+    <published>2016-03-10T09:19:48.000Z</published>
+    <updated>2016-03-11T01:25:01.501Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;基本用法&quot;&gt;&lt;a href=&quot;#基本用法&quot; class=&quot;headerlink&quot; title=&quot;基本用法&quot;&gt;&lt;/a&gt;基本用法&lt;/h3&gt;&lt;p&gt;定义接口：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public interface GitHubService &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @GET(&lt;span class=&quot;string&quot;&gt;&quot;users/&amp;#123;user&amp;#125;/repos&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&lt;span class=&quot;string&quot;&gt;&quot;user&quot;&lt;/span&gt;) &lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; user);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;使用类 Retrofit 生成接口 GitHubService 的实现：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Retrofit retrofit = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Retrofit.Builder()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    .baseUrl(&lt;span class=&quot;string&quot;&gt;&quot;https://api.github.com/&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    .build();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;GitHubService service = retrofit.create(GitHubService.class);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;之后就可以直接调用生成的GitHubServcie实例去发送请求：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; repos = service.listRepos(&lt;span class=&quot;string&quot;&gt;&quot;octocat&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：baseUrl和注解中url连接的”/“最好写在baseUrl的后面，而不是注解中url的前面，否则可能会出现不可预知的错误。&lt;/strong&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;请求的URL可以在函数中使用替换块和参数进行动态更新，替换块是{ }包围的字符串，相应的参数必须使用相同的字符串被@Path进行注释&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@GET(&lt;span class=&quot;string&quot;&gt;&quot;group/&amp;#123;id&amp;#125;/users&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;User&amp;gt; groupList(@Path(&lt;span class=&quot;string&quot;&gt;&quot;id&quot;&lt;/span&gt;) int groupId);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;也可以添加查询参数&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@GET(&lt;span class=&quot;string&quot;&gt;&quot;group/&amp;#123;id&amp;#125;/users&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;User&amp;gt; groupList(@Path(&lt;span class=&quot;string&quot;&gt;&quot;id&quot;&lt;/span&gt;) int groupId, @Query(&lt;span class=&quot;string&quot;&gt;&quot;sort&quot;&lt;/span&gt;) &lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; sort);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;复杂的查询参数可以使用Map进行组合&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@GET(&lt;span class=&quot;string&quot;&gt;&quot;group/&amp;#123;id&amp;#125;/users&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;User&amp;gt; groupList(@Path(&lt;span class=&quot;string&quot;&gt;&quot;id&quot;&lt;/span&gt;) int groupId, @QueryMap &lt;span class=&quot;built_in&quot;&gt;Map&lt;/span&gt;&amp;lt;&lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt;&amp;gt; options);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;实例介绍&quot;&gt;&lt;a href=&quot;#实例介绍&quot; class=&quot;headerlink&quot; title=&quot;实例介绍&quot;&gt;&lt;/a&gt;实例介绍&lt;/h3&gt;&lt;p&gt;首先添加依赖：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;com.squareup.retrofit2:retrofit:2.0.0-beta4&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&quot;定义接口&quot;&gt;&lt;a href=&quot;#定义接口&quot; class=&quot;headerlink&quot; title=&quot;定义接口&quot;&gt;&lt;/a&gt;定义接口&lt;/h4&gt;&lt;p&gt;要进行网络请求，首先要有请求的接口，这里以一个请求天气的接口为例，Retrofit使用以下方法定义一个接口：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; * http://wthrcdn.etouch.cn/weather_mini?citykey=101010100&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public interface ApiWeatherService &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @GET(&lt;span class=&quot;string&quot;&gt;&quot;weather_mini&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Observable&amp;lt;WeatherBean&amp;gt; getWeatherInfo(@Query(&lt;span class=&quot;string&quot;&gt;&quot;citykey&quot;&lt;/span&gt;) &lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; cityKey);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：上面使用Observable（被观察者、事件源）返回而不是Call的原因是请求结束后要配合使用RxJava。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;网络请求&quot;&gt;&lt;a href=&quot;#网络请求&quot; class=&quot;headerlink&quot; title=&quot;网络请求&quot;&gt;&lt;/a&gt;网络请求&lt;/h4&gt;&lt;p&gt;使用Retrofit进行网络请求：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Retrofit retrofit = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Retrofit.Builder()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;comment&quot;&gt;//baseUrl&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .baseUrl(&lt;span class=&quot;string&quot;&gt;&quot;http://wthrcdn.etouch.cn/&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;comment&quot;&gt;//如果你想接收json结果并解析，你必须把Gson Converter作为一个独立的依赖添加进来&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .addConverterFactory(GsonConverterFactory.create())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;comment&quot;&gt;//Retrofit团队有已经准备好了的CallAdapter module。其中最著名的module可能是为RxJava准备的CallAdapter，它将作为Observable返回&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .build();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ApiWeatherService weatherService = retrofit.create(ApiWeatherService.class);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;注意：要使用GSON解析和CallAdapter（配合RxJava使用），你的项目需要添加以下依赖：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;com.squareup.retrofit2:converter-gson:2.0.0-beta4&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在Retrofit 2.0中，你需要自己插入一个Converter（addConverterFactory），不然的话Retrofit只能接收字符串结果。同样，Retrofit 2.0也不再依赖于Gson。&lt;br&gt;你可以使用Gson、Jackson或者其它的Converter modules，一般我们使用Gson。&lt;/p&gt;
+&lt;h4 id=&quot;使用RxJava&quot;&gt;&lt;a href=&quot;#使用RxJava&quot; class=&quot;headerlink&quot; title=&quot;使用RxJava&quot;&gt;&lt;/a&gt;使用RxJava&lt;/h4&gt;&lt;p&gt;你可以完全像RxJava那样使用它，如果你想让subscribe部分的代码在主线程中被调用，需要把observeOn(AndroidSchedulers.mainThread())添加到链表中。&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Observable&amp;lt;WeatherBean&amp;gt; observable = weatherService.getWeatherInfo(&lt;span class=&quot;string&quot;&gt;&quot;101010100&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        observable.subscribeOn(Schedulers.io())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .observeOn(AndroidSchedulers.mainThread())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .subscribe(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Subscriber&amp;lt;WeatherBean&amp;gt;() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    public &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; onCompleted() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        Log.i(&lt;span class=&quot;string&quot;&gt;&quot;RxJava----&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;onCompleted&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    public &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; onError(Throwable e) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        Log.e(&lt;span class=&quot;string&quot;&gt;&quot;RxJava----&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;onError&quot;&lt;/span&gt; + e.toString());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    public &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; onNext(WeatherBean weatherBean) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        rxJavaTv.setText(&lt;span class=&quot;string&quot;&gt;&quot;天气信息：&quot;&lt;/span&gt; + weatherBean.getData().getGanmao());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;注意：要使用RxJava和AndroidSchedulers.mainThread()，你需要添加依赖：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;io.reactivex:rxjava:1.1.0&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;io.reactivex:rxandroid:1.1.0&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;至此，一个使用Retrofit和RxJava进行简单的网络请求并解析的例子就完成了。简单两段代码实现了网络请求、解析、异步，结构也非常的清晰，不得不说Retrofit和RxJava的强大，也值得我们深入学习。&lt;br&gt;听说Retrofit和RxJava更配哦！&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;br&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0915/3460.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Retrofit 2.0：有史以来最大的改进&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/u014165119/article/details/49280779&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Retrofit2.0使用详解&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;基本用法&quot;&gt;&lt;a href=&quot;#基本用法&quot; class=&quot;headerlink&quot; title=&quot;基本用法&quot;&gt;&lt;/a&gt;基本用法&lt;/h3&gt;&lt;p&gt;定义接口：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public interface GitHubService &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @GET(&lt;span class=&quot;string&quot;&gt;&quot;users/&amp;#123;user&amp;#125;/repos&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&lt;span class=&quot;string&quot;&gt;&quot;user&quot;&lt;/span&gt;) &lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; user);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;使用类 Retrofit 生成接口 GitHubService 的实现：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Retrofit retrofit = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Retrofit.Builder()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    .baseUrl(&lt;span class=&quot;string&quot;&gt;&quot;https://api.github.com/&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    .build();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;GitHubService service = retrofit.create(GitHubService.class);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;之后就可以直接调用生成的GitHubServcie实例去发送请求：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; repos = service.listRepos(&lt;span class=&quot;string&quot;&gt;&quot;octocat&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：baseUrl和注解中url连接的”/“最好写在baseUrl的后面，而不是注解中url的前面，否则可能会出现不可预知的错误。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="RxJava" scheme="http://yoursite.com/tags/RxJava/"/>
+    
+      <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我有一壶酒，足以慰风尘</title>
+    <link href="http://yoursite.com/2016/03/06/i-have-a-cup-of-wine/"/>
+    <id>http://yoursite.com/2016/03/06/i-have-a-cup-of-wine/</id>
+    <published>2016-03-06T11:47:16.000Z</published>
+    <updated>2016-03-11T01:25:13.173Z</updated>
+    
+    <content type="html">&lt;p&gt;我有一壶酒，足以慰风尘。这句在微博上求续写的诗句可谓是火爆异常，引发了全民创作热潮。很多网友都续写了诗句，而且不少都相当有意境，令人拍案叫绝，有网友感慨“国人诗性未死”。&lt;/p&gt;
+&lt;p&gt;先来看看原作：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简卢陟    [唐]韦应物&lt;br&gt;可怜白雪曲，未遇知音人。&lt;br&gt;恓惶戎旅下，蹉跎淮海滨。&lt;br&gt;涧树含朝雨，山鸟哢馀春。&lt;br&gt;我有一瓢酒，可以慰风尘。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下面这句是获点赞最高的，个人也是最喜欢这一句。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。&lt;br&gt;尽倾江海里，赠饮天下人。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/bmiddle/67dd74e0gw1f1dgi9mkqrj20c80d976m.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;其它一些获赞较高和一些人气佳句：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。三杯知冷暖，笑眼看醉人。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。醉里经年少，乍醒华发生。沧浪星野阔，月涌浮骚声。我恨鸿翼轻，难渡天下人。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。脚踏星汉履，漫步上昆仑。望眼不见仙，低眉叹伊人。却见春枝里，斜倚桃花君。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。闲约二鸿儒，黄昏扣柴门。阔谈三更后，把盏有余温。醉眼四处看，皆为梦中人。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。酒醒清宵半，枕月思何人？&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。聚散终有时，此去无故人。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。醉回君归处，白兔伴孤坟。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。但有庭上客，浮云笑此生。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。三杯春风醉，佳缘何处寻？&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。只见西江月，不见梦中人。但求酩酊醉，何怜蒲柳身。乌啼霜叶落，泪眼对黄昏。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。醉酒笑人生，酒醒空一人。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。愿与君把盏，共看白云深。&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。百盏千杯尽，缘何不见君。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我有一壶酒，足以慰风尘。这句在微博上求续写的诗句可谓是火爆异常，引发了全民创作热潮。很多网友都续写了诗句，而且不少都相当有意境，令人拍案叫绝，有网友感慨“国人诗性未死”。&lt;/p&gt;
+&lt;p&gt;先来看看原作：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简卢陟    [唐]韦应物&lt;br&gt;可怜白雪曲，未遇知音人。&lt;br&gt;恓惶戎旅下，蹉跎淮海滨。&lt;br&gt;涧树含朝雨，山鸟哢馀春。&lt;br&gt;我有一瓢酒，可以慰风尘。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下面这句是获点赞最高的，个人也是最喜欢这一句。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。&lt;br&gt;尽倾江海里，赠饮天下人。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/bmiddle/67dd74e0gw1f1dgi9mkqrj20c80d976m.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;其它一些获赞较高和一些人气佳句：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我有一壶酒，足以慰风尘。三杯知冷暖，笑眼看醉人。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="文章" scheme="http://yoursite.com/categories/%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="文章" scheme="http://yoursite.com/tags/%E6%96%87%E7%AB%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scalpel：Jake Wharton的一把解剖刀</title>
+    <link href="http://yoursite.com/2016/03/06/scalpel-jack/"/>
+    <id>http://yoursite.com/2016/03/06/scalpel-jack/</id>
+    <published>2016-03-06T06:06:11.000Z</published>
+    <updated>2016-03-11T01:25:36.316Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;Jake Wharton，Android开发领域传奇一般的存在，熟悉Android开发的同学应该都听说过，即便没有，也应该会经常用到他主导或参与贡献的开源项目，他在GitHub上开源了多个Android兼容性、依赖注入相关的知名项目，也参与贡献了Square公司开源的诸如Retrofit, okhttp等热门项目。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;简单介绍&quot;&gt;&lt;a href=&quot;#简单介绍&quot; class=&quot;headerlink&quot; title=&quot;简单介绍&quot;&gt;&lt;/a&gt;简单介绍&lt;/h3&gt;&lt;p&gt;Jake大神喜欢以刀命名自己的项目，可能他觉得这能很好的表达它们作为开发利器的犀利程度。&lt;/p&gt;
+&lt;p&gt;他最有名的两把刀，一把是Dagger, 匕首，一个依赖注入框架，用来解耦开发中各模块依赖的；另一把是同样大名鼎鼎的ButterKnife，黄油刀，有了它，你再也不用写findViewById了。&lt;/p&gt;
+&lt;p&gt;Scalpel，英文翻译为解剖刀。的确，这个开源项目的确是用来解剖安卓布局的，使用这个名字非常形象。&lt;br&gt;一句话介绍它：A surgical debugging tool to uncover the layers under your app，效果如下面这张图所示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/JakeWharton/scalpel/raw/master/images/sample.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;方法功能&quot;&gt;&lt;a href=&quot;#方法功能&quot; class=&quot;headerlink&quot; title=&quot;方法功能&quot;&gt;&lt;/a&gt;方法功能&lt;/h3&gt;&lt;p&gt;是不是很酷？其实它是实现了一个三维效果的界面布局层次展示，只需要简单几行代码将其集成到你的应用中，即可开启酷炫之旅，它提供的功能包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过setLayerInteractionEnabled(boolean)可开启与关闭此功能。&lt;/li&gt;
+&lt;li&gt;通过setDrawViews(boolean)可控制是否绘制View, 也就是说它可以仅仅是个简单的布局线框图，也可以是色彩丰富的真实效果图。&lt;/li&gt;
+&lt;li&gt;通过setDrawIds(boolean)可控制是否显示各控件的Id, 你就能知道你自己正在调试的那个控件到底在哪了。&lt;/li&gt;
+&lt;li&gt;通过setChromeColor，setChromeShadowColor可自定义线框图的颜色，随你喜欢。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;太小了看不清怎么办？布局太深了里面的怎么看？不用担心，它提供了强大的手势功能。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单点触摸：可以控制其旋转角度。&lt;/li&gt;
+&lt;li&gt;两指垂直滑动：可以放大或缩小。&lt;/li&gt;
+&lt;li&gt;两指水平滑动：可以调整布局层次之间的间距，清晰看到深层次的布局结构。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;如何使用&quot;&gt;&lt;a href=&quot;#如何使用&quot; class=&quot;headerlink&quot; title=&quot;如何使用&quot;&gt;&lt;/a&gt;如何使用&lt;/h3&gt;&lt;p&gt;1.添加依赖：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;com.jakewharton.scalpel:scalpel:1.1.2&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;2.布局文件：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;?xml version=&lt;span class=&quot;string&quot;&gt;&quot;1.0&quot;&lt;/span&gt; encoding=&lt;span class=&quot;string&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;?&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;com.jakewharton.scalpel.ScalpelFrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    android:id=&quot;@+id/scalpel&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    android:layout_width=&quot;match_parent&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    android:layout_height=&quot;match_parent&quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;LinearLayout&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        android:layout_width=&quot;match_parent&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        android:layout_height=&quot;match_parent&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        android:orientation=&quot;vertical&quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;!--这里是你的布局--&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/LinearLayout&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/com.jakewharton.scalpel.ScalpelFrameLayout&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;3.代码用法：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;scalpelView.setLayerInteractionEnabled(&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//true：开启 false：关闭&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;需要注意&quot;&gt;&lt;a href=&quot;#需要注意&quot; class=&quot;headerlink&quot; title=&quot;需要注意&quot;&gt;&lt;/a&gt;需要注意&lt;/h3&gt;&lt;p&gt;值得注意的是，它要求修改根布局来实现功能，如果担心对线上用户的影响，可以仅在Debug模式下将其嵌入，类似下面这样几行代码即可在你的复杂项目中将其引入：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (BuildConfig.DEBUG)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            View mainView = getLayoutInflater().inflate(R.layout.activity_main,&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            scalpelView = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ScalpelFrameLayout(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            scalpelView.addView(mainView);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            setContentView(scalpelView);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            setContentView(R.layout.activity_main);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;br&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1201/3740.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Scalpel: Jake大神的第三把刀&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Jake Wharton，Android开发领域传奇一般的存在，熟悉Android开发的同学应该都听说过，即便没有，也应该会经常用到他主导或参与贡献的开源项目，他在GitHub上开源了多个Android兼容性、依赖注入相关的知名项目，也参与贡献了Square公司开源的诸如Retrofit, okhttp等热门项目。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;简单介绍&quot;&gt;&lt;a href=&quot;#简单介绍&quot; class=&quot;headerlink&quot; title=&quot;简单介绍&quot;&gt;&lt;/a&gt;简单介绍&lt;/h3&gt;&lt;p&gt;Jake大神喜欢以刀命名自己的项目，可能他觉得这能很好的表达它们作为开发利器的犀利程度。&lt;/p&gt;
+&lt;p&gt;他最有名的两把刀，一把是Dagger, 匕首，一个依赖注入框架，用来解耦开发中各模块依赖的；另一把是同样大名鼎鼎的ButterKnife，黄油刀，有了它，你再也不用写findViewById了。&lt;/p&gt;
+&lt;p&gt;Scalpel，英文翻译为解剖刀。的确，这个开源项目的确是用来解剖安卓布局的，使用这个名字非常形象。&lt;br&gt;一句话介绍它：A surgical debugging tool to uncover the layers under your app，效果如下面这张图所示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/JakeWharton/scalpel/raw/master/images/sample.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="开源项目" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android开发常用代码片段</title>
     <link href="http://yoursite.com/2016/03/04/code-snippets/"/>
     <id>http://yoursite.com/2016/03/04/code-snippets/</id>
     <published>2016-03-04T04:58:46.000Z</published>
-    <updated>2016-03-04T06:30:51.346Z</updated>
+    <updated>2016-03-11T01:24:53.687Z</updated>
     
     <content type="html">&lt;h4 id=&quot;拨打电话&quot;&gt;&lt;a href=&quot;#拨打电话&quot; class=&quot;headerlink&quot; title=&quot;拨打电话&quot;&gt;&lt;/a&gt;拨打电话&lt;/h4&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; call(Context context, &lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; phoneNumber) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        context.startActivity(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Intent(Intent.ACTION_CALL, Uri.parse(&lt;span class=&quot;string&quot;&gt;&quot;tel:&quot;&lt;/span&gt; + phoneNumber)));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h4 id=&quot;跳转至拨号界面&quot;&gt;&lt;a href=&quot;#跳转至拨号界面&quot; class=&quot;headerlink&quot; title=&quot;跳转至拨号界面&quot;&gt;&lt;/a&gt;跳转至拨号界面&lt;/h4&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; callDial(Context context, &lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; phoneNumber) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        context.startActivity(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Intent(Intent.ACTION_DIAL, Uri.parse(&lt;span class=&quot;string&quot;&gt;&quot;tel:&quot;&lt;/span&gt; + phoneNumber)));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -62,8 +225,8 @@
     
     </summary>
     
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
     
-      <category term="技巧" scheme="http://yoursite.com/tags/%E6%8A%80%E5%B7%A7/"/>
     
       <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
@@ -74,7 +237,7 @@
     <link href="http://yoursite.com/2016/03/04/RxJava-Retrofit/"/>
     <id>http://yoursite.com/2016/03/04/RxJava-Retrofit/</id>
     <published>2016-03-04T01:28:04.000Z</published>
-    <updated>2016-03-04T01:47:15.073Z</updated>
+    <updated>2016-03-11T01:25:30.021Z</updated>
     
     <content type="html">&lt;p&gt;&lt;strong&gt;RxJava、Retrofit学习资料总结：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://gold.xitu.io/entry/561b2c1860b2b90b56881f83&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;给Android开发者的RxJava详解&lt;/a&gt;&lt;/p&gt;
@@ -95,6 +258,8 @@
     
     </summary>
     
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
     
       <category term="RxJava" scheme="http://yoursite.com/tags/RxJava/"/>
     
@@ -107,40 +272,39 @@
     <link href="http://yoursite.com/2016/03/03/android-studio-plugin/"/>
     <id>http://yoursite.com/2016/03/03/android-studio-plugin/</id>
     <published>2016-03-03T05:18:10.000Z</published>
-    <updated>2016-03-04T06:35:55.366Z</updated>
+    <updated>2016-03-11T01:21:21.151Z</updated>
     
     <content type="html">&lt;p&gt;Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
-&lt;font color=&quot;#ff0000&quot; size=&quot;3&quot;&gt;注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
+&lt;font color=&quot;#ff0000&quot; size=&quot;3&quot;&gt;注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
 
-&lt;h3 id=&quot;1-ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#1-ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;1.ButterKnife Zelezny&quot;&gt;&lt;/a&gt;1.ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife Zelezny&quot;&gt;&lt;/a&gt;ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;2-GsonFormat&quot;&gt;&lt;a href=&quot;#2-GsonFormat&quot; class=&quot;headerlink&quot; title=&quot;2.GsonFormat&quot;&gt;&lt;/a&gt;2.GsonFormat&lt;/h3&gt;&lt;p&gt;现在大多数服务端api都以json数据格式返回，而客户端需要根据api接口生成相应的实体类，这个插件把这个过程自动化了，赶紧使用起来吧。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/gson_format.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;3-SelectorChapek&quot;&gt;&lt;a href=&quot;#3-SelectorChapek&quot; class=&quot;headerlink&quot; title=&quot;3.SelectorChapek&quot;&gt;&lt;/a&gt;3.SelectorChapek&lt;/h3&gt;&lt;p&gt;设计师给我们提供好了各种资源，每个按钮都要写一个selector是不是很麻烦？这么这个插件就为解决这个问题而生，你只需要做的是告诉设计师们按照规范命名就好了，其它一键搞定。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/select_option.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;4-ParcelableGenerator&quot;&gt;&lt;a href=&quot;#4-ParcelableGenerator&quot; class=&quot;headerlink&quot; title=&quot;4.ParcelableGenerator&quot;&gt;&lt;/a&gt;4.ParcelableGenerator&lt;/h3&gt;&lt;p&gt;Android中的序列化有两种方式，分别是实现Serializable接口和Parcelable接口，但在Android中是推荐使用Parcelable，只不过我们这种方式要比Serializable方式要繁琐，那么有了这个插件一切就ok了。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/parcelable_generator.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;5-LeakCanary&quot;&gt;&lt;a href=&quot;#5-LeakCanary&quot; class=&quot;headerlink&quot; title=&quot;5.LeakCanary&quot;&gt;&lt;/a&gt;5.LeakCanary&lt;/h3&gt;&lt;p&gt;良心企业Square最近刚开源的一个非常有用的工具，强烈推荐，帮助你在开发阶段方便的检测出内存泄露的问题，使用起来简单方便。&lt;/p&gt;
+&lt;h3 id=&quot;GsonFormat&quot;&gt;&lt;a href=&quot;#GsonFormat&quot; class=&quot;headerlink&quot; title=&quot;GsonFormat&quot;&gt;&lt;/a&gt;GsonFormat&lt;/h3&gt;&lt;p&gt;现在大多数服务端api都以json数据格式返回，而客户端需要根据api接口生成相应的实体类，这个插件把这个过程自动化了，赶紧使用起来吧。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/gson_format.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;SelectorChapek&quot;&gt;&lt;a href=&quot;#SelectorChapek&quot; class=&quot;headerlink&quot; title=&quot;SelectorChapek&quot;&gt;&lt;/a&gt;SelectorChapek&lt;/h3&gt;&lt;p&gt;设计师给我们提供好了各种资源，每个按钮都要写一个selector是不是很麻烦？这么这个插件就为解决这个问题而生，你只需要做的是告诉设计师们按照规范命名就好了，其它一键搞定。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/select_option.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Parcelable&quot;&gt;&lt;a href=&quot;#Parcelable&quot; class=&quot;headerlink&quot; title=&quot;Parcelable&quot;&gt;&lt;/a&gt;Parcelable&lt;/h3&gt;&lt;p&gt;Android中的序列化有两种方式，分别是实现Serializable接口和Parcelable接口，但在Android中是推荐使用Parcelable，只不过我们这种方式要比Serializable方式要繁琐，那么有了这个插件一切就ok了。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/parcelable_generator.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;CodeGlance&quot;&gt;&lt;a href=&quot;#CodeGlance&quot; class=&quot;headerlink&quot; title=&quot;CodeGlance&quot;&gt;&lt;/a&gt;CodeGlance&lt;/h3&gt;&lt;p&gt;可用于快速定位代码，类似于Sublime编辑器右侧定位视图。&lt;br&gt;&lt;img src=&quot;http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;JsonOnlineViewer&quot;&gt;&lt;a href=&quot;#JsonOnlineViewer&quot; class=&quot;headerlink&quot; title=&quot;JsonOnlineViewer&quot;&gt;&lt;/a&gt;JsonOnlineViewer&lt;/h3&gt;&lt;p&gt;可实现直接在android studio中调试接口数据，可以选择请求类型，自定义请求头及请求体，json数据格式化后展示，配合着Gsonformat会不会不错呢？&lt;br&gt;&lt;img src=&quot;http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;lint-cleaner-plugin&quot;&gt;&lt;a href=&quot;#lint-cleaner-plugin&quot; class=&quot;headerlink&quot; title=&quot;lint-cleaner-plugin&quot;&gt;&lt;/a&gt;lint-cleaner-plugin&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/marcoRS/lint-cleaner-plugin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;lint-cleaner-plugin&lt;/a&gt;&lt;br&gt;移除Android中无用资源。&lt;/p&gt;
+&lt;h3 id=&quot;LeakCanary&quot;&gt;&lt;a href=&quot;#LeakCanary&quot; class=&quot;headerlink&quot; title=&quot;LeakCanary&quot;&gt;&lt;/a&gt;LeakCanary&lt;/h3&gt;&lt;p&gt;良心企业Square开源的一个非常有用的工具，强烈推荐，帮助你在开发阶段方便的检测出内存泄露的问题，使用起来简单方便。&lt;/p&gt;
 &lt;p&gt;中文版&lt;a href=&quot;http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;LeakCanary 中文使用说明&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://stormzhang.com/image/leakcaneray.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;6-Genymotion&quot;&gt;&lt;a href=&quot;#6-Genymotion&quot; class=&quot;headerlink&quot; title=&quot;6.Genymotion&quot;&gt;&lt;/a&gt;6.Genymotion&lt;/h3&gt;&lt;p&gt;强大的安卓模拟器！&lt;br&gt;中文官网：&lt;a href=&quot;http://www.genymotion.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Genymotion&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;7-Lifecycle-Sorter&quot;&gt;&lt;a href=&quot;#7-Lifecycle-Sorter&quot; class=&quot;headerlink&quot; title=&quot;7.Lifecycle-Sorter&quot;&gt;&lt;/a&gt;7.Lifecycle-Sorter&lt;/h3&gt;&lt;p&gt;可以根据Activity或者fragment的生命周期对其生命周期方法位置进行先后排序， 快捷键Ctrl + alt + K&lt;br&gt;&lt;img src=&quot;http://www.jcodecraeer.com/uploads/20151009/1444358722597969.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;8-CodeGlance&quot;&gt;&lt;a href=&quot;#8-CodeGlance&quot; class=&quot;headerlink&quot; title=&quot;8.CodeGlance&quot;&gt;&lt;/a&gt;8.CodeGlance&lt;/h3&gt;&lt;p&gt;可用于快速定位代码，类似于Sublime编辑器右侧定位视图。&lt;br&gt;&lt;img src=&quot;http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;9-JsonOnlineViewer&quot;&gt;&lt;a href=&quot;#9-JsonOnlineViewer&quot; class=&quot;headerlink&quot; title=&quot;9.JsonOnlineViewer&quot;&gt;&lt;/a&gt;9.JsonOnlineViewer&lt;/h3&gt;&lt;p&gt;可实现直接在android studio中调试接口数据，可以选择请求类型，自定义请求头及请求体，json数据格式化后展示，配合着Gsonformat会不会不错呢？&lt;br&gt;&lt;img src=&quot;http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;10-lint-cleaner-plugin&quot;&gt;&lt;a href=&quot;#10-lint-cleaner-plugin&quot; class=&quot;headerlink&quot; title=&quot;10.lint-cleaner-plugin&quot;&gt;&lt;/a&gt;10.lint-cleaner-plugin&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/marcoRS/lint-cleaner-plugin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;lint-cleaner-plugin&lt;/a&gt;&lt;br&gt;移除Android中无用资源。&lt;/p&gt;
+&lt;h3 id=&quot;Genymotion&quot;&gt;&lt;a href=&quot;#Genymotion&quot; class=&quot;headerlink&quot; title=&quot;Genymotion&quot;&gt;&lt;/a&gt;Genymotion&lt;/h3&gt;&lt;p&gt;强大的安卓模拟器！&lt;br&gt;中文官网：&lt;a href=&quot;http://www.genymotion.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Genymotion&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;参考文章：&lt;br&gt;&lt;a href=&quot;http://stormzhang.com/android/2015/05/26/android-tools/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;推荐几个非常有用的工具&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/28026027&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;有什么好用的Android Studio的插件值得推荐？&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/Android_Studio/2015/1009/3557.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;推荐几款实用的Android Studio 插件&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
-&lt;font color=#ff0000 size=3&gt;注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
+&lt;font color=#ff0000 size=3&gt;注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
 
-&lt;h3 id=&quot;1-ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#1-ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;1.ButterKnife Zelezny&quot;&gt;&lt;/a&gt;1.ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife Zelezny&quot;&gt;&lt;/a&gt;ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
     
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
-    
-      <category term="Androidstudio" scheme="http://yoursite.com/tags/Androidstudio/"/>
     
       <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
@@ -151,7 +315,7 @@
     <link href="http://yoursite.com/2016/03/03/my-first-blog/"/>
     <id>http://yoursite.com/2016/03/03/my-first-blog/</id>
     <published>2016-03-03T03:17:30.000Z</published>
-    <updated>2016-03-03T03:26:49.066Z</updated>
+    <updated>2016-03-11T01:25:23.244Z</updated>
     
     <content type="html">&lt;p&gt;这是一篇测试Blog&lt;/p&gt;
 &lt;p&gt;这是一篇成功建立个人博客站点并能正常访问的测试Blog&lt;/p&gt;
@@ -166,6 +330,8 @@
 &lt;p&gt;使用工具：&lt;br&gt;&lt;a href=&quot;https://pages.github.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Github P
     
     </summary>
+    
+      <category term="文章" scheme="http://yoursite.com/categories/%E6%96%87%E7%AB%A0/"/>
     
     
       <category term="文章" scheme="http://yoursite.com/tags/%E6%96%87%E7%AB%A0/"/>

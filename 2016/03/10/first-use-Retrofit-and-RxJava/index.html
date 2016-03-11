@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="AndroidStudio,工具," />
+  <meta name="keywords" content="RxJava,Retrofit," />
 
 
 
@@ -57,27 +57,22 @@
 
 
 
-<meta name="description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称">
+<meta name="description" content="注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法
+
+基本用法定义接口：1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&quot;user&quot;) String u">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Studio实用插件推荐">
-<meta property="og:url" content="http://yoursite.com/2016/03/03/android-studio-plugin/index.html">
+<meta property="og:title" content="Android使用Retrofit+RxJava网络请求小结">
+<meta property="og:url" content="http://yoursite.com/2016/03/10/first-use-Retrofit-and-RxJava/index.html">
 <meta property="og:site_name" content="那一抹、记忆">
-<meta property="og:description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称">
-<meta property="og:image" content="http://stormzhang.com/image/zelezny_animated.gif">
-<meta property="og:image" content="http://stormzhang.com/image/gson_format.gif">
-<meta property="og:image" content="http://stormzhang.com/image/select_option.png">
-<meta property="og:image" content="http://stormzhang.com/image/parcelable_generator.png">
-<meta property="og:image" content="http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif">
-<meta property="og:image" content="http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif">
-<meta property="og:image" content="http://stormzhang.com/image/leakcaneray.png">
-<meta property="og:updated_time" content="2016-03-11T01:21:21.151Z">
+<meta property="og:description" content="注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法
+
+基本用法定义接口：1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&quot;user&quot;) String u">
+<meta property="og:updated_time" content="2016-03-11T01:25:01.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Studio实用插件推荐">
-<meta name="twitter:description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称">
-<meta name="twitter:image" content="http://stormzhang.com/image/zelezny_animated.gif">
+<meta name="twitter:title" content="Android使用Retrofit+RxJava网络请求小结">
+<meta name="twitter:description" content="注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法
+
+基本用法定义接口：1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&quot;user&quot;) String u">
 
 
 
@@ -95,7 +90,7 @@
   };
 </script>
 
-  <title> Android Studio实用插件推荐 | 那一抹、记忆 </title>
+  <title> Android使用Retrofit+RxJava网络请求小结 | 那一抹、记忆 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -237,7 +232,7 @@
             
             
               
-                Android Studio实用插件推荐
+                Android使用Retrofit+RxJava网络请求小结
               
             
           </h1>
@@ -249,8 +244,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-03T13:18:10+08:00" content="2016-03-03">
-              2016-03-03
+            <time itemprop="dateCreated" datetime="2016-03-10T17:19:48+08:00" content="2016-03-10">
+              2016-03-10
             </time>
           </span>
 
@@ -279,8 +274,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/03/android-studio-plugin/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/03/android-studio-plugin/" itemprop="commentsCount"></span>
+                <a href="/2016/03/10/first-use-Retrofit-and-RxJava/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/first-use-Retrofit-and-RxJava/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -302,22 +297,27 @@
       
 
       
-        <p>Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。</p>
-<font color="#ff0000" size="3">注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。</font>
-
-<h3 id="ButterKnife-Zelezny"><a href="#ButterKnife-Zelezny" class="headerlink" title="ButterKnife Zelezny"></a>ButterKnife Zelezny</h3><p>ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。<br><img src="http://stormzhang.com/image/zelezny_animated.gif" alt=""></p>
+        <blockquote>
+<p>注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法</p>
+</blockquote>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>定义接口：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface GitHubService &#123;</span><br><span class="line">  @GET(<span class="string">"users/&#123;user&#125;/repos"</span>)</span><br><span class="line">  Call&lt;List&lt;Repo&gt;&gt; listRepos(@Path(<span class="string">"user"</span>) <span class="built_in">String</span> user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用类 Retrofit 生成接口 GitHubService 的实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">    .baseUrl(<span class="string">"https://api.github.com/"</span>)</span><br><span class="line">    .build();</span><br><span class="line">GitHubService service = retrofit.create(GitHubService.class);</span><br></pre></td></tr></table></figure></p>
+<p>之后就可以直接调用生成的GitHubServcie实例去发送请求：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"octocat"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：baseUrl和注解中url连接的”/“最好写在baseUrl的后面，而不是注解中url的前面，否则可能会出现不可预知的错误。</strong></p>
 <a id="more"></a>
-<h3 id="GsonFormat"><a href="#GsonFormat" class="headerlink" title="GsonFormat"></a>GsonFormat</h3><p>现在大多数服务端api都以json数据格式返回，而客户端需要根据api接口生成相应的实体类，这个插件把这个过程自动化了，赶紧使用起来吧。<br><img src="http://stormzhang.com/image/gson_format.gif" alt=""></p>
-<h3 id="SelectorChapek"><a href="#SelectorChapek" class="headerlink" title="SelectorChapek"></a>SelectorChapek</h3><p>设计师给我们提供好了各种资源，每个按钮都要写一个selector是不是很麻烦？这么这个插件就为解决这个问题而生，你只需要做的是告诉设计师们按照规范命名就好了，其它一键搞定。<br><img src="http://stormzhang.com/image/select_option.png" alt=""></p>
-<h3 id="Parcelable"><a href="#Parcelable" class="headerlink" title="Parcelable"></a>Parcelable</h3><p>Android中的序列化有两种方式，分别是实现Serializable接口和Parcelable接口，但在Android中是推荐使用Parcelable，只不过我们这种方式要比Serializable方式要繁琐，那么有了这个插件一切就ok了。<br><img src="http://stormzhang.com/image/parcelable_generator.png" alt=""></p>
-<h3 id="CodeGlance"><a href="#CodeGlance" class="headerlink" title="CodeGlance"></a>CodeGlance</h3><p>可用于快速定位代码，类似于Sublime编辑器右侧定位视图。<br><img src="http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif" alt=""></p>
-<h3 id="JsonOnlineViewer"><a href="#JsonOnlineViewer" class="headerlink" title="JsonOnlineViewer"></a>JsonOnlineViewer</h3><p>可实现直接在android studio中调试接口数据，可以选择请求类型，自定义请求头及请求体，json数据格式化后展示，配合着Gsonformat会不会不错呢？<br><img src="http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif" alt=""></p>
-<h3 id="lint-cleaner-plugin"><a href="#lint-cleaner-plugin" class="headerlink" title="lint-cleaner-plugin"></a>lint-cleaner-plugin</h3><p><a href="https://github.com/marcoRS/lint-cleaner-plugin" target="_blank" rel="external">lint-cleaner-plugin</a><br>移除Android中无用资源。</p>
-<h3 id="LeakCanary"><a href="#LeakCanary" class="headerlink" title="LeakCanary"></a>LeakCanary</h3><p>良心企业Square开源的一个非常有用的工具，强烈推荐，帮助你在开发阶段方便的检测出内存泄露的问题，使用起来简单方便。</p>
-<p>中文版<a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="external">LeakCanary 中文使用说明</a></p>
-<p><img src="http://stormzhang.com/image/leakcaneray.png" alt=""></p>
-<h3 id="Genymotion"><a href="#Genymotion" class="headerlink" title="Genymotion"></a>Genymotion</h3><p>强大的安卓模拟器！<br>中文官网：<a href="http://www.genymotion.net/" target="_blank" rel="external">Genymotion</a></p>
-<p>参考文章：<br><a href="http://stormzhang.com/android/2015/05/26/android-tools/" target="_blank" rel="external">推荐几个非常有用的工具</a><br><a href="https://www.zhihu.com/question/28026027" target="_blank" rel="external">有什么好用的Android Studio的插件值得推荐？</a><br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/Android_Studio/2015/1009/3557.html" target="_blank" rel="external">推荐几款实用的Android Studio 插件</a></p>
+<p>请求的URL可以在函数中使用替换块和参数进行动态更新，替换块是{ }包围的字符串，相应的参数必须使用相同的字符串被@Path进行注释<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@GET(<span class="string">"group/&#123;id&#125;/users"</span>)</span><br><span class="line">List&lt;User&gt; groupList(@Path(<span class="string">"id"</span>) int groupId);</span><br></pre></td></tr></table></figure></p>
+<p>也可以添加查询参数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@GET(<span class="string">"group/&#123;id&#125;/users"</span>)</span><br><span class="line">List&lt;User&gt; groupList(@Path(<span class="string">"id"</span>) int groupId, @Query(<span class="string">"sort"</span>) <span class="built_in">String</span> sort);</span><br></pre></td></tr></table></figure></p>
+<p>复杂的查询参数可以使用Map进行组合<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@GET(<span class="string">"group/&#123;id&#125;/users"</span>)</span><br><span class="line">List&lt;User&gt; groupList(@Path(<span class="string">"id"</span>) int groupId, @QueryMap <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; options);</span><br></pre></td></tr></table></figure></p>
+<h3 id="实例介绍"><a href="#实例介绍" class="headerlink" title="实例介绍"></a>实例介绍</h3><p>首先添加依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.squareup.retrofit2:retrofit:2.0.0-beta4'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="定义接口"><a href="#定义接口" class="headerlink" title="定义接口"></a>定义接口</h4><p>要进行网络请求，首先要有请求的接口，这里以一个请求天气的接口为例，Retrofit使用以下方法定义一个接口：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * http://wthrcdn.etouch.cn/weather_mini?citykey=101010100</span><br><span class="line"> */</span></span><br><span class="line">public interface ApiWeatherService &#123;</span><br><span class="line">    @GET(<span class="string">"weather_mini"</span>)</span><br><span class="line">    Observable&lt;WeatherBean&gt; getWeatherInfo(@Query(<span class="string">"citykey"</span>) <span class="built_in">String</span> cityKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：上面使用Observable（被观察者、事件源）返回而不是Call的原因是请求结束后要配合使用RxJava。</strong></p>
+<h4 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h4><p>使用Retrofit进行网络请求：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">                <span class="comment">//baseUrl</span></span><br><span class="line">                .baseUrl(<span class="string">"http://wthrcdn.etouch.cn/"</span>)</span><br><span class="line">                <span class="comment">//如果你想接收json结果并解析，你必须把Gson Converter作为一个独立的依赖添加进来</span></span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                <span class="comment">//Retrofit团队有已经准备好了的CallAdapter module。其中最著名的module可能是为RxJava准备的CallAdapter，它将作为Observable返回</span></span><br><span class="line">                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</span><br><span class="line">                .build();</span><br><span class="line">ApiWeatherService weatherService = retrofit.create(ApiWeatherService.class);</span><br></pre></td></tr></table></figure></p>
+<p>注意：要使用GSON解析和CallAdapter（配合RxJava使用），你的项目需要添加以下依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.squareup.retrofit2:converter-gson:2.0.0-beta4'</span></span><br><span class="line">compile <span class="string">'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'</span></span><br></pre></td></tr></table></figure></p>
+<p>在Retrofit 2.0中，你需要自己插入一个Converter（addConverterFactory），不然的话Retrofit只能接收字符串结果。同样，Retrofit 2.0也不再依赖于Gson。<br>你可以使用Gson、Jackson或者其它的Converter modules，一般我们使用Gson。</p>
+<h4 id="使用RxJava"><a href="#使用RxJava" class="headerlink" title="使用RxJava"></a>使用RxJava</h4><p>你可以完全像RxJava那样使用它，如果你想让subscribe部分的代码在主线程中被调用，需要把observeOn(AndroidSchedulers.mainThread())添加到链表中。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;WeatherBean&gt; observable = weatherService.getWeatherInfo(<span class="string">"101010100"</span>);</span><br><span class="line">        observable.subscribeOn(Schedulers.io())</span><br><span class="line">                .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                .subscribe(<span class="keyword">new</span> Subscriber&lt;WeatherBean&gt;() &#123;</span><br><span class="line">                    @Override</span><br><span class="line">                    public <span class="keyword">void</span> onCompleted() &#123;</span><br><span class="line">                        Log.i(<span class="string">"RxJava----"</span>, <span class="string">"onCompleted"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    @Override</span><br><span class="line">                    public <span class="keyword">void</span> onError(Throwable e) &#123;</span><br><span class="line">                        Log.e(<span class="string">"RxJava----"</span>, <span class="string">"onError"</span> + e.toString());</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    @Override</span><br><span class="line">                    public <span class="keyword">void</span> onNext(WeatherBean weatherBean) &#123;</span><br><span class="line">                        rxJavaTv.setText(<span class="string">"天气信息："</span> + weatherBean.getData().getGanmao());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>注意：要使用RxJava和AndroidSchedulers.mainThread()，你需要添加依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'io.reactivex:rxjava:1.1.0'</span></span><br><span class="line">compile <span class="string">'io.reactivex:rxandroid:1.1.0'</span></span><br></pre></td></tr></table></figure></p>
+<p>至此，一个使用Retrofit和RxJava进行简单的网络请求并解析的例子就完成了。简单两段代码实现了网络请求、解析、异步，结构也非常的清晰，不得不说Retrofit和RxJava的强大，也值得我们深入学习。<br>听说Retrofit和RxJava更配哦！</p>
+<p>参考文章：<br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0915/3460.html" target="_blank" rel="external">Retrofit 2.0：有史以来最大的改进</a><br><a href="http://blog.csdn.net/u014165119/article/details/49280779" target="_blank" rel="external">Retrofit2.0使用详解</a></p>
 
       
     </div>
@@ -332,9 +332,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AndroidStudio/" rel="tag">#AndroidStudio</a>
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
           
-            <a href="/tags/工具/" rel="tag">#工具</a>
+            <a href="/tags/Retrofit/" rel="tag">#Retrofit</a>
           
         </div>
       
@@ -343,17 +343,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/03/my-first-blog/" rel="next" title="测试Blog">
-                <i class="fa fa-chevron-left"></i> 测试Blog
+              <a href="/2016/03/06/i-have-a-cup-of-wine/" rel="next" title="我有一壶酒，足以慰风尘">
+                <i class="fa fa-chevron-left"></i> 我有一壶酒，足以慰风尘
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/04/RxJava-Retrofit/" rel="prev" title="RxJava、Retrofit学习资料">
-                RxJava、Retrofit学习资料 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -379,8 +375,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/03/android-studio-plugin/"
-           data-title="Android Studio实用插件推荐" data-url="http://yoursite.com/2016/03/03/android-studio-plugin/">
+      <div class="ds-thread" data-thread-key="2016/03/10/first-use-Retrofit-and-RxJava/"
+           data-title="Android使用Retrofit+RxJava网络请求小结" data-url="http://yoursite.com/2016/03/10/first-use-Retrofit-and-RxJava/">
       </div>
     
   </div>
@@ -544,7 +540,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ButterKnife-Zelezny"><span class="nav-number">1.</span> <span class="nav-text">ButterKnife Zelezny</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GsonFormat"><span class="nav-number">2.</span> <span class="nav-text">GsonFormat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SelectorChapek"><span class="nav-number">3.</span> <span class="nav-text">SelectorChapek</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parcelable"><span class="nav-number">4.</span> <span class="nav-text">Parcelable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CodeGlance"><span class="nav-number">5.</span> <span class="nav-text">CodeGlance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JsonOnlineViewer"><span class="nav-number">6.</span> <span class="nav-text">JsonOnlineViewer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lint-cleaner-plugin"><span class="nav-number">7.</span> <span class="nav-text">lint-cleaner-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeakCanary"><span class="nav-number">8.</span> <span class="nav-text">LeakCanary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Genymotion"><span class="nav-number">9.</span> <span class="nav-text">Genymotion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法"><span class="nav-number">1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例介绍"><span class="nav-number">2.</span> <span class="nav-text">实例介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义接口"><span class="nav-number">2.1.</span> <span class="nav-text">定义接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络请求"><span class="nav-number">2.2.</span> <span class="nav-text">网络请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用RxJava"><span class="nav-number">2.3.</span> <span class="nav-text">使用RxJava</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

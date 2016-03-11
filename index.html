@@ -234,6 +234,380 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/10/first-use-Retrofit-and-RxJava/" itemprop="url">
+                  Android使用Retrofit+RxJava网络请求小结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-10T17:19:48+08:00" content="2016-03-10">
+              2016-03-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/10/first-use-Retrofit-and-RxJava/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/first-use-Retrofit-and-RxJava/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法</p>
+</blockquote>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>定义接口：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface GitHubService &#123;</span><br><span class="line">  @GET(<span class="string">"users/&#123;user&#125;/repos"</span>)</span><br><span class="line">  Call&lt;List&lt;Repo&gt;&gt; listRepos(@Path(<span class="string">"user"</span>) <span class="built_in">String</span> user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用类 Retrofit 生成接口 GitHubService 的实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">    .baseUrl(<span class="string">"https://api.github.com/"</span>)</span><br><span class="line">    .build();</span><br><span class="line">GitHubService service = retrofit.create(GitHubService.class);</span><br></pre></td></tr></table></figure></p>
+<p>之后就可以直接调用生成的GitHubServcie实例去发送请求：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"octocat"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：baseUrl和注解中url连接的”/“最好写在baseUrl的后面，而不是注解中url的前面，否则可能会出现不可预知的错误。</strong></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/10/first-use-Retrofit-and-RxJava/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/06/i-have-a-cup-of-wine/" itemprop="url">
+                  我有一壶酒，足以慰风尘
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-06T19:47:16+08:00" content="2016-03-06">
+              2016-03-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/文章/" itemprop="url" rel="index">
+                    <span itemprop="name">文章</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/06/i-have-a-cup-of-wine/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/i-have-a-cup-of-wine/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>我有一壶酒，足以慰风尘。这句在微博上求续写的诗句可谓是火爆异常，引发了全民创作热潮。很多网友都续写了诗句，而且不少都相当有意境，令人拍案叫绝，有网友感慨“国人诗性未死”。</p>
+<p>先来看看原作：</p>
+<blockquote>
+<p>简卢陟    [唐]韦应物<br>可怜白雪曲，未遇知音人。<br>恓惶戎旅下，蹉跎淮海滨。<br>涧树含朝雨，山鸟哢馀春。<br>我有一瓢酒，可以慰风尘。</p>
+</blockquote>
+<p>下面这句是获点赞最高的，个人也是最喜欢这一句。</p>
+<blockquote>
+<p>我有一壶酒，足以慰风尘。<br>尽倾江海里，赠饮天下人。</p>
+</blockquote>
+<p><img src="http://ww2.sinaimg.cn/bmiddle/67dd74e0gw1f1dgi9mkqrj20c80d976m.jpg" alt=""></p>
+<p><strong>其它一些获赞较高和一些人气佳句：</strong></p>
+<p>我有一壶酒，足以慰风尘。三杯知冷暖，笑眼看醉人。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/06/i-have-a-cup-of-wine/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/06/scalpel-jack/" itemprop="url">
+                  Scalpel：Jake Wharton的一把解剖刀
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-06T14:06:11+08:00" content="2016-03-06">
+              2016-03-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/06/scalpel-jack/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/scalpel-jack/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>Jake Wharton，Android开发领域传奇一般的存在，熟悉Android开发的同学应该都听说过，即便没有，也应该会经常用到他主导或参与贡献的开源项目，他在GitHub上开源了多个Android兼容性、依赖注入相关的知名项目，也参与贡献了Square公司开源的诸如Retrofit, okhttp等热门项目。</p>
+</blockquote>
+<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>Jake大神喜欢以刀命名自己的项目，可能他觉得这能很好的表达它们作为开发利器的犀利程度。</p>
+<p>他最有名的两把刀，一把是Dagger, 匕首，一个依赖注入框架，用来解耦开发中各模块依赖的；另一把是同样大名鼎鼎的ButterKnife，黄油刀，有了它，你再也不用写findViewById了。</p>
+<p>Scalpel，英文翻译为解剖刀。的确，这个开源项目的确是用来解剖安卓布局的，使用这个名字非常形象。<br>一句话介绍它：A surgical debugging tool to uncover the layers under your app，效果如下面这张图所示。</p>
+<p><img src="https://github.com/JakeWharton/scalpel/raw/master/images/sample.gif" alt=""></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/06/scalpel-jack/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/04/code-snippets/" itemprop="url">
                   Android开发常用代码片段
                 </a>
@@ -253,6 +627,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -354,6 +747,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -460,6 +872,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -490,9 +921,9 @@
       
         
           <p>Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。</p>
-<font color=#ff0000 size=3>注：以下插件均可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。</font>
+<font color=#ff0000 size=3>注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。</font>
 
-<h3 id="1-ButterKnife-Zelezny"><a href="#1-ButterKnife-Zelezny" class="headerlink" title="1.ButterKnife Zelezny"></a>1.ButterKnife Zelezny</h3><p>ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。<br><img src="http://stormzhang.com/image/zelezny_animated.gif" alt=""></p>
+<h3 id="ButterKnife-Zelezny"><a href="#ButterKnife-Zelezny" class="headerlink" title="ButterKnife Zelezny"></a>ButterKnife Zelezny</h3><p>ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。<br><img src="http://stormzhang.com/image/zelezny_animated.gif" alt=""></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/03/android-studio-plugin/#more" rel="contents">
               阅读全文 &raquo;
@@ -560,6 +991,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/文章/" itemprop="url" rel="index">
+                    <span itemprop="name">文章</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -661,17 +1111,24 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
           
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
