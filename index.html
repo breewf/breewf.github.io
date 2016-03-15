@@ -244,6 +244,140 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/15/property-anim/" itemprop="url">
+                  PropertyAnimation属性动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-15T09:00:33+08:00" content="2016-03-15">
+              2016-03-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/15/property-anim/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/property-anim/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>好的动画效果能使App更生动的传达信息，提升用户体验。Android为我们提供了帧动画（frame-by-frame animation）、补间动画（tweened animation）以及属性动画（property animation）。</p>
+</blockquote>
+<p>注：属性动画需要安卓3.0版本以上，若要在3.0以下的版本使用属性动画，请使用jack大神的开源库<a href="https://github.com/JakeWharton/NineOldAndroids/">NineOldAndroids</a></p>
+<p>帧动画和补间动画的用法不再赘述，这里介绍一些属性动画的基本用法。</p>
+<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>相关的类</p>
+<ul>
+<li>ValueAnimator：动画的执行类，属性动画机制中最核心的一个类，不过我们并不常用这个类。</li>
+<li>ObjectAnimator：动画的执行类，它可以直接对对象的属性进行动画操作，比如说View的alpha属性。该类是我们最常接触到的类，继承自ValueAnimator。</li>
+<li>AnimatorSet：用于控制一组动画的执行，如顺序执行或是同时执行等。</li>
+<li>AnimatorInflater：加载使用xml文件定义的属性动画。</li>
+<li>AnimatorListener、AnimatorListenerAdapter：动画监听器，可以监听动画的开始执行、重复执行、结束执行等操作。</li>
+<li>TypeEvaluator：类型估值，主要用于设置动画操作属性的值，简单来说，就是告诉动画系统如何从初始值过度到结束值。</li>
+<li>TimeInterpolator：时间差值，用于定义动画的变化速率。</li>
+</ul>
+<h3 id="简单用法"><a href="#简单用法" class="headerlink" title="简单用法"></a>简单用法</h3><p>使用属性动画同样也可以实现像补间动画那样的淡入淡出、旋转、平移、缩放的操作。</p>
+<h4 id="淡入淡出"><a href="#淡入淡出" class="headerlink" title="淡入淡出"></a>淡入淡出</h4><p>将一个TextView在5秒中内从常规变换成全透明，再从全透明变换成常规。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(textview, <span class="string">"alpha"</span>, <span class="number">1</span>f, <span class="number">0</span>f, <span class="number">1</span>f);  </span><br><span class="line">animator.setDuration(<span class="number">5000</span>);  </span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20150406161443130" alt=""></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/15/property-anim/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/10/first-use-Retrofit-and-RxJava/" itemprop="url">
                   Android使用Retrofit+RxJava网络请求小结
                 </a>
@@ -1121,7 +1255,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1138,7 +1272,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
