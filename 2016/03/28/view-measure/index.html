@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="AndroidStudio,工具," />
+  <meta name="keywords" content="View," />
 
 
 
@@ -57,27 +57,22 @@
 
 
 
-<meta name="description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称">
+<meta name="description" content="通常，在我们想要获取一个view的宽高时，我们都会想到在oncreate()中使用view.getWidth()和view.getHeight()方法来获取。这看起来并没有什么问题，但它们的值却都为0，并不是我们想要的结果。为什么会这样呢？这是因为在oncreate()时view的绘制工作还未完成，也就获取不到我们想要view的宽高了。
+我们可以使用下面几种方式来获取view的宽高：
+方法1重写A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Studio实用插件推荐">
-<meta property="og:url" content="http://yoursite.com/2016/03/03/android-studio-plugin/index.html">
+<meta property="og:title" content="Android获取View宽高的几种方式">
+<meta property="og:url" content="http://yoursite.com/2016/03/28/view-measure/index.html">
 <meta property="og:site_name" content="那一抹、记忆">
-<meta property="og:description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称">
-<meta property="og:image" content="http://stormzhang.com/image/zelezny_animated.gif">
-<meta property="og:image" content="http://stormzhang.com/image/gson_format.gif">
-<meta property="og:image" content="http://stormzhang.com/image/select_option.png">
-<meta property="og:image" content="http://stormzhang.com/image/parcelable_generator.png">
-<meta property="og:image" content="http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif">
-<meta property="og:image" content="http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif">
-<meta property="og:image" content="http://stormzhang.com/image/leakcaneray.png">
-<meta property="og:updated_time" content="2016-03-11T01:21:21.151Z">
+<meta property="og:description" content="通常，在我们想要获取一个view的宽高时，我们都会想到在oncreate()中使用view.getWidth()和view.getHeight()方法来获取。这看起来并没有什么问题，但它们的值却都为0，并不是我们想要的结果。为什么会这样呢？这是因为在oncreate()时view的绘制工作还未完成，也就获取不到我们想要view的宽高了。
+我们可以使用下面几种方式来获取view的宽高：
+方法1重写A">
+<meta property="og:updated_time" content="2016-03-28T07:30:26.007Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Studio实用插件推荐">
-<meta name="twitter:description" content="Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。
-注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称">
-<meta name="twitter:image" content="http://stormzhang.com/image/zelezny_animated.gif">
+<meta name="twitter:title" content="Android获取View宽高的几种方式">
+<meta name="twitter:description" content="通常，在我们想要获取一个view的宽高时，我们都会想到在oncreate()中使用view.getWidth()和view.getHeight()方法来获取。这看起来并没有什么问题，但它们的值却都为0，并不是我们想要的结果。为什么会这样呢？这是因为在oncreate()时view的绘制工作还未完成，也就获取不到我们想要view的宽高了。
+我们可以使用下面几种方式来获取view的宽高：
+方法1重写A">
 
 
 
@@ -95,7 +90,7 @@
   };
 </script>
 
-  <title> Android Studio实用插件推荐 | 那一抹、记忆 </title>
+  <title> Android获取View宽高的几种方式 | 那一抹、记忆 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -247,7 +242,7 @@
             
             
               
-                Android Studio实用插件推荐
+                Android获取View宽高的几种方式
               
             
           </h1>
@@ -259,8 +254,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-03T13:18:10+08:00" content="2016-03-03">
-              2016-03-03
+            <time itemprop="dateCreated" datetime="2016-03-28T15:00:04+08:00" content="2016-03-28">
+              2016-03-28
             </time>
           </span>
 
@@ -289,8 +284,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/03/android-studio-plugin/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/03/android-studio-plugin/" itemprop="commentsCount"></span>
+                <a href="/2016/03/28/view-measure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/view-measure/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,22 +307,14 @@
       
 
       
-        <p>Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。</p>
-<font color="#ff0000" size="3">注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。</font>
-
-<h3 id="ButterKnife-Zelezny"><a href="#ButterKnife-Zelezny" class="headerlink" title="ButterKnife Zelezny"></a>ButterKnife Zelezny</h3><p>ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。<br><img src="http://stormzhang.com/image/zelezny_animated.gif" alt=""></p>
+        <p>通常，在我们想要获取一个view的宽高时，我们都会想到在oncreate()中使用view.getWidth()和view.getHeight()方法来获取。这看起来并没有什么问题，但它们的值却都为0，并不是我们想要的结果。为什么会这样呢？这是因为在oncreate()时view的绘制工作还未完成，也就获取不到我们想要view的宽高了。</p>
+<p>我们可以使用下面几种方式来获取view的宽高：</p>
+<h4 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h4><p>重写Activity中的onWindowFocusChanged()方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public <span class="keyword">void</span> onWindowFocusChanged(boolean hasFocus) &#123;</span><br><span class="line">        <span class="keyword">super</span>.onWindowFocusChanged(hasFocus);</span><br><span class="line">        Log.i(<span class="string">"textView"</span>, <span class="string">"width--&gt;&gt;"</span> + textView.getWidth() + <span class="string">"--height--&gt;&gt;"</span> + textView.getHeight());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h3 id="GsonFormat"><a href="#GsonFormat" class="headerlink" title="GsonFormat"></a>GsonFormat</h3><p>现在大多数服务端api都以json数据格式返回，而客户端需要根据api接口生成相应的实体类，这个插件把这个过程自动化了，赶紧使用起来吧。<br><img src="http://stormzhang.com/image/gson_format.gif" alt=""></p>
-<h3 id="SelectorChapek"><a href="#SelectorChapek" class="headerlink" title="SelectorChapek"></a>SelectorChapek</h3><p>设计师给我们提供好了各种资源，每个按钮都要写一个selector是不是很麻烦？这么这个插件就为解决这个问题而生，你只需要做的是告诉设计师们按照规范命名就好了，其它一键搞定。<br><img src="http://stormzhang.com/image/select_option.png" alt=""></p>
-<h3 id="Parcelable"><a href="#Parcelable" class="headerlink" title="Parcelable"></a>Parcelable</h3><p>Android中的序列化有两种方式，分别是实现Serializable接口和Parcelable接口，但在Android中是推荐使用Parcelable，只不过我们这种方式要比Serializable方式要繁琐，那么有了这个插件一切就ok了。<br><img src="http://stormzhang.com/image/parcelable_generator.png" alt=""></p>
-<h3 id="CodeGlance"><a href="#CodeGlance" class="headerlink" title="CodeGlance"></a>CodeGlance</h3><p>可用于快速定位代码，类似于Sublime编辑器右侧定位视图。<br><img src="http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif" alt=""></p>
-<h3 id="JsonOnlineViewer"><a href="#JsonOnlineViewer" class="headerlink" title="JsonOnlineViewer"></a>JsonOnlineViewer</h3><p>可实现直接在android studio中调试接口数据，可以选择请求类型，自定义请求头及请求体，json数据格式化后展示，配合着Gsonformat会不会不错呢？<br><img src="http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif" alt=""></p>
-<h3 id="lint-cleaner-plugin"><a href="#lint-cleaner-plugin" class="headerlink" title="lint-cleaner-plugin"></a>lint-cleaner-plugin</h3><p><a href="https://github.com/marcoRS/lint-cleaner-plugin" target="_blank" rel="external">lint-cleaner-plugin</a><br>移除Android中无用资源。</p>
-<h3 id="LeakCanary"><a href="#LeakCanary" class="headerlink" title="LeakCanary"></a>LeakCanary</h3><p>良心企业Square开源的一个非常有用的工具，强烈推荐，帮助你在开发阶段方便的检测出内存泄露的问题，使用起来简单方便。</p>
-<p>中文版<a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="external">LeakCanary 中文使用说明</a></p>
-<p><img src="http://stormzhang.com/image/leakcaneray.png" alt=""></p>
-<h3 id="Genymotion"><a href="#Genymotion" class="headerlink" title="Genymotion"></a>Genymotion</h3><p>强大的安卓模拟器！<br>中文官网：<a href="http://www.genymotion.net/" target="_blank" rel="external">Genymotion</a></p>
-<p>参考文章：<br><a href="http://stormzhang.com/android/2015/05/26/android-tools/" target="_blank" rel="external">推荐几个非常有用的工具</a><br><a href="https://www.zhihu.com/question/28026027" target="_blank" rel="external">有什么好用的Android Studio的插件值得推荐？</a><br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/Android_Studio/2015/1009/3557.html" target="_blank" rel="external">推荐几款实用的Android Studio 插件</a></p>
+<h4 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h4><p>使用测量的方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int w = View.MeasureSpec.makeMeasureSpec(<span class="number">0</span>, View.MeasureSpec.UNSPECIFIED);</span><br><span class="line">int h = View.MeasureSpec.makeMeasureSpec(<span class="number">0</span>, View.MeasureSpec.UNSPECIFIED);</span><br><span class="line"></span><br><span class="line">textView.measure(w, h);</span><br><span class="line"></span><br><span class="line">int width = textView.getMeasuredWidth();</span><br><span class="line">int height = textView.getMeasuredHeight();</span><br><span class="line"></span><br><span class="line">Log.i(<span class="string">"textView"</span>, <span class="string">"width--&gt;&gt;"</span> + width + <span class="string">"--height--&gt;&gt;"</span> + height);</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法3"><a href="#方法3" class="headerlink" title="方法3"></a>方法3</h4><p>添加组件绘制监听OnPreDrawListener。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ViewTreeObserver vto =textView.getViewTreeObserver();</span><br><span class="line">        vto.addOnPreDrawListener(<span class="keyword">new</span> ViewTreeObserver.OnPreDrawListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean onPreDraw() &#123;</span><br><span class="line">                textView.getViewTreeObserver().removeOnPreDrawListener(<span class="keyword">this</span>);</span><br><span class="line">                Log.i(<span class="string">"textView"</span>, <span class="string">"width--&gt;&gt;"</span> + textView.getWidth() + <span class="string">"--height--&gt;&gt;"</span> + textView.getHeight());</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法4"><a href="#方法4" class="headerlink" title="方法4"></a>方法4</h4><p>添加组件绘制监听OnGlobalLayoutListener。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ViewTreeObserver vto =textView.getViewTreeObserver();</span><br><span class="line">        vto.addOnGlobalLayoutListener(<span class="keyword">new</span> ViewTreeObserver.OnGlobalLayoutListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public <span class="keyword">void</span> onGlobalLayout() &#123;</span><br><span class="line">                textView.getViewTreeObserver().removeOnGlobalLayoutListener(<span class="keyword">this</span>);</span><br><span class="line">                Log.i(<span class="string">"textView"</span>, <span class="string">"width--&gt;&gt;"</span> + textView.getWidth() + <span class="string">"--height--&gt;&gt;"</span> + textView.getHeight());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法5"><a href="#方法5" class="headerlink" title="方法5"></a>方法5</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">textView.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public <span class="keyword">void</span> run() &#123;</span><br><span class="line">                Log.i(<span class="string">"textView"</span>, <span class="string">"width--&gt;&gt;"</span> + textView.getWidth() + <span class="string">"--height--&gt;&gt;"</span> + textView.getHeight());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -342,9 +329,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AndroidStudio/" rel="tag">#AndroidStudio</a>
-          
-            <a href="/tags/工具/" rel="tag">#工具</a>
+            <a href="/tags/View/" rel="tag">#View</a>
           
         </div>
       
@@ -353,17 +338,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/03/my-first-blog/" rel="next" title="测试Blog">
-                <i class="fa fa-chevron-left"></i> 测试Blog
+              <a href="/2016/03/15/property-anim/" rel="next" title="PropertyAnimation属性动画">
+                <i class="fa fa-chevron-left"></i> PropertyAnimation属性动画
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/04/RxJava-Retrofit/" rel="prev" title="RxJava、Retrofit学习资料">
-                RxJava、Retrofit学习资料 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -389,8 +370,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/03/android-studio-plugin/"
-           data-title="Android Studio实用插件推荐" data-url="http://yoursite.com/2016/03/03/android-studio-plugin/">
+      <div class="ds-thread" data-thread-key="2016/03/28/view-measure/"
+           data-title="Android获取View宽高的几种方式" data-url="http://yoursite.com/2016/03/28/view-measure/">
       </div>
     
   </div>
@@ -518,7 +499,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ButterKnife-Zelezny"><span class="nav-number">1.</span> <span class="nav-text">ButterKnife Zelezny</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GsonFormat"><span class="nav-number">2.</span> <span class="nav-text">GsonFormat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SelectorChapek"><span class="nav-number">3.</span> <span class="nav-text">SelectorChapek</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parcelable"><span class="nav-number">4.</span> <span class="nav-text">Parcelable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CodeGlance"><span class="nav-number">5.</span> <span class="nav-text">CodeGlance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JsonOnlineViewer"><span class="nav-number">6.</span> <span class="nav-text">JsonOnlineViewer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lint-cleaner-plugin"><span class="nav-number">7.</span> <span class="nav-text">lint-cleaner-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeakCanary"><span class="nav-number">8.</span> <span class="nav-text">LeakCanary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Genymotion"><span class="nav-number">9.</span> <span class="nav-text">Genymotion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法1"><span class="nav-number">1.</span> <span class="nav-text">方法1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法2"><span class="nav-number">2.</span> <span class="nav-text">方法2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法3"><span class="nav-number">3.</span> <span class="nav-text">方法3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法4"><span class="nav-number">4.</span> <span class="nav-text">方法4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法5"><span class="nav-number">5.</span> <span class="nav-text">方法5</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
