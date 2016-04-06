@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-28T07:30:26.007Z</updated>
+  <updated>2016-04-06T06:15:23.087Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>移动开发优秀三方支持</title>
+    <link href="http://yoursite.com/2016/04/06/app-dev-third-sup/"/>
+    <id>http://yoursite.com/2016/04/06/app-dev-third-sup/</id>
+    <published>2016-04-06T05:55:04.000Z</published>
+    <updated>2016-04-06T06:15:23.087Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;统计&quot;&gt;&lt;a href=&quot;#统计&quot; class=&quot;headerlink&quot; title=&quot;统计&quot;&gt;&lt;/a&gt;统计&lt;/h3&gt;&lt;p&gt;1.友盟：&lt;a href=&quot;http://www.umeng.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.umeng.com/&lt;/a&gt;&lt;br&gt;友盟涵盖应用统计、消息推送、即时通讯、社会化分享、自动更新等功能，可以说是大而全。&lt;br&gt;2.Talkingdata：&lt;a href=&quot;https://www.talkingdata.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.talkingdata.com/&lt;/a&gt;&lt;br&gt;Talkingdata提供应用统计分析、游戏运营分析、移动广告检测等服务。&lt;/p&gt;
+&lt;h3 id=&quot;推送&quot;&gt;&lt;a href=&quot;#推送&quot; class=&quot;headerlink&quot; title=&quot;推送&quot;&gt;&lt;/a&gt;推送&lt;/h3&gt;&lt;p&gt;1.个推：&lt;a href=&quot;http://www.getui.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.getui.com/&lt;/a&gt;&lt;br&gt;2.极光推送：&lt;a href=&quot;https://www.jpush.cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.jpush.cn/&lt;/a&gt;&lt;br&gt;3.友盟推送：&lt;a href=&quot;http://www.umeng.com/push&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.umeng.com/push&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;社会化分享&quot;&gt;&lt;a href=&quot;#社会化分享&quot; class=&quot;headerlink&quot; title=&quot;社会化分享&quot;&gt;&lt;/a&gt;社会化分享&lt;/h3&gt;&lt;p&gt;1.Mob ShareSDK：&lt;a href=&quot;http://www.mob.com/#/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.mob.com/#/&lt;/a&gt;&lt;br&gt;Mob还提供短信验证SDK，MobAPI(包括天气查询、邮编查询、号码归属地查询以及即将上线的车辆违章查询等API接口)。&lt;br&gt;2.友盟社会化分享：&lt;a href=&quot;http://www.umeng.com/social&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.umeng.com/social&lt;/a&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;地图&quot;&gt;&lt;a href=&quot;#地图&quot; class=&quot;headerlink&quot; title=&quot;地图&quot;&gt;&lt;/a&gt;地图&lt;/h3&gt;&lt;p&gt;1.百度地图：&lt;a href=&quot;http://lbsyun.baidu.com/index.php?title=%E9%A6%96%E9%A1%B5&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lbsyun.baidu.com/index.php?title=%E9%A6%96%E9%A1%B5&lt;/a&gt;&lt;br&gt;2.高德地图：&lt;a href=&quot;http://lbs.amap.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lbs.amap.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;后端服务&quot;&gt;&lt;a href=&quot;#后端服务&quot; class=&quot;headerlink&quot; title=&quot;后端服务&quot;&gt;&lt;/a&gt;后端服务&lt;/h3&gt;&lt;p&gt;Bmob：&lt;a href=&quot;http://www.bmob.cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.bmob.cn/&lt;/a&gt;&lt;br&gt;Bmob解决了后端逻辑重复开发和维护的问题，无需后端编程和租用服务器，让移动开发更简单。&lt;br&gt;Bmob同时也提供消息推送、短信验证、即时通讯、移动支付等服务。&lt;/p&gt;
+&lt;h3 id=&quot;即时通信（IM）&quot;&gt;&lt;a href=&quot;#即时通信（IM）&quot; class=&quot;headerlink&quot; title=&quot;即时通信（IM）&quot;&gt;&lt;/a&gt;即时通信（IM）&lt;/h3&gt;&lt;p&gt;1.环信：&lt;a href=&quot;http://www.easemob.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.easemob.com/&lt;/a&gt;&lt;br&gt;2.融云：&lt;a href=&quot;http://www.easemob.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.easemob.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;测试&quot;&gt;&lt;a href=&quot;#测试&quot; class=&quot;headerlink&quot; title=&quot;测试&quot;&gt;&lt;/a&gt;测试&lt;/h3&gt;&lt;p&gt;1.Testin：&lt;a href=&quot;http://www.testin.cn/site/index&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.testin.cn/site/index&lt;/a&gt;&lt;br&gt;Testin为开发者提供随叫随到的一站式测试服务，和您一起打造更高品质的App。&lt;br&gt;2.fir.im：&lt;a href=&quot;http://fir.im/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fir.im/&lt;/a&gt;&lt;br&gt;服务移动开发者，让开发测试更高效。&lt;br&gt;fir.im为开发者提供测试应用极速发布，应用崩溃实时分析、用户反馈收集等一系列开发测试效率工具服务，帮助开发者将更多精力放在产品的开发与应用的优化上。&lt;/p&gt;
+&lt;h3 id=&quot;Html5移动开发&quot;&gt;&lt;a href=&quot;#Html5移动开发&quot; class=&quot;headerlink&quot; title=&quot;Html5移动开发&quot;&gt;&lt;/a&gt;Html5移动开发&lt;/h3&gt;&lt;p&gt;APICloud：&lt;a href=&quot;http://www.apicloud.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.apicloud.com/&lt;/a&gt;&lt;br&gt;APICloud云端一体，重新定义移动应用开发，使用HTML5轻松开发高性能iOS、Android原生应用。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;统计&quot;&gt;&lt;a href=&quot;#统计&quot; class=&quot;headerlink&quot; title=&quot;统计&quot;&gt;&lt;/a&gt;统计&lt;/h3&gt;&lt;p&gt;1.友盟：&lt;a href=&quot;http://www.umeng.com/&quot;&gt;http://www.umeng.com/&lt;/a&gt;&lt;br&gt;友盟涵盖应用统计、消息推送、即时通讯、社会化分享、自动更新等功能，可以说是大而全。&lt;br&gt;2.Talkingdata：&lt;a href=&quot;https://www.talkingdata.com/&quot;&gt;https://www.talkingdata.com/&lt;/a&gt;&lt;br&gt;Talkingdata提供应用统计分析、游戏运营分析、移动广告检测等服务。&lt;/p&gt;
+&lt;h3 id=&quot;推送&quot;&gt;&lt;a href=&quot;#推送&quot; class=&quot;headerlink&quot; title=&quot;推送&quot;&gt;&lt;/a&gt;推送&lt;/h3&gt;&lt;p&gt;1.个推：&lt;a href=&quot;http://www.getui.com/&quot;&gt;http://www.getui.com/&lt;/a&gt;&lt;br&gt;2.极光推送：&lt;a href=&quot;https://www.jpush.cn/&quot;&gt;https://www.jpush.cn/&lt;/a&gt;&lt;br&gt;3.友盟推送：&lt;a href=&quot;http://www.umeng.com/push&quot;&gt;http://www.umeng.com/push&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;社会化分享&quot;&gt;&lt;a href=&quot;#社会化分享&quot; class=&quot;headerlink&quot; title=&quot;社会化分享&quot;&gt;&lt;/a&gt;社会化分享&lt;/h3&gt;&lt;p&gt;1.Mob ShareSDK：&lt;a href=&quot;http://www.mob.com/#/&quot;&gt;http://www.mob.com/#/&lt;/a&gt;&lt;br&gt;Mob还提供短信验证SDK，MobAPI(包括天气查询、邮编查询、号码归属地查询以及即将上线的车辆违章查询等API接口)。&lt;br&gt;2.友盟社会化分享：&lt;a href=&quot;http://www.umeng.com/social&quot;&gt;http://www.umeng.com/social&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Android获取View宽高的几种方式</title>
