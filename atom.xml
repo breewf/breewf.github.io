@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-06T06:19:32.045Z</updated>
+  <updated>2016-04-26T06:46:50.369Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,86 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Apk分析利器ClassyShark</title>
+    <link href="http://yoursite.com/2016/04/26/classy-shark/"/>
+    <id>http://yoursite.com/2016/04/26/classy-shark/</id>
+    <published>2016-04-26T06:22:43.000Z</published>
+    <updated>2016-04-26T06:46:50.369Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;对于一个感兴趣的android非开源项目，通常使用逆向工程查看apk中的内容，俗称反编译。工具大概包括dex2jar、JD-GUI、apktool、procyon，这些工具使用起来相对比较麻烦，如果我们只想知道该项目的基本框架、使用到哪些开源项目的话，那么就有些浪费时间。&lt;br&gt;对于一些大厂的项目，我们还比较关心的是用到了哪些新的框架和技术，对于新技术的流行程度和使用普遍程度有个比较好的把握，指导是否需要进行深度的使用学习。比如最近的比较流行的rxjava，热更新技术等等。&lt;/p&gt;
+&lt;h3 id=&quot;ClassyShark&quot;&gt;&lt;a href=&quot;#ClassyShark&quot; class=&quot;headerlink&quot; title=&quot;ClassyShark&quot;&gt;&lt;/a&gt;ClassyShark&lt;/h3&gt;&lt;p&gt;ClassyShark是Google发布的一款可以查看Android可执行文件的浏览工具，支持.dex, .aar, .so, .apk, .jar, .class, .xml 等文件格式，分析里面的内容包括classes.dex文件，包、方法数量、类、字符串、使用的NativeLibrary等。&lt;br&gt;下载链接：&lt;a href=&quot;https://github.com/google/android-classyshark&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/google/android-classyshark&lt;/a&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;使用方法&quot;&gt;&lt;a href=&quot;#使用方法&quot; class=&quot;headerlink&quot; title=&quot;使用方法&quot;&gt;&lt;/a&gt;使用方法&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开apk文件java -jar ClassyShark.jar -open &lt;your_apk.apk&gt;&lt;/your_apk.apk&gt;&lt;/li&gt;
+&lt;li&gt;将生成的所有数据导出到文本文件里java -jar ClassyShark.jar -dump &lt;binary_file&gt;&lt;/binary_file&gt;&lt;/li&gt;
+&lt;li&gt;将指定类生成的文件导出到文本文件里java -jar ClassyShark.jar -dump &lt;binary_file&gt; &lt;fully_qualified_class_name&gt;&lt;/fully_qualified_class_name&gt;&lt;/binary_file&gt;&lt;/li&gt;
+&lt;li&gt;打开ClassyShark，在GUI界面展示某特定的类&lt;/li&gt;
+&lt;li&gt;java -jar ClassyShark.jar -open &lt;binary_file&gt; &lt;fully_qualified_class_name&gt;&lt;/fully_qualified_class_name&gt;&lt;/binary_file&gt;&lt;/li&gt;
+&lt;li&gt;检测APKjava -jar ClassyShark.jar -inspect &lt;your_apk.apk&gt;&lt;/your_apk.apk&gt;&lt;/li&gt;
+&lt;li&gt;导出所有的字符串 java -jar ClassyShark.jar -stringdump &lt;your_apk.apk&gt;&lt;/your_apk.apk&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;具体使用&quot;&gt;&lt;a href=&quot;#具体使用&quot; class=&quot;headerlink&quot; title=&quot;具体使用&quot;&gt;&lt;/a&gt;具体使用&lt;/h3&gt;&lt;p&gt;以美团项目为例，让我们看看能得到什么有用的信息。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;java -jar ClassyShark.jar -open ~/Downloads/group-351&lt;em&gt;3-meituan&lt;/em&gt;.apk&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://mmbiz.qpic.cn/mmbiz/159icnNTXChMR3icsruOffp4vVMPXqHfnUUVTzS7mAtsUevyEmar1dnibUVfbbeErCJlPmrTQasMasoZMkIkXB9fg/640?wx_fmt=png&amp;amp;tp=webp&amp;amp;wxfrom=5&amp;amp;wx_lazy=1&quot; alt=&quot;&quot;&gt;&lt;br&gt;美团项目中使用了MultiDex，并且classes.dex文件有3个，说明方法数肯定非常多。&lt;br&gt;美团的编译版本非常新，紧跟时代，23版本(Android 6.0)。&lt;br&gt;并且TargetSdkVersion也是23版本，紧跟技术方向。&lt;br&gt;最低版本是16(Android 4.1)，4.1以下的手机无法运行。&lt;br&gt;而且有好多的so库，有美团自己的，也有好多是第三方的库。&lt;br&gt;&lt;img src=&quot;http://mmbiz.qpic.cn/mmbiz/159icnNTXChMR3icsruOffp4vVMPXqHfnUqx9icENWf8NKBDFCMMG2iakEZlYKbqoDOosTss2dK5KZicejCoxQ0rZzA/640?wx_fmt=png&amp;amp;tp=webp&amp;amp;wxfrom=5&amp;amp;wx_lazy=1&quot; alt=&quot;&quot;&gt;&lt;br&gt;可以看到9万多个方法，怪不得会有3个classes.dex文件。&lt;br&gt;项目中应用了大量的第三方库，并且一般都是主流的比较稳定的开源库。&lt;/p&gt;
+&lt;p&gt;我们来看下都用到了哪些库：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ZXing二维码识别库&lt;/li&gt;
+&lt;li&gt;amap: 高德地图&lt;/li&gt;
+&lt;li&gt;PullToRefresh使用最广的下拉刷新组件&lt;/li&gt;
+&lt;li&gt;jackson，json解析库&lt;/li&gt;
+&lt;li&gt;NineOldAndroids Jake大神的android兼容库&lt;/li&gt;
+&lt;li&gt;fresco，facebook出品的图片处理库，图片加载节省很多内存，避免OOM&lt;/li&gt;
+&lt;li&gt;RxJava响应式编程库，再加上Square的Retrofit库的支持，可以说未来就是rxjava的天下，目前市面上已经有很多基于rxjava的项目；我们团队也将基于rxjava来开发项目&lt;/li&gt;
+&lt;li&gt;圈内最牛逼的开源公司Square，Jake大神所在的公司，可以毫不夸张的说，Square的开源项目使得Android开发提速了好几年&lt;/li&gt;
+&lt;li&gt;okhttp网络请求库，已被官方采用&lt;/li&gt;
+&lt;li&gt;retrofit非常牛逼的网络请求库，配合rxjava和lambda使用，代码量减少90%&lt;/li&gt;
+&lt;li&gt;otto事件总线&lt;/li&gt;
+&lt;li&gt;picasso图片加载库&lt;/li&gt;
+&lt;li&gt;dagger依赖注入框架&lt;/li&gt;
+&lt;li&gt;ExpandableTextView可折叠的TextView&lt;/li&gt;
+&lt;li&gt;iflytek，科大讯飞的语音集成&lt;/li&gt;
+&lt;li&gt;ViewPagerIndicator还是Jake大神的项目，viewpager的滚动控件&lt;/li&gt;
+&lt;li&gt;actionbarsherlock依然是Jake大神的项目，Actionbar的适配库，不过已经过时了&lt;/li&gt;
+&lt;li&gt;华为推送&lt;/li&gt;
+&lt;li&gt;SystemBarTint状态栏沉浸效果库&lt;/li&gt;
+&lt;li&gt;百度地图&lt;/li&gt;
+&lt;li&gt;新浪微博&lt;/li&gt;
+&lt;li&gt;腾讯的QQ和微信&lt;/li&gt;
+&lt;li&gt;大众点评，已经合并一家,东西也得用&lt;/li&gt;
+&lt;li&gt;umpay，联动优势支付&lt;/li&gt;
+&lt;li&gt;支付宝&lt;/li&gt;
+&lt;li&gt;andfix阿里出品的android热更新框架&lt;/li&gt;
+&lt;li&gt;flurry统计库&lt;/li&gt;
+&lt;li&gt;小米推送&lt;/li&gt;
+&lt;li&gt;http-request网络请求库&lt;/li&gt;
+&lt;li&gt;EventBus事件总线库&lt;/li&gt;
+&lt;li&gt;PhotoView放大缩小的图片处理库&lt;/li&gt;
+&lt;li&gt;roboguice依赖注入框架，类似Dagger&lt;/li&gt;
+&lt;li&gt;zip4j处理zip压缩的库&lt;/li&gt;
+&lt;li&gt;link异步task关联库,很像rxjava&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;p&gt;从上面分析我们可见看出，美团是一个技术很开放的公司，对于框架的使用比较多，使用的基本都是主流的开发框架，减少开发成本，增强app的稳定性和体验，对于我们来说，有很大的借鉴意义。比如，目前都在试水的热更新框架，美团选择了阿里的andfix,那么该技术方案肯定是得到了美团团队的验证；另外，美团团队也是比较潮流的，Retrofit+Rxjava的潮流趋势已经不可阻挡，美团已经开始使用；但是，从项目引用库中我们也可以看到一些不足之处；比如，同一种框架引用了多种第三方库，如网络库(okhttp,http-request),图片加载库(fresco,picasso),事件总线(EventBus, Otto),依赖注入(Dagger,roboguice)，推送相关的库等很多重复的库，如果去掉重复的库那么可以节省很多的编译时间和apk包的大小；还有就是，我们基本可以断定，美团团队的内部并不能很好的统一，没有有效的沟通，代码开发很混乱，导致项目结构上的臃肿，重复库的使用等等问题。&lt;/p&gt;
+&lt;p&gt;通过分析App的项目结构和引用库的信息，我们大致掌握了该项目的架构，一些开发中的经验和不足，拓宽下开发视野，发现一些好用的开源库，增强我们的武器，这些都是我们在开发中可以借鉴的东西。&lt;/p&gt;
+&lt;p&gt;原文链接：&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzA4NTQwNDcyMA==&amp;amp;mid=402526638&amp;amp;idx=1&amp;amp;sn=bdd13a3cb722e72f67d4dcc1af0f620d#rd&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ClassyShark——apk分析利器&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;对于一个感兴趣的android非开源项目，通常使用逆向工程查看apk中的内容，俗称反编译。工具大概包括dex2jar、JD-GUI、apktool、procyon，这些工具使用起来相对比较麻烦，如果我们只想知道该项目的基本框架、使用到哪些开源项目的话，那么就有些浪费时间。&lt;br&gt;对于一些大厂的项目，我们还比较关心的是用到了哪些新的框架和技术，对于新技术的流行程度和使用普遍程度有个比较好的把握，指导是否需要进行深度的使用学习。比如最近的比较流行的rxjava，热更新技术等等。&lt;/p&gt;
+&lt;h3 id=&quot;ClassyShark&quot;&gt;&lt;a href=&quot;#ClassyShark&quot; class=&quot;headerlink&quot; title=&quot;ClassyShark&quot;&gt;&lt;/a&gt;ClassyShark&lt;/h3&gt;&lt;p&gt;ClassyShark是Google发布的一款可以查看Android可执行文件的浏览工具，支持.dex, .aar, .so, .apk, .jar, .class, .xml 等文件格式，分析里面的内容包括classes.dex文件，包、方法数量、类、字符串、使用的NativeLibrary等。&lt;br&gt;下载链接：&lt;a href=&quot;https://github.com/google/android-classyshark&quot;&gt;https://github.com/google/android-classyshark&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>移动开发优秀三方支持</title>

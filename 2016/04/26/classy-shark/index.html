@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="RxJava,Retrofit," />
+  <meta name="keywords" content="工具," />
 
 
 
@@ -57,22 +57,19 @@
 
 
 
-<meta name="description" content="注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法
-
-基本用法定义接口：1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&quot;user&quot;) String u">
+<meta name="description" content="背景对于一个感兴趣的android非开源项目，通常使用逆向工程查看apk中的内容，俗称反编译。工具大概包括dex2jar、JD-GUI、apktool、procyon，这些工具使用起来相对比较麻烦，如果我们只想知道该项目的基本框架、使用到哪些开源项目的话，那么就有些浪费时间。对于一些大厂的项目，我们还比较关心的是用到了哪些新的框架和技术，对于新技术的流行程度和使用普遍程度有个比较好的把握，指导是否">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android使用Retrofit+RxJava网络请求小结">
-<meta property="og:url" content="http://yoursite.com/2016/03/10/first-use-Retrofit-and-RxJava/index.html">
+<meta property="og:title" content="Apk分析利器ClassyShark">
+<meta property="og:url" content="http://yoursite.com/2016/04/26/classy-shark/index.html">
 <meta property="og:site_name" content="那一抹、记忆">
-<meta property="og:description" content="注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法
-
-基本用法定义接口：1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&quot;user&quot;) String u">
-<meta property="og:updated_time" content="2016-03-11T01:25:01.501Z">
+<meta property="og:description" content="背景对于一个感兴趣的android非开源项目，通常使用逆向工程查看apk中的内容，俗称反编译。工具大概包括dex2jar、JD-GUI、apktool、procyon，这些工具使用起来相对比较麻烦，如果我们只想知道该项目的基本框架、使用到哪些开源项目的话，那么就有些浪费时间。对于一些大厂的项目，我们还比较关心的是用到了哪些新的框架和技术，对于新技术的流行程度和使用普遍程度有个比较好的把握，指导是否">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz/159icnNTXChMR3icsruOffp4vVMPXqHfnUUVTzS7mAtsUevyEmar1dnibUVfbbeErCJlPmrTQasMasoZMkIkXB9fg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz/159icnNTXChMR3icsruOffp4vVMPXqHfnUqx9icENWf8NKBDFCMMG2iakEZlYKbqoDOosTss2dK5KZicejCoxQ0rZzA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:updated_time" content="2016-04-26T06:46:50.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android使用Retrofit+RxJava网络请求小结">
-<meta name="twitter:description" content="注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法
-
-基本用法定义接口：1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;List&amp;lt;Repo&amp;gt;&amp;gt; listRepos(@Path(&quot;user&quot;) String u">
+<meta name="twitter:title" content="Apk分析利器ClassyShark">
+<meta name="twitter:description" content="背景对于一个感兴趣的android非开源项目，通常使用逆向工程查看apk中的内容，俗称反编译。工具大概包括dex2jar、JD-GUI、apktool、procyon，这些工具使用起来相对比较麻烦，如果我们只想知道该项目的基本框架、使用到哪些开源项目的话，那么就有些浪费时间。对于一些大厂的项目，我们还比较关心的是用到了哪些新的框架和技术，对于新技术的流行程度和使用普遍程度有个比较好的把握，指导是否">
+<meta name="twitter:image" content="http://mmbiz.qpic.cn/mmbiz/159icnNTXChMR3icsruOffp4vVMPXqHfnUUVTzS7mAtsUevyEmar1dnibUVfbbeErCJlPmrTQasMasoZMkIkXB9fg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
 
 
 
@@ -90,7 +87,7 @@
   };
 </script>
 
-  <title> Android使用Retrofit+RxJava网络请求小结 | 那一抹、记忆 </title>
+  <title> Apk分析利器ClassyShark | 那一抹、记忆 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -242,7 +239,7 @@
             
             
               
-                Android使用Retrofit+RxJava网络请求小结
+                Apk分析利器ClassyShark
               
             
           </h1>
@@ -254,8 +251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-10T17:19:48+08:00" content="2016-03-10">
-              2016-03-10
+            <time itemprop="dateCreated" datetime="2016-04-26T14:22:43+08:00" content="2016-04-26">
+              2016-04-26
             </time>
           </span>
 
@@ -284,8 +281,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/10/first-use-Retrofit-and-RxJava/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/first-use-Retrofit-and-RxJava/" itemprop="commentsCount"></span>
+                <a href="/2016/04/26/classy-shark/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/26/classy-shark/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -307,27 +304,63 @@
       
 
       
-        <blockquote>
-<p>注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法</p>
-</blockquote>
-<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>定义接口：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface GitHubService &#123;</span><br><span class="line">  @GET(<span class="string">"users/&#123;user&#125;/repos"</span>)</span><br><span class="line">  Call&lt;List&lt;Repo&gt;&gt; listRepos(@Path(<span class="string">"user"</span>) <span class="built_in">String</span> user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用类 Retrofit 生成接口 GitHubService 的实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">    .baseUrl(<span class="string">"https://api.github.com/"</span>)</span><br><span class="line">    .build();</span><br><span class="line">GitHubService service = retrofit.create(GitHubService.class);</span><br></pre></td></tr></table></figure></p>
-<p>之后就可以直接调用生成的GitHubServcie实例去发送请求：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"octocat"</span>);</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：baseUrl和注解中url连接的”/“最好写在baseUrl的后面，而不是注解中url的前面，否则可能会出现不可预知的错误。</strong></p>
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>对于一个感兴趣的android非开源项目，通常使用逆向工程查看apk中的内容，俗称反编译。工具大概包括dex2jar、JD-GUI、apktool、procyon，这些工具使用起来相对比较麻烦，如果我们只想知道该项目的基本框架、使用到哪些开源项目的话，那么就有些浪费时间。<br>对于一些大厂的项目，我们还比较关心的是用到了哪些新的框架和技术，对于新技术的流行程度和使用普遍程度有个比较好的把握，指导是否需要进行深度的使用学习。比如最近的比较流行的rxjava，热更新技术等等。</p>
+<h3 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a>ClassyShark</h3><p>ClassyShark是Google发布的一款可以查看Android可执行文件的浏览工具，支持.dex, .aar, .so, .apk, .jar, .class, .xml 等文件格式，分析里面的内容包括classes.dex文件，包、方法数量、类、字符串、使用的NativeLibrary等。<br>下载链接：<a href="https://github.com/google/android-classyshark" target="_blank" rel="external">https://github.com/google/android-classyshark</a></p>
 <a id="more"></a>
-<p>请求的URL可以在函数中使用替换块和参数进行动态更新，替换块是{ }包围的字符串，相应的参数必须使用相同的字符串被@Path进行注释<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@GET(<span class="string">"group/&#123;id&#125;/users"</span>)</span><br><span class="line">List&lt;User&gt; groupList(@Path(<span class="string">"id"</span>) int groupId);</span><br></pre></td></tr></table></figure></p>
-<p>也可以添加查询参数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@GET(<span class="string">"group/&#123;id&#125;/users"</span>)</span><br><span class="line">List&lt;User&gt; groupList(@Path(<span class="string">"id"</span>) int groupId, @Query(<span class="string">"sort"</span>) <span class="built_in">String</span> sort);</span><br></pre></td></tr></table></figure></p>
-<p>复杂的查询参数可以使用Map进行组合<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@GET(<span class="string">"group/&#123;id&#125;/users"</span>)</span><br><span class="line">List&lt;User&gt; groupList(@Path(<span class="string">"id"</span>) int groupId, @QueryMap <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; options);</span><br></pre></td></tr></table></figure></p>
-<h3 id="实例介绍"><a href="#实例介绍" class="headerlink" title="实例介绍"></a>实例介绍</h3><p>首先添加依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.squareup.retrofit2:retrofit:2.0.0-beta4'</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="定义接口"><a href="#定义接口" class="headerlink" title="定义接口"></a>定义接口</h4><p>要进行网络请求，首先要有请求的接口，这里以一个请求天气的接口为例，Retrofit使用以下方法定义一个接口：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * http://wthrcdn.etouch.cn/weather_mini?citykey=101010100</span><br><span class="line"> */</span></span><br><span class="line">public interface ApiWeatherService &#123;</span><br><span class="line">    @GET(<span class="string">"weather_mini"</span>)</span><br><span class="line">    Observable&lt;WeatherBean&gt; getWeatherInfo(@Query(<span class="string">"citykey"</span>) <span class="built_in">String</span> cityKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：上面使用Observable（被观察者、事件源）返回而不是Call的原因是请求结束后要配合使用RxJava。</strong></p>
-<h4 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h4><p>使用Retrofit进行网络请求：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">                <span class="comment">//baseUrl</span></span><br><span class="line">                .baseUrl(<span class="string">"http://wthrcdn.etouch.cn/"</span>)</span><br><span class="line">                <span class="comment">//如果你想接收json结果并解析，你必须把Gson Converter作为一个独立的依赖添加进来</span></span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                <span class="comment">//Retrofit团队有已经准备好了的CallAdapter module。其中最著名的module可能是为RxJava准备的CallAdapter，它将作为Observable返回</span></span><br><span class="line">                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</span><br><span class="line">                .build();</span><br><span class="line">ApiWeatherService weatherService = retrofit.create(ApiWeatherService.class);</span><br></pre></td></tr></table></figure></p>
-<p>注意：要使用GSON解析和CallAdapter（配合RxJava使用），你的项目需要添加以下依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.squareup.retrofit2:converter-gson:2.0.0-beta4'</span></span><br><span class="line">compile <span class="string">'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'</span></span><br></pre></td></tr></table></figure></p>
-<p>在Retrofit 2.0中，你需要自己插入一个Converter（addConverterFactory），不然的话Retrofit只能接收字符串结果。同样，Retrofit 2.0也不再依赖于Gson。<br>你可以使用Gson、Jackson或者其它的Converter modules，一般我们使用Gson。</p>
-<h4 id="使用RxJava"><a href="#使用RxJava" class="headerlink" title="使用RxJava"></a>使用RxJava</h4><p>你可以完全像RxJava那样使用它，如果你想让subscribe部分的代码在主线程中被调用，需要把observeOn(AndroidSchedulers.mainThread())添加到链表中。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;WeatherBean&gt; observable = weatherService.getWeatherInfo(<span class="string">"101010100"</span>);</span><br><span class="line">        observable.subscribeOn(Schedulers.io())</span><br><span class="line">                .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                .subscribe(<span class="keyword">new</span> Subscriber&lt;WeatherBean&gt;() &#123;</span><br><span class="line">                    @Override</span><br><span class="line">                    public <span class="keyword">void</span> onCompleted() &#123;</span><br><span class="line">                        Log.i(<span class="string">"RxJava----"</span>, <span class="string">"onCompleted"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    @Override</span><br><span class="line">                    public <span class="keyword">void</span> onError(Throwable e) &#123;</span><br><span class="line">                        Log.e(<span class="string">"RxJava----"</span>, <span class="string">"onError"</span> + e.toString());</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    @Override</span><br><span class="line">                    public <span class="keyword">void</span> onNext(WeatherBean weatherBean) &#123;</span><br><span class="line">                        rxJavaTv.setText(<span class="string">"天气信息："</span> + weatherBean.getData().getGanmao());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure></p>
-<p>注意：要使用RxJava和AndroidSchedulers.mainThread()，你需要添加依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'io.reactivex:rxjava:1.1.0'</span></span><br><span class="line">compile <span class="string">'io.reactivex:rxandroid:1.1.0'</span></span><br></pre></td></tr></table></figure></p>
-<p>至此，一个使用Retrofit和RxJava进行简单的网络请求并解析的例子就完成了。简单两段代码实现了网络请求、解析、异步，结构也非常的清晰，不得不说Retrofit和RxJava的强大，也值得我们深入学习。<br>听说Retrofit和RxJava更配哦！</p>
-<p>参考文章：<br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0915/3460.html" target="_blank" rel="external">Retrofit 2.0：有史以来最大的改进</a><br><a href="http://blog.csdn.net/u014165119/article/details/49280779" target="_blank" rel="external">Retrofit2.0使用详解</a></p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
+<li>打开apk文件java -jar ClassyShark.jar -open <your_apk.apk></your_apk.apk></li>
+<li>将生成的所有数据导出到文本文件里java -jar ClassyShark.jar -dump <binary_file></binary_file></li>
+<li>将指定类生成的文件导出到文本文件里java -jar ClassyShark.jar -dump <binary_file> <fully_qualified_class_name></fully_qualified_class_name></binary_file></li>
+<li>打开ClassyShark，在GUI界面展示某特定的类</li>
+<li>java -jar ClassyShark.jar -open <binary_file> <fully_qualified_class_name></fully_qualified_class_name></binary_file></li>
+<li>检测APKjava -jar ClassyShark.jar -inspect <your_apk.apk></your_apk.apk></li>
+<li>导出所有的字符串 java -jar ClassyShark.jar -stringdump <your_apk.apk></your_apk.apk></li>
+</ol>
+<h3 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h3><p>以美团项目为例，让我们看看能得到什么有用的信息。</p>
+<blockquote>
+<p>java -jar ClassyShark.jar -open ~/Downloads/group-351<em>3-meituan</em>.apk</p>
+</blockquote>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/159icnNTXChMR3icsruOffp4vVMPXqHfnUUVTzS7mAtsUevyEmar1dnibUVfbbeErCJlPmrTQasMasoZMkIkXB9fg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt=""><br>美团项目中使用了MultiDex，并且classes.dex文件有3个，说明方法数肯定非常多。<br>美团的编译版本非常新，紧跟时代，23版本(Android 6.0)。<br>并且TargetSdkVersion也是23版本，紧跟技术方向。<br>最低版本是16(Android 4.1)，4.1以下的手机无法运行。<br>而且有好多的so库，有美团自己的，也有好多是第三方的库。<br><img src="http://mmbiz.qpic.cn/mmbiz/159icnNTXChMR3icsruOffp4vVMPXqHfnUqx9icENWf8NKBDFCMMG2iakEZlYKbqoDOosTss2dK5KZicejCoxQ0rZzA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt=""><br>可以看到9万多个方法，怪不得会有3个classes.dex文件。<br>项目中应用了大量的第三方库，并且一般都是主流的比较稳定的开源库。</p>
+<p>我们来看下都用到了哪些库：</p>
+<ul>
+<li>ZXing二维码识别库</li>
+<li>amap: 高德地图</li>
+<li>PullToRefresh使用最广的下拉刷新组件</li>
+<li>jackson，json解析库</li>
+<li>NineOldAndroids Jake大神的android兼容库</li>
+<li>fresco，facebook出品的图片处理库，图片加载节省很多内存，避免OOM</li>
+<li>RxJava响应式编程库，再加上Square的Retrofit库的支持，可以说未来就是rxjava的天下，目前市面上已经有很多基于rxjava的项目；我们团队也将基于rxjava来开发项目</li>
+<li>圈内最牛逼的开源公司Square，Jake大神所在的公司，可以毫不夸张的说，Square的开源项目使得Android开发提速了好几年</li>
+<li>okhttp网络请求库，已被官方采用</li>
+<li>retrofit非常牛逼的网络请求库，配合rxjava和lambda使用，代码量减少90%</li>
+<li>otto事件总线</li>
+<li>picasso图片加载库</li>
+<li>dagger依赖注入框架</li>
+<li>ExpandableTextView可折叠的TextView</li>
+<li>iflytek，科大讯飞的语音集成</li>
+<li>ViewPagerIndicator还是Jake大神的项目，viewpager的滚动控件</li>
+<li>actionbarsherlock依然是Jake大神的项目，Actionbar的适配库，不过已经过时了</li>
+<li>华为推送</li>
+<li>SystemBarTint状态栏沉浸效果库</li>
+<li>百度地图</li>
+<li>新浪微博</li>
+<li>腾讯的QQ和微信</li>
+<li>大众点评，已经合并一家,东西也得用</li>
+<li>umpay，联动优势支付</li>
+<li>支付宝</li>
+<li>andfix阿里出品的android热更新框架</li>
+<li>flurry统计库</li>
+<li>小米推送</li>
+<li>http-request网络请求库</li>
+<li>EventBus事件总线库</li>
+<li>PhotoView放大缩小的图片处理库</li>
+<li>roboguice依赖注入框架，类似Dagger</li>
+<li>zip4j处理zip压缩的库</li>
+<li>link异步task关联库,很像rxjava</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从上面分析我们可见看出，美团是一个技术很开放的公司，对于框架的使用比较多，使用的基本都是主流的开发框架，减少开发成本，增强app的稳定性和体验，对于我们来说，有很大的借鉴意义。比如，目前都在试水的热更新框架，美团选择了阿里的andfix,那么该技术方案肯定是得到了美团团队的验证；另外，美团团队也是比较潮流的，Retrofit+Rxjava的潮流趋势已经不可阻挡，美团已经开始使用；但是，从项目引用库中我们也可以看到一些不足之处；比如，同一种框架引用了多种第三方库，如网络库(okhttp,http-request),图片加载库(fresco,picasso),事件总线(EventBus, Otto),依赖注入(Dagger,roboguice)，推送相关的库等很多重复的库，如果去掉重复的库那么可以节省很多的编译时间和apk包的大小；还有就是，我们基本可以断定，美团团队的内部并不能很好的统一，没有有效的沟通，代码开发很混乱，导致项目结构上的臃肿，重复库的使用等等问题。</p>
+<p>通过分析App的项目结构和引用库的信息，我们大致掌握了该项目的架构，一些开发中的经验和不足，拓宽下开发视野，发现一些好用的开源库，增强我们的武器，这些都是我们在开发中可以借鉴的东西。</p>
+<p>原文链接：<a href="http://mp.weixin.qq.com/s?__biz=MzA4NTQwNDcyMA==&amp;mid=402526638&amp;idx=1&amp;sn=bdd13a3cb722e72f67d4dcc1af0f620d#rd" target="_blank" rel="external">ClassyShark——apk分析利器</a></p>
 
       
     </div>
@@ -342,9 +375,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
-          
-            <a href="/tags/Retrofit/" rel="tag">#Retrofit</a>
+            <a href="/tags/工具/" rel="tag">#工具</a>
           
         </div>
       
@@ -353,17 +384,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/06/i-have-a-cup-of-wine/" rel="next" title="我有一壶酒，足以慰风尘">
-                <i class="fa fa-chevron-left"></i> 我有一壶酒，足以慰风尘
+              <a href="/2016/04/06/app-dev-third-sup/" rel="next" title="移动开发优秀三方支持">
+                <i class="fa fa-chevron-left"></i> 移动开发优秀三方支持
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/15/property-anim/" rel="prev" title="PropertyAnimation属性动画">
-                PropertyAnimation属性动画 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -389,8 +416,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/10/first-use-Retrofit-and-RxJava/"
-           data-title="Android使用Retrofit+RxJava网络请求小结" data-url="http://yoursite.com/2016/03/10/first-use-Retrofit-and-RxJava/">
+      <div class="ds-thread" data-thread-key="2016/04/26/classy-shark/"
+           data-title="Apk分析利器ClassyShark" data-url="http://yoursite.com/2016/04/26/classy-shark/">
       </div>
     
   </div>
@@ -518,7 +545,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法"><span class="nav-number">1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例介绍"><span class="nav-number">2.</span> <span class="nav-text">实例介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义接口"><span class="nav-number">2.1.</span> <span class="nav-text">定义接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络请求"><span class="nav-number">2.2.</span> <span class="nav-text">网络请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用RxJava"><span class="nav-number">2.3.</span> <span class="nav-text">使用RxJava</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassyShark"><span class="nav-number">2.</span> <span class="nav-text">ClassyShark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体使用"><span class="nav-number">4.</span> <span class="nav-text">具体使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
