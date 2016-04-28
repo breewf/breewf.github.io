@@ -1,0 +1,875 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RxJava," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="原文链接 : RxJava – the production line
+原文作者 : Mateusz Budzar
+译文出自 : 掘金翻译计划
+译者 : Sausure
+校对者 : lizhuo, Rocky
+
+
+为什么另写一篇 RxJava 的文章?已经有很多 RxJava 的文章通过例子阐述了什么是 RxJava 以及怎么去用，但它们大多数只有代码。虽然也会通过类比来解释，例如最出名的就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用流水线的方式来理解RxJava的概念">
+<meta property="og:url" content="http://yoursite.com/2016/04/28/rxjava-production-line/index.html">
+<meta property="og:site_name" content="那一抹、记忆">
+<meta property="og:description" content="原文链接 : RxJava – the production line
+原文作者 : Mateusz Budzar
+译文出自 : 掘金翻译计划
+译者 : Sausure
+校对者 : lizhuo, Rocky
+
+
+为什么另写一篇 RxJava 的文章?已经有很多 RxJava 的文章通过例子阐述了什么是 RxJava 以及怎么去用，但它们大多数只有代码。虽然也会通过类比来解释，例如最出名的就是">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a490147fjw1f2ty3u29rzj20sg0fx0t6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a490147fgw1f2ty4x582tj20sg0fv0ts.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/a490147fgw1f2ty5f9qhpj20sg0fvjrz.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/a490147fgw1f2ty67umsuj20sg0fudhh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a490147fgw1f2ty6sggq4j20sg0fuwgd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a490147fgw1f2ty78qmzzj20sg0fsdhg.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/a490147fgw1f2ty7nfx7lj20sg0ftwfm.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/a490147fgw1f2ty83zoxfj20sg0fvdgp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a490147fgw1f2ty8i3n9fj20sg0fwq49.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/a490147fgw1f2ty9j44v8j20sg0fvgmp.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/a490147fgw1f2tya3eqinj20sg0fymya.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/a490147fgw1f2tyb17a9wj20sg0c5mxz.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/a490147fgw1f2tybbvu5hj20sg0cw0td.jpg">
+<meta property="og:updated_time" content="2016-04-28T08:00:35.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用流水线的方式来理解RxJava的概念">
+<meta name="twitter:description" content="原文链接 : RxJava – the production line
+原文作者 : Mateusz Budzar
+译文出自 : 掘金翻译计划
+译者 : Sausure
+校对者 : lizhuo, Rocky
+
+
+为什么另写一篇 RxJava 的文章?已经有很多 RxJava 的文章通过例子阐述了什么是 RxJava 以及怎么去用，但它们大多数只有代码。虽然也会通过类比来解释，例如最出名的就是">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/a490147fjw1f2ty3u29rzj20sg0fx0t6.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 用流水线的方式来理解RxJava的概念 | 那一抹、记忆 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4adc0e01c4193676b336ddf961eadc45";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">那一抹、记忆</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Android小白一枚</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用流水线的方式来理解RxJava的概念
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T15:49:16+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/28/rxjava-production-line/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/28/rxjava-production-line/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<ul>
+<li>原文链接 : <a href="http://www.thedroidsonroids.com/blog/android/rxjava-production-line/" target="_blank" rel="external">RxJava – the production line</a></li>
+<li>原文作者 : <a href="">Mateusz Budzar</a></li>
+<li>译文出自 : <a href="https://github.com/xitu/gold-miner" target="_blank" rel="external">掘金翻译计划</a></li>
+<li>译者 : <a href="https://github.com/Sausure" target="_blank" rel="external">Sausure</a></li>
+<li>校对者 : <a href="https://github.com/huanglizhuo" target="_blank" rel="external">lizhuo</a>, <a href="https://github.com/rockzhai" target="_blank" rel="external">Rocky</a></li>
+</ul>
+</blockquote>
+<h2 id="为什么另写一篇-RxJava-的文章"><a href="#为什么另写一篇-RxJava-的文章" class="headerlink" title="为什么另写一篇 RxJava 的文章?"></a>为什么另写一篇 RxJava 的文章?</h2><p>已经有很多<a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external"> RxJava </a>的文章通过例子阐述了什么是 RxJava 以及怎么去用，但它们大多数只有代码。虽然也会通过类比来解释，例如最出名的就是“流”。通常情况下代码能完美地让人理解（我们都是程序员，对吧？），但是 RxJava 十分不同于以往的 Android 开发。在最开始时通过代码是很难让人理解的，用“流”来类比并不足够，即使是<a href="http://rxmarbles.com/" target="_blank" rel="external"> marbles </a>的例子也还远远不够。我可以保证自己能理解，但对于别人，老实说，难道你们不需要更多结合实际的例子？难道你们不想在脑海中举一个例子来让自己更好地理解 RxJava 吗？我做了，并且我想和你们分享。</p>
+<h2 id="工厂流水线"><a href="#工厂流水线" class="headerlink" title="工厂流水线"></a>工厂流水线</h2><p>好吧，我说谎了。为了理解 RxJava，我在脑海里举了不仅仅一个例子。例如我尝试观察动物园笼子的动物，尝试观察河流里的鱼，也尝试去观察蝙蝠侠里的犯罪（额，这不是现实生活中的，但不失为一个很好的例子）。但我还是认为工厂流水线是最好的例子。</p>
+<p><img src="http://ww1.sinaimg.cn/large/a490147fjw1f2ty3u29rzj20sg0fx0t6.jpg" alt=""></p>
+<a id="more"></a>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>我们先想象下，我们需要写一款应用来展示动物们的信息，并且现在我需要在新的界面实现以下功能：</p>
+<ul>
+<li>三份关于猫的信息</li>
+<li>每份都是唯一的</li>
+<li>每份都应该少于 300 字符</li>
+<li>每份都配张猫的图片</li>
+</ul>
+<h3 id="启动流水线！"><a href="#启动流水线！" class="headerlink" title="启动流水线！"></a>启动流水线！</h3><p>我们尝试通过流水线上的工人们的帮助实现那些功能。</p>
+<p>1. 首先我们需要启动产品处理进程。仅仅有流水线是不足够的 - 还需要有人去启动它。例如一个对结果感兴趣的产品经理</p>
+<p><img src="http://ww1.sinaimg.cn/large/a490147fgw1f2ty4x582tj20sg0fv0ts.jpg" alt=""></p>
+<p>2. 现在我们需要随机获得有关猫的信息。但怎么做呢？幸运的是这里有<a href="http://catfacts-api.appspot.com/doc.html" target="_blank" rel="external"> API </a>能让我们很容易做到！真的是巧合么。。。？好吧，我们先通过 <em>GET</em> 方法获取这些信息。</p>
+<p><img src="http://ww3.sinaimg.cn/large/a490147fgw1f2ty5f9qhpj20sg0fvjrz.jpg" alt=""></p>
+<p>3. 现在我们需要处理来自 API 的响应。它是由 HTTP 状态码和一列有关猫的信息组成。我们并不需要状态码所以我们首先去除它并将信息列表传给下一个工人。</p>
+<p><img src="http://ww3.sinaimg.cn/large/a490147fgw1f2ty67umsuj20sg0fudhh.jpg" alt=""></p>
+<p>4. 下一件要做的事就是将信息列表的信息一个个抽离出来。为什么要这么做？因为这样做方便下游的工人操作单个字符串（例如检查字符串是否过长）。</p>
+<p><img src="http://ww1.sinaimg.cn/large/a490147fgw1f2ty6sggq4j20sg0fuwgd.jpg" alt=""></p>
+<p>5. 每条信息都是唯一的。下一个工人的任务是清除重复项。</p>
+<p><img src="http://ww1.sinaimg.cn/large/a490147fgw1f2ty78qmzzj20sg0fsdhg.jpg" alt=""></p>
+<p>6. 每条信息都不能太长（少于 300 字符）</p>
+<p><img src="http://ww4.sinaimg.cn/large/a490147fgw1f2ty7nfx7lj20sg0ftwfm.jpg" alt=""></p>
+<p>7. 现在我们的信息是唯一的且长度也符合要求可数量太多了而我们仅仅需要 3 份。所以下一个工人应该清除多余的信息。</p>
+<p><img src="http://ww2.sinaimg.cn/large/a490147fgw1f2ty83zoxfj20sg0fvdgp.jpg" alt=""></p>
+<p>8. 每条信息都有一张随机的猫的图片。</p>
+<p><img src="http://ww1.sinaimg.cn/large/a490147fgw1f2ty8i3n9fj20sg0fwq49.jpg" alt=""></p>
+<p>9. 我们不应该将信息分批给产品经理，而是应该将这些信息打包成一个列表。</p>
+<p><img src="http://ww4.sinaimg.cn/large/a490147fgw1f2ty9j44v8j20sg0fvgmp.jpg" alt=""></p>
+<p>10. 现在产品经理可以在屏幕上显示结果了。</p>
+<p><img src="http://ww4.sinaimg.cn/large/a490147fgw1f2tya3eqinj20sg0fymya.jpg" alt=""></p>
+<p>这就是我们要做的。我们已经通过流水线上的工人完整地实现了全部功能并最后将结果显示到了屏幕上。</p>
+<h3 id="若用-RxJava-实现这些需求该怎么做呢"><a href="#若用-RxJava-实现这些需求该怎么做呢" class="headerlink" title="若用 RxJava 实现这些需求该怎么做呢?"></a>若用 RxJava 实现这些需求该怎么做呢?</h3><p>RxJava 中存在很多可观察对象（它传出的数据可以被我们观察到）和观察者（它观察并处理可观察对象传出的数据）。在我们的例子里流水线就是可观察对象而产品经理就是观察者。需要注意的是观察者启动整个流水线这个步骤是十分重要的。如果没有观察者，流水线是不会启动的。</p>
+<p><img src="http://ww3.sinaimg.cn/large/a490147fgw1f2tyb17a9wj20sg0c5mxz.jpg" alt=""></p>
+<p>那么流水线上的工人算什么呢？在 RxJava 的世界里它们叫做操作符。它们的动作十分像工人 - 他们需要处理那些被传出的数据（例如仅仅让唯一的数据通过）</p>
+<p><img src="http://ww3.sinaimg.cn/large/a490147fgw1f2tybbvu5hj20sg0cw0td.jpg" alt=""></p>
+<h3 id="在代码世界实现流水线"><a href="#在代码世界实现流水线" class="headerlink" title="在代码世界实现流水线"></a>在代码世界实现流水线</h3><p>很好。可这么多图片有卵用？代码终究还是代码并不是一条流水线，不是吗？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mCatFactsService.getCatFacts(<span class="number">100</span>)</span><br><span class="line">                .map(catFactResponse -&gt; catFactResponse.getFacts())</span><br><span class="line">                .flatMap(catFacts -&gt; Observable.from(catFacts))</span><br><span class="line">                .distinct()</span><br><span class="line">                .filter(catFact -&gt; catFact.length() &lt;= <span class="number">300</span>)</span><br><span class="line">                .take(<span class="number">3</span>)</span><br><span class="line">                .map(catFact -&gt; <span class="keyword">new</span> CatFactWithImage(catFact, getRandomCatImageId()))</span><br><span class="line">                .toList()</span><br><span class="line">                .subscribeOn(Schedulers.io())</span><br><span class="line">                .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                .subscribe(mCatFactsAdapter::setCatFactWithImages, Throwable::printStackTrace);</span><br></pre></td></tr></table></figure></p>
+<p>这样就能通过 RxJava 实现流水线了。为了理解上面的代码你应该从上到下看一遍。每个动作都是独立运行的 - 一个接着一个。</p>
+<ul>
+<li><strong>mCatFactsService.getCatFacts(100)</strong> – 这个就是 <em>GET</em> 方法。在响应里我们获得一个封装了 HTTP 状态码以及一列猫的信息的对象。<code>Observable</code> （即可观察对象）将这个对象（我们叫它 CatFactResponse 吧） 封装起来，现在我们就可以用 RxJava 的操作符对它进行处理。</li>
+<li><strong>map(), flatMap(), distinct(), filter(), take(), toList()</strong> – 这些就是操作符。它们可以修改被传出的数据 - 一个接着一个。它们就像上面例子的图片中流水线上的工人。</li>
+<li><strong>subscribe()</strong> – 让一个 <code>Observer</code> （即观察者）去订阅一个 <code>Observable</code>。若没有这一步整个流水线都无法启动。</li>
+<li><strong>subscribeOn()</strong> – 告诉 <code>Observable</code> 当 <em>subscribe()</em> 方法被调用后它应该在哪个线程被启动。接着每个操作符都会在那个线程工作直到我们改变线程。</li>
+<li><strong>observeOn()</strong> – 改变下一个操作符的工作线程。每个在这个方法之后的操作符都会在它指定的新的线程里工作，直到我们通过别的 <em>observeOn()</em> 改变线程。</li>
+</ul>
+<p>现在我们再仔细分析我们用过的每个操作符<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.map(<span class="keyword">new</span> Func1&lt;CatFactResponse, List&lt;String&gt;&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">call</span><span class="params">(CatFactResponse catFactResponse)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> catFactResponse.getFacts();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>有可能你会不适应那花俏的箭头所以我将完整的实现展开了（当然我们可以通过 Java8 的 lambda 表达式实现那种语法 - 详情见<a href="https://github.com/evant/gradle-retrolambda" target="_blank" rel="external"> retrolambda </a>）</p>
+<p>正如你说看到的， <em>mCatFactsService.getCatFacts()</em> 返回一串数据并被传到 <em>CatFactResponse</em> 中，但因为现在我们不需要 HTTP 状态码，所以我们通过 <strong>MAP</strong> （转换）操作符将 CatFactResponse 对象转换成别的对象 - 在这个例子中是 List <string> 对象。下一个操作符将会处理这个对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.flatMap(<span class="keyword">new</span> Func1&lt;List&lt;String&gt;, Observable&lt;? extends String&gt;&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Observable&lt;? extends String&gt; call(List&lt;String&gt; catFacts) &#123;</span><br><span class="line">            <span class="keyword">return</span> Observable.from(catFacts);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></string></p>
+<p><code>flatMap</code> 操作符接受猫的信息列表作为参数，分别取出列表的每条数据并抛给下一个操作符。所以我们拿到并抛出的数据都是 <strong>FROM</strong> （来自）这个列表的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.distinct()</span><br></pre></td></tr></table></figure></p>
+<p>这个操作符用来处理重复项，并且它不会让任何已经通过的相同字符串再次通过。每个都是 <strong>DISTINCT</strong> (独特的)。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.filter(<span class="keyword">new</span> Func1&lt;String, Boolean&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Boolean <span class="title">call</span><span class="params">(String catFact)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> catFact.length() &lt;= <span class="number">300</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><code>filter</code> 操作符就是个简单的对/错判断表达式。如果字符串太长，将无法通过。所以 <code>filter</code> 很显然是用来 <strong>FILTERS</strong> （过滤的）。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.take(<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<p><code>take</code> 操作符 <strong>TAKES</strong> （取出）指定数量的信息。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.map(<span class="keyword">new</span> Func1&lt;String, CatFactWithImage&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> CatFactWithImage <span class="title">call</span><span class="params">(String catFact)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CatFactWithImage(catFact, getRandomCatImageId());</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>另一个 <code>map</code> 操作符。在我们打包所有字符串之前我们应该为每个字符串添加张猫的图片。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.toList()</span><br></pre></td></tr></table></figure></p>
+<p>现在我们可以打包所有 <em>CatFactWithImage</em> 对象 <strong>TO</strong> （成）一个 <strong>LIST</strong> （列表）了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.subscribe(<span class="keyword">new</span> Observer&lt;List&lt;CatFactWithImage&gt;&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">//no-op</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(List&lt;CatFactWithImage&gt; catFactWithImages)</span> </span>&#123;</span><br><span class="line">            mCatFactsAdapter.setCatFactWithImages(catFactWithImages);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>然后就是简单地将 <code>list</code> 对象传给 <code>adapter</code> 对象而已。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>RxJava 是款十分强大的工具。但不幸的是如果你之前没有通过“流”的形式写过代码你可能很难理解它并学会如何去用它。因为它十分不同于以往平常的安卓开发，所以我们需要一些比代码更形象的东西去理解它。我希望这篇文章能帮助你更好地理解 RxJava 是如何工作的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/26/classy-shark/" rel="next" title="Apk分析利器ClassyShark">
+                <i class="fa fa-chevron-left"></i> Apk分析利器ClassyShark
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/28/rxjava-production-line/"
+           data-title="用流水线的方式来理解RxJava的概念" data-url="http://yoursite.com/2016/04/28/rxjava-production-line/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img4.duitang.com/uploads/item/201501/20/20150120180628_Uy5in.jpeg"
+               alt="HYGao" />
+          <p class="site-author-name" itemprop="name">HYGao</p>
+          <p class="site-description motion-element" itemprop="description">阳光温热，岁月静好。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/breewf" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/haiygao" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 新浪微博
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gold.xitu.io/#/" target="_blank">稀土掘金</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么另写一篇-RxJava-的文章"><span class="nav-number">1.</span> <span class="nav-text">为什么另写一篇 RxJava 的文章?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂流水线"><span class="nav-number">2.</span> <span class="nav-text">工厂流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">2.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动流水线！"><span class="nav-number">2.2.</span> <span class="nav-text">启动流水线！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#若用-RxJava-实现这些需求该怎么做呢"><span class="nav-number">2.3.</span> <span class="nav-text">若用 RxJava 实现这些需求该怎么做呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在代码世界实现流水线"><span class="nav-number">2.4.</span> <span class="nav-text">在代码世界实现流水线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYGao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"breewf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+
+</body>
+</html>
