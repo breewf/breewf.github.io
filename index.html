@@ -244,157 +244,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/04/28/android-studio-tips/" itemprop="url">
-                  Android Studio小技巧合集
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-28T16:26:18+08:00" content="2016-04-28">
-              2016-04-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/安卓/" itemprop="url" rel="index">
-                    <span itemprop="name">安卓</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/28/android-studio-tips/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/28/android-studio-tips/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<ul>
-<li>原文链接: <a href="https://github.com/pavlospt/Android-Studio-Tips-by-Philippe-Breault/wiki">Android Studio Tips by Philippe Breault</a></li>
-<li>原文作者 : <a href="https://github.com/pavlospt">Philippe Breault</a></li>
-<li>译文出自 : <a href="https://github.com/xitu/gold-miner">掘金翻译计划</a></li>
-<li>译者 : <a href="https://github.com/laobie">Jaeger</a>, <a href="https://github.com/brucezz">Brucezz</a></li>
-<li>校对者 :<a href="https://github.com/Glowin">Glow Chiang</a>, <a href="https://github.com/void-main">Void Main</a></li>
-<li>状态 : 完成</li>
-</ul>
-</blockquote>
-<p>欢迎来到Phillipe Breault发布的Android Studio技巧wiki页面。</p>
-<p>我创建了这个仓库是因为我认为Phillipe Breault发布的每一个Android Studio技巧都应该被记录下来。</p>
-<p>随着新技巧的发布，我将会一直保持更新。</p>
-<p>敬请关注！！</p>
-<p>鸣谢：<a href="https://plus.google.com/u/0/+PhilippeBreault">Philippe Breault</a></p>
-<h3 id="1-分析传入数据流（Analyze-data-flow-to-here）"><a href="#1-分析传入数据流（Analyze-data-flow-to-here）" class="headerlink" title="1. 分析传入数据流（Analyze data flow to here）"></a>1. 分析传入数据流（Analyze data flow to here）</h3><ul>
-<li><strong>描述：</strong>这个操作将会根据当前选中的变量、参数或者字段，分析出其传递到此处的路径。<br>当你进入某段陌生的代码，试图明白某个参数是怎么传递到此处的时候，这是一个非常有用的操作。</li>
-<li><strong>调用：</strong>Menu → Analyze → Analyze Data Flow to Here</li>
-<li><strong>快捷键：</strong>无，可以在设置中指定。</li>
-<li><strong>相反的操作：</strong>分析传出数据流（Analyze data flow from here），这个将会分析当前选中的变量往下传递的路径，直到结束。</li>
-</ul>
-<p><img src="https://lh4.googleusercontent.com/-Fv4MxHWIdHw/VCFWY4Ykv0I/AAAAAAAANoQ/YVe2hmnkAPE/w667-h348-no/31-analyzedataflow.gif" alt=""></p>
-<h3 id="2-堆栈追踪分析（Analyze-Stacktrace）"><a href="#2-堆栈追踪分析（Analyze-Stacktrace）" class="headerlink" title="2. 堆栈追踪分析（Analyze Stacktrace）"></a>2. 堆栈追踪分析（Analyze Stacktrace）</h3><ul>
-<li><strong>描述：</strong> 这个操作读取一份堆栈追踪信息，并且使它像logcat中那样可以点击。当你从bug报告中或者终端复制了一份堆栈追踪，使用该操作可以很方便地调试。</li>
-<li><strong>调用：</strong>Menu → Analyze → Analyze Stacktrace</li>
-<li><strong>快捷键：</strong>无，可以在设置中指定。</li>
-<li><strong>更多：</strong>通过使用“ProGuard Unscramble Plugin”插件，也可以分析混淆过的堆栈追踪。</li>
-</ul>
-<p><img src="https://lh3.googleusercontent.com/-ud2l1QdHTow/VCAEACCK1bI/AAAAAAAANmY/5a3od9nIm2E/w676-h392/30-analyzestacktrace.gif" alt=""></p>
-<h3 id="3-关联调试程序（Attach-Debugger）"><a href="#3-关联调试程序（Attach-Debugger）" class="headerlink" title="3.  关联调试程序（Attach Debugger）"></a>3.  关联调试程序（Attach Debugger）</h3><ul>
-<li><strong>描述：</strong>随时启动调试程序，即使你没有以调试模式启动你的应用。这是一个很方便的操作，因为你不必为了调试程序而以调试模式重新部署你的应用。当别人正在测试应用，突然遇到一个bug而将设备交给你时，你也可以很快地进入调试模式。</li>
-<li><strong>调用：</strong>点击工具栏图标或者Menu → Build → Attach to Android Process</li>
-<li><strong>快捷键：</strong>无，可以在设置中指定，或者点击工具栏对应的图标。</li>
-</ul>
-<p><img src="https://lh3.googleusercontent.com/-yOySWA1dWPU/VBgiH8KnkGI/AAAAAAAANfU/0E6-y0u5sic/w378-h236-no/26-attachdebugger.gif" alt=""></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/28/android-studio-tips/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/04/28/rxjava-production-line/" itemprop="url">
                   用流水线的方式来理解RxJava的概念
                 </a>
@@ -1486,6 +1335,130 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/04/RxJava-Retrofit/" itemprop="url">
+                  RxJava、Retrofit学习资料
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-04T09:28:04+08:00" content="2016-03-04">
+              2016-03-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/04/RxJava-Retrofit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/04/RxJava-Retrofit/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>RxJava、Retrofit学习资料总结：</strong></p>
+<p><a href="http://gold.xitu.io/entry/561b2c1860b2b90b56881f83" target="_blank" rel="external">给Android开发者的RxJava详解</a></p>
+<p><a href="http://gold.xitu.io/entry/56ce811171cfe4005408447e" target="_blank" rel="external">学习Retrofit和RxJava小记</a></p>
+<p><a href="http://www.jianshu.com/p/90b1f20b123d#" target="_blank" rel="external">Retrofit笔记</a></p>
+<p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0430/2815.html" target="_blank" rel="external">RxJava专题_泡在网上的日子</a></p>
+<p><a href="http://blog.csdn.net/lzyzsd/article/category/2767743" target="_blank" rel="external">RxJava_大头鬼Bruce</a></p>
+<p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0915/3460.html" target="_blank" rel="external">Retrofit2.0：有史以来最大的改进</a></p>
+<p><a href="http://blog.csdn.net/u012301841/article/details/49685677" target="_blank" rel="external">Retrofit2.0使用详解，配合OkHttp、Gson，Android最强网络请求框架</a></p>
+<p><a href="http://blog.csdn.net/u014165119/article/details/49280779" target="_blank" rel="external">Retrofit2.0使用详解</a></p>
+<p><a href="http://blog.csdn.net/qq_17766199/article/details/49946429" target="_blank" rel="external">Retrofit2.0使用</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
 
   </section>
 
@@ -1532,7 +1505,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
