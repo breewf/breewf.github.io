@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-28T08:00:35.127Z</updated>
+  <updated>2016-06-13T03:16:24.335Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo常用命令备忘</title>
+    <link href="http://yoursite.com/2016/06/13/hexo-simple-use/"/>
+    <id>http://yoursite.com/2016/06/13/hexo-simple-use/</id>
+    <published>2016-06-13T03:03:09.000Z</published>
+    <updated>2016-06-13T03:16:24.335Z</updated>
+    
+    <content type="html">&lt;p&gt;$ hexo g #生成&lt;br&gt;$ hexo s #本地预览&lt;/p&gt;
+&lt;p&gt;访问本地页面：&lt;a href=&quot;http://localhost:4000/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:4000/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;$ hexo d #部署&lt;/p&gt;
+&lt;p&gt;hexo new “postName” #新建文章&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;$ hexo g #生成&lt;br&gt;$ hexo s #本地预览&lt;/p&gt;
+&lt;p&gt;访问本地页面：&lt;a href=&quot;http://localhost:4000/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:4000/&lt;/a&gt;&lt;/
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>用流水线的方式来理解RxJava的概念</title>
