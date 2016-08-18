@@ -1,0 +1,801 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Gradle," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="为什么要多渠道打包？众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。
+使用gradle打包配置AndroidManifes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gradle、Python脚本多渠道自动化打包">
+<meta property="og:url" content="http://yoursite.com/2016/08/18/more-channel-apk/index.html">
+<meta property="og:site_name" content="那一抹、记忆">
+<meta property="og:description" content="为什么要多渠道打包？众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。
+使用gradle打包配置AndroidManifes">
+<meta property="og:image" content="http://tech.meituan.com/img/dzh/apk_packaging2.jpg">
+<meta property="og:image" content="http://tech.meituan.com/img/dzh/apk_packaging3.jpg">
+<meta property="og:updated_time" content="2016-08-18T07:53:25.320Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gradle、Python脚本多渠道自动化打包">
+<meta name="twitter:description" content="为什么要多渠道打包？众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。
+使用gradle打包配置AndroidManifes">
+<meta name="twitter:image" content="http://tech.meituan.com/img/dzh/apk_packaging2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Gradle、Python脚本多渠道自动化打包 | 那一抹、记忆 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4adc0e01c4193676b336ddf961eadc45";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">那一抹、记忆</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Android小白一枚</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Gradle、Python脚本多渠道自动化打包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-18T13:47:12+08:00" content="2016-08-18">
+              2016-08-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/18/more-channel-apk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/more-channel-apk/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="为什么要多渠道打包？"><a href="#为什么要多渠道打包？" class="headerlink" title="为什么要多渠道打包？"></a>为什么要多渠道打包？</h2><p>众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。</p>
+<h2 id="使用gradle打包"><a href="#使用gradle打包" class="headerlink" title="使用gradle打包"></a>使用gradle打包</h2><h3 id="配置AndroidManifest-xml"><a href="#配置AndroidManifest-xml" class="headerlink" title="配置AndroidManifest.xml"></a>配置AndroidManifest.xml</h3><p>在Androidmanifest.xml中定义mate-data标签：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:Android=<span class="string">"http://schemas.Android.com/apk/res/Android"</span>    </span><br><span class="line">    package=<span class="string">"com.package.name"</span>&gt;    </span><br><span class="line">    &lt;application&gt;    </span><br><span class="line"></span><br><span class="line">          &lt;meta-data android:name="UMENG_CHANNEL" android:value="xiaomi" /&gt;   </span><br><span class="line"></span><br><span class="line">    &lt;/application&gt;    </span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果不使用多渠道打包方法，那就需要我们手动一个一个去修改value中的值，比如xiaomi，360，qq，wandoujia等等。<br>使用多渠道打包的方式，就需要把上面的value配置成下面的方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data android:name=<span class="string">"UMENG_CHANNEL"</span> android:value=<span class="string">"$&#123;UMENG_CHANNEL_VALUE&#125;"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>其中${UMENG_CHANNEL_VALUE}中的值就是你在gradle中自定义配置的值。</p>
+<a id="more"></a>
+<h3 id="在build-gradle设置productFlavors"><a href="#在build-gradle设置productFlavors" class="headerlink" title="在build.gradle设置productFlavors"></a>在build.gradle设置productFlavors</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">productFlavors &#123;</span><br><span class="line">     wandoujia &#123;</span><br><span class="line">          manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"wandoujia"</span>]</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     xiaomi&#123;</span><br><span class="line">          manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"xiaomi"</span>]</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     qq &#123;</span><br><span class="line">          manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"qq"</span>]</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中[UMENG_CHANNEL_VALUE: “wandoujia”]就是对应${UMENG_CHANNEL_VALUE}的值。但是这种写法比较繁琐，可以简写为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">android &#123; </span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        wandoujia&#123;&#125;</span><br><span class="line">        xiaomi&#123;&#125;</span><br><span class="line">        qq&#123;&#125;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    productFlavors.all &#123; </span><br><span class="line">        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name] </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中name的值对相对应各个productFlavors的选项值，这样就达到自动替换渠道值的目的了。这样生成apk时，选择相应的Flavors来生成指定渠道的包就可以了，生成的apk会自动帮你加上相应渠道的后缀，非常方便和直观。</p>
+<h3 id="一次生成所有渠道包"><a href="#一次生成所有渠道包" class="headerlink" title="一次生成所有渠道包"></a>一次生成所有渠道包</h3><p>我们可以使用Android Studio中下方底栏的命令行工具Terminal，输入命令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle assembleRelease</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以自动打包了，如果渠道数较多的话，将会比较耗时。</p>
+<h3 id="带签名的渠道包"><a href="#带签名的渠道包" class="headerlink" title="带签名的渠道包"></a>带签名的渠道包</h3><p>需要在build.gradle进行相关签名的配置：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//签名</span></span><br><span class="line">signingConfigs&#123;</span><br><span class="line">     release &#123;</span><br><span class="line">          storeFile file(<span class="string">"keystore路径"</span>)</span><br><span class="line">          storePassword <span class="string">"***"</span></span><br><span class="line">          keyAlias <span class="string">"***"</span></span><br><span class="line">          keyPassword <span class="string">"***"</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            runProguard <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">            signingConfig signingConfigs.release</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改导出包的apk名称"><a href="#修改导出包的apk名称" class="headerlink" title="修改导出包的apk名称"></a>修改导出包的apk名称</h3><p>我们打包有非常多的渠道包，所以我们可以根据渠道自定义apk的名称，方便知道哪个apk对应的是哪个渠道：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line"></span><br><span class="line">    applicationVariants.all &#123; variant -&gt;</span><br><span class="line"></span><br><span class="line">        variant.outputs.each &#123; output -&gt;</span><br><span class="line"></span><br><span class="line">            output.outputFile = <span class="keyword">new</span> File(</span><br><span class="line"></span><br><span class="line">                    output.outputFile.parent,</span><br><span class="line"></span><br><span class="line">                    <span class="string">"xxxx(apk的名字)-$&#123;variant.buildType.name&#125;-$&#123;defaultConfig.versionName&#125;-$&#123;variant.productFlavors[0].name&#125;.apk"</span>.toLowerCase())</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后打包完成之后，apk文件就会生成在项目的build\outputs\apk下。</p>
+<h2 id="使用python脚本打包"><a href="#使用python脚本打包" class="headerlink" title="使用python脚本打包"></a>使用python脚本打包</h2><h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>随着渠道数量越来越多，gradle打包方式就暴露出速度慢、不灵活的特点，那有没有一种高效、快速的方案呢？答案是肯定的，就是广为流传的美团自动化多渠道打包方案。</p>
+<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>主要的原理是在META-INF目录内添加空文件的方式，实现批量快速打包Android应用。Android应用安装包apk文件其实是一个压缩文件，可以将后缀修改为zip直接解压。解压安装文件后会发现在根目录有一个META-INF目录。<br><img src="http://tech.meituan.com/img/dzh/apk_packaging2.jpg" alt=""><br>如果在META-INF目录内添加空文件，可以不用重新签名应用。因此，通过为不同渠道的应用添加不同的空文件，可以唯一标识一个渠道。<br>下面的python代码用来给apk添加空的渠道文件，渠道名的前缀为mtchannel_：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line">zipped = zipfile.ZipFile(your_apk, <span class="string">'a'</span>, zipfile.ZIP_DEFLATED) </span><br><span class="line">empty_channel_file = <span class="string">"META-INF/mtchannel_&#123;channel&#125;"</span>.format(channel=your_channel)</span><br><span class="line">zipped.write(your_empty_file, empty_channel_file)</span><br></pre></td></tr></table></figure></p>
+<p>添加完空渠道文件后的目录，META-INFO目录多了一个名为mtchannel_meituan的空文件：<br><img src="http://tech.meituan.com/img/dzh/apk_packaging3.jpg" alt=""><br>接下来就可以在Java代码中读取空渠道文件名了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="built_in">String</span> getChannel(Context context) &#123;</span><br><span class="line">        ApplicationInfo appinfo = context.getApplicationInfo();</span><br><span class="line">        <span class="built_in">String</span> sourceDir = appinfo.sourceDir;</span><br><span class="line">        <span class="built_in">String</span> ret = <span class="string">""</span>;</span><br><span class="line">        ZipFile zipfile = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            zipfile = <span class="keyword">new</span> ZipFile(sourceDir);</span><br><span class="line">            Enumeration&lt;?&gt; entries = zipfile.entries();</span><br><span class="line">            <span class="keyword">while</span> (entries.hasMoreElements()) &#123;</span><br><span class="line">                ZipEntry entry = ((ZipEntry) entries.nextElement());</span><br><span class="line">                <span class="built_in">String</span> entryName = entry.getName();</span><br><span class="line">                <span class="keyword">if</span> (entryName.startsWith(<span class="string">"mtchannel"</span>)) &#123;</span><br><span class="line">                    ret = entryName;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (zipfile != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    zipfile.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">String</span>[] split = ret.split(<span class="string">"_"</span>);</span><br><span class="line">        <span class="keyword">if</span> (split != <span class="literal">null</span> &amp;&amp; split.length &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> ret.substring(split[<span class="number">0</span>].length() + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>采用这种方式，每打一个渠道包只需复制一个apk，在META－INF中添加一个使用渠道号命名的空文件即可。所以这种打包方式速度非常快，900多个渠道不到一分钟就能打完。</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>说的这么厉害，怎么来使用呢？</p>
+<h4 id="配置Paython环境"><a href="#配置Paython环境" class="headerlink" title="配置Paython环境"></a>配置Paython环境</h4><p>我们既然需要使用脚本打包，那么当然要有可以运行python脚本的运行环境。所以我们第一步是要配置python运行环境。 自己去官网下载安装即可。官网地址：<a href="https://www.python.org/" target="_blank" rel="external">https://www.python.org/</a></p>
+<h4 id="编写脚本命令"><a href="#编写脚本命令" class="headerlink" title="编写脚本命令"></a>编写脚本命令</h4><p>python脚本网上有很多，使用方法也不尽相同，参考如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">import zipfile</span><br><span class="line">import shutil</span><br><span class="line">import os</span><br><span class="line">import sys</span><br><span class="line">import time</span><br><span class="line">    </span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    SOURCE_ROOT = '.\\app\\build\\outputs\\apk\\'</span><br><span class="line"></span><br><span class="line">    startTime = time.time()</span><br><span class="line">    #调用gradle命令行打release包</span><br><span class="line">    os.system('gradlew.bat clean')</span><br><span class="line">    os.system('gradlew.bat assembleProduceRelease')</span><br><span class="line">    </span><br><span class="line">    apkFile = SOURCE_ROOT + 'app-produce-release.apk'</span><br><span class="line">    apk = 'app-produce-release'</span><br><span class="line">    </span><br><span class="line">    # print apkFile</span><br><span class="line">    emptyFile = 'xxx.txt'</span><br><span class="line">    f = open(emptyFile, 'w')</span><br><span class="line">    f.close()</span><br><span class="line">    with open('.\\android_channels.txt', 'r') as f:</span><br><span class="line">        contens = f.read()</span><br><span class="line">    lines = contens.split('\n')</span><br><span class="line">    TARGET_ROOT = SOURCE_ROOT + 'release_channel\\'</span><br><span class="line">    if os.path.exists(TARGET_ROOT):</span><br><span class="line">    	shutil.rmtree(TARGET_ROOT)</span><br><span class="line">    os.mkdir(TARGET_ROOT)</span><br><span class="line">    # print lines[0]</span><br><span class="line">    for line in lines:</span><br><span class="line">        channel = line</span><br><span class="line">        destfile = TARGET_ROOT + '%s-%s.apk'  % (apk, channel)</span><br><span class="line">        shutil.copy(apkFile, destfile)</span><br><span class="line">        zipped = zipfile.ZipFile(destfile, 'a')</span><br><span class="line">        channelFile = "META-INF\\&#123;channelname&#125;".format(channelname="appchannel_" + channel)</span><br><span class="line">        zipped.write(emptyFile, channelFile)</span><br><span class="line">        zipped.close()</span><br><span class="line">    os.remove('.\\xxx.txt')</span><br><span class="line"></span><br><span class="line">    # windows</span><br><span class="line">    os.system('zipalign_batch.bat %s' % TARGET_ROOT)</span><br><span class="line">    endTime = time.time()</span><br><span class="line">    print (endTime - startTime)</span><br></pre></td></tr></table></figure></p>
+<p>首先脚本会执行clean命令，有时会出现Build failed的错误，原因是./app/build文件夹无法删除，这种情况没有关系，不会影响后续打包的进行。clean完毕我们首先会打一个正常生产环境的安装包，然后使用python完成的渠道包的批量打包，最后的zipalign_batch.bat批处理是进行apk的优化对齐。<br>关于优化对齐有兴趣的同学可以自行了解，zipalign_batch.bat内容如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">echo begin running</span><br><span class="line">echo %<span class="number">1</span>%</span><br><span class="line"></span><br><span class="line">set SIGNED_APK_ROOT=%<span class="number">1</span>%</span><br><span class="line">set ZIPALOGNED_APK_ROOT=%<span class="number">1</span>zipaligned%</span><br><span class="line">echo %SIGNED_APK_ROOT%</span><br><span class="line">echo %ZIPALOGNED_APK_ROOT%</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> exist %ZIPALOGNED_APK_ROOT% (</span><br><span class="line">    rd /s /q %ZIPALOGNED_APK_ROOT%</span><br><span class="line">    echo <span class="keyword">delete</span> root</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">md %ZIPALOGNED_APK_ROOT%</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> /f <span class="string">"delims="</span> %%i <span class="keyword">in</span> (<span class="string">'dir %SIGNED_APK_ROOT%*.apk /b'</span>) <span class="keyword">do</span> (</span><br><span class="line">    .\zipalign -v <span class="number">4</span>  %SIGNED_APK_ROOT%%%i %ZIPALOGNED_APK_ROOT%\%%i</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">echo end running</span><br></pre></td></tr></table></figure></p>
+<p>注意：需要用到zipalign.exe这个文件，和python脚本以及zipalign_batch.bat批处理文件一同放在项目根目录下即可。<br><a href="http://download.csdn.net/detail/favour_k/8697997" target="_blank" rel="external">zipalign.exe下载</a></p>
+<h4 id="填写渠道列表"><a href="#填写渠道列表" class="headerlink" title="填写渠道列表"></a>填写渠道列表</h4><p>如上面脚本命令里打开的android_channels.txt所示，这个就是渠道列表啦，只需把需要的渠道依次换行添加进去就行啦！就像这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GW</span><br><span class="line">BD</span><br><span class="line">wandoujia</span><br><span class="line">qq</span><br><span class="line"><span class="number">360</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：android_channels.txt（渠道列表文件）跟上面提到的channel.py（脚本文件）、zipalign.exe（对齐执行文件）、zipalign_batch.bat（对齐批处理文件）都放在项目根目录就好啦！</p>
+<h4 id="执行脚本进行打包"><a href="#执行脚本进行打包" class="headerlink" title="执行脚本进行打包"></a>执行脚本进行打包</h4><p>同理还是在Studio中下方底栏的命令行工具Terminal中输入命令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.py</span><br></pre></td></tr></table></figure></p>
+<p>即可，也就是输入你的脚本文件的名称啦！<br>等待BULID SUCCESSFUL后，在./app/build/outputs/apk/release_channel/下就是打好的渠道包啦，其中zipaligned文件夹下的是zipalign对齐优化后的渠道包，也就是我们要的渠道包啦！</p>
+<h4 id="获取渠道包名称"><a href="#获取渠道包名称" class="headerlink" title="获取渠道包名称"></a>获取渠道包名称</h4><p>说了这么多，我该如何知道这个包是那个渠道的呢？其实上面已经有啦，就是getChannel()方法，在我们需要使用渠道的地方调用即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置友盟渠道号</span></span><br><span class="line"><span class="built_in">String</span> channelCode = ChannelUtil.getChannel();</span><br><span class="line">Log.i(<span class="string">"Channel"</span>, <span class="string">"渠道号："</span> + channelCode);</span><br><span class="line">AnalyticsConfig.setChannel(channelCode);</span><br></pre></td></tr></table></figure></p>
+<p>好啦，还没有体验过的小伙伴赶紧使用体验一下吧！</p>
+<p>参考文章：<br><a href="http://tech.meituan.com/mt-apk-packaging.html" target="_blank" rel="external">美团Android自动化之旅—生成渠道包</a><br><a href="http://blog.csdn.net/javazejian/article/details/50760590" target="_blank" rel="external"> 详解高速神器python脚步打包android apk，超级快！！（打包系列教程之六）</a><br><a href="http://mp.weixin.qq.com/s?__biz=MjM5NDkxMTgyNw==&amp;mid=2653057549&amp;idx=1&amp;sn=456fa138f2fd307a3ff94eddc5ff2e73&amp;scene=21#wechat_redirect" target="_blank" rel="external">Android Studio 使用Gradle多渠道打包</a><br><a href="http://blog.csdn.net/qq_23547831/article/details/51569261" target="_blank" rel="external">Android产品研发（五）–&gt;多渠道打包</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Gradle/" rel="tag">#Gradle</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/16/android-splash/" rel="next" title="APP闪屏页的正确打开方式">
+                <i class="fa fa-chevron-left"></i> APP闪屏页的正确打开方式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/18/more-channel-apk/"
+           data-title="Gradle、Python脚本多渠道自动化打包" data-url="http://yoursite.com/2016/08/18/more-channel-apk/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img4.duitang.com/uploads/item/201501/20/20150120180628_Uy5in.jpeg"
+               alt="HYGao" />
+          <p class="site-author-name" itemprop="name">HYGao</p>
+          <p class="site-description motion-element" itemprop="description">阳光温热，岁月静好。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/breewf" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gold.xitu.io/#/" target="_blank">稀土掘金</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要多渠道打包？"><span class="nav-number">1.</span> <span class="nav-text">为什么要多渠道打包？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用gradle打包"><span class="nav-number">2.</span> <span class="nav-text">使用gradle打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置AndroidManifest-xml"><span class="nav-number">2.1.</span> <span class="nav-text">配置AndroidManifest.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在build-gradle设置productFlavors"><span class="nav-number">2.2.</span> <span class="nav-text">在build.gradle设置productFlavors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一次生成所有渠道包"><span class="nav-number">2.3.</span> <span class="nav-text">一次生成所有渠道包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带签名的渠道包"><span class="nav-number">2.4.</span> <span class="nav-text">带签名的渠道包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改导出包的apk名称"><span class="nav-number">2.5.</span> <span class="nav-text">修改导出包的apk名称</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用python脚本打包"><span class="nav-number">3.</span> <span class="nav-text">使用python脚本打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题由来"><span class="nav-number">3.1.</span> <span class="nav-text">问题由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单介绍"><span class="nav-number">3.2.</span> <span class="nav-text">简单介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用"><span class="nav-number">3.3.</span> <span class="nav-text">如何使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Paython环境"><span class="nav-number">3.3.1.</span> <span class="nav-text">配置Paython环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写脚本命令"><span class="nav-number">3.3.2.</span> <span class="nav-text">编写脚本命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#填写渠道列表"><span class="nav-number">3.3.3.</span> <span class="nav-text">填写渠道列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行脚本进行打包"><span class="nav-number">3.3.4.</span> <span class="nav-text">执行脚本进行打包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取渠道包名称"><span class="nav-number">3.3.5.</span> <span class="nav-text">获取渠道包名称</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYGao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"breewf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+
+</body>
+</html>

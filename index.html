@@ -244,6 +244,126 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/18/more-channel-apk/" itemprop="url">
+                  Gradle、Python脚本多渠道自动化打包
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-18T13:47:12+08:00" content="2016-08-18">
+              2016-08-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/18/more-channel-apk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/more-channel-apk/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="为什么要多渠道打包？"><a href="#为什么要多渠道打包？" class="headerlink" title="为什么要多渠道打包？"></a>为什么要多渠道打包？</h2><p>众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。</p>
+<h2 id="使用gradle打包"><a href="#使用gradle打包" class="headerlink" title="使用gradle打包"></a>使用gradle打包</h2><h3 id="配置AndroidManifest-xml"><a href="#配置AndroidManifest-xml" class="headerlink" title="配置AndroidManifest.xml"></a>配置AndroidManifest.xml</h3><p>在Androidmanifest.xml中定义mate-data标签：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:Android=<span class="string">"http://schemas.Android.com/apk/res/Android"</span>    </span><br><span class="line">    package=<span class="string">"com.package.name"</span>&gt;    </span><br><span class="line">    &lt;application&gt;    </span><br><span class="line"></span><br><span class="line">          &lt;meta-data android:name="UMENG_CHANNEL" android:value="xiaomi" /&gt;   </span><br><span class="line"></span><br><span class="line">    &lt;/application&gt;    </span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果不使用多渠道打包方法，那就需要我们手动一个一个去修改value中的值，比如xiaomi，360，qq，wandoujia等等。<br>使用多渠道打包的方式，就需要把上面的value配置成下面的方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data android:name=<span class="string">"UMENG_CHANNEL"</span> android:value=<span class="string">"$&#123;UMENG_CHANNEL_VALUE&#125;"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>其中${UMENG_CHANNEL_VALUE}中的值就是你在gradle中自定义配置的值。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/18/more-channel-apk/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/16/android-splash/" itemprop="url">
                   APP闪屏页的正确打开方式
                 </a>
@@ -1301,129 +1421,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/10/first-use-Retrofit-and-RxJava/" itemprop="url">
-                  Android使用Retrofit+RxJava网络请求小结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-10T17:19:48+08:00" content="2016-03-10">
-              2016-03-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/安卓/" itemprop="url" rel="index">
-                    <span itemprop="name">安卓</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/10/first-use-Retrofit-and-RxJava/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/first-use-Retrofit-and-RxJava/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法</p>
-</blockquote>
-<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>定义接口：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface GitHubService &#123;</span><br><span class="line">  @GET(<span class="string">"users/&#123;user&#125;/repos"</span>)</span><br><span class="line">  Call&lt;List&lt;Repo&gt;&gt; listRepos(@Path(<span class="string">"user"</span>) <span class="built_in">String</span> user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用类 Retrofit 生成接口 GitHubService 的实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">    .baseUrl(<span class="string">"https://api.github.com/"</span>)</span><br><span class="line">    .build();</span><br><span class="line">GitHubService service = retrofit.create(GitHubService.class);</span><br></pre></td></tr></table></figure></p>
-<p>之后就可以直接调用生成的GitHubServcie实例去发送请求：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"octocat"</span>);</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：baseUrl和注解中url连接的”/“最好写在baseUrl的后面，而不是注解中url的前面，否则可能会出现不可预知的错误。</strong></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/10/first-use-Retrofit-and-RxJava/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1470,7 +1467,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1487,7 +1484,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
