@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-18T07:53:25.320Z</updated>
+  <updated>2016-09-10T03:34:54.273Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ADB命令学习资料</title>
+    <link href="http://yoursite.com/2016/09/10/adb-command-data/"/>
+    <id>http://yoursite.com/2016/09/10/adb-command-data/</id>
+    <published>2016-09-10T03:14:14.000Z</published>
+    <updated>2016-09-10T03:34:54.273Z</updated>
+    
+    <content type="html">&lt;p&gt;ADB即Android Debug Bridge，安卓开发、测试过程中强大的命令调试工具，熟练掌握ADB命令可以提高开发效率。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ADB学习资料整理：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/mzlogin/awesome-adb#%E5%91%BD%E4%BB%A4%E8%AF%AD%E6%B3%95&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Awesome Adb——一份超全超详细的 ADB 用法大全&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://yifeiyuan.me/2016/06/30/ADB%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;那些做Android开发必须知道的ADB命令&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://stormzhang.com/2016/09/08/common-adb-commands/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;你应该知道的一些 ADB 命令&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ZQiang94/StudyRecords/blob/master/other/src/main/java/com/other/adb%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;adb 命令行的使用记录&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/5980c8c282ef&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android adb你真的会用吗?&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ADB即Android Debug Bridge，安卓开发、测试过程中强大的命令调试工具，熟练掌握ADB命令可以提高开发效率。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ADB学习资料整理：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/mzl
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="其它" scheme="http://yoursite.com/tags/%E5%85%B6%E5%AE%83/"/>
+    
+  </entry>
   
   <entry>
     <title>Gradle、Python脚本多渠道自动化打包</title>
@@ -895,9 +926,9 @@
       <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
     
     
-      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
-    
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
+    
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
