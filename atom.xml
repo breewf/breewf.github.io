@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-10T03:34:54.273Z</updated>
+  <updated>2016-09-11T12:15:46.570Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,177 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>判断App位于前台或后台的6种方法</title>
+    <link href="http://yoursite.com/2016/09/11/judge-app-background/"/>
+    <id>http://yoursite.com/2016/09/11/judge-app-background/</id>
+    <published>2016-09-11T12:04:14.000Z</published>
+    <updated>2016-09-11T12:15:46.570Z</updated>
+    
+    <content type="html">&lt;p&gt;原文链接：&lt;a href=&quot;https://github.com/wenmingvs/AndroidProcess&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AndroidProcess&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;AndroidProcess&quot;&gt;&lt;a href=&quot;#AndroidProcess&quot; class=&quot;headerlink&quot; title=&quot;AndroidProcess&quot;&gt;&lt;/a&gt;AndroidProcess&lt;/h1&gt;&lt;p&gt;提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用&lt;/p&gt;
+&lt;p&gt;最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，&lt;a href=&quot;https://github.com/jaredrummler/AndroidProcesses&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub项目在这里&lt;/a&gt;，也一并加入到工程中，供大家做全面的参考选择   &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2016.2.11更新——感谢&lt;a href=&quot;http://weibo.com/hatewx?refer_flag=1005050005_&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@EffectiveMatrix&lt;/a&gt;大神带来的新的判断前后台的方法&lt;/strong&gt;  &lt;/p&gt;
+&lt;h2 id=&quot;预览图&quot;&gt;&lt;a href=&quot;#预览图&quot; class=&quot;headerlink&quot; title=&quot;预览图&quot;&gt;&lt;/a&gt;预览图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;用法&quot;&gt;&lt;a href=&quot;#用法&quot; class=&quot;headerlink&quot; title=&quot;用法&quot;&gt;&lt;/a&gt;用法&lt;/h2&gt;&lt;p&gt;传入Context参数与想要判断是否位于前台的App的包名,会返回ture或者false表示App是否位于前台&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//六种方法任选其一&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法一&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getRunningTask(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法二&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getRunningAppProcesses(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法三&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getApplicationValue(context);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法四&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.queryUsageStats(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法五&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getFromAccessibilityService(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法六&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getLinuxCoreInfo(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;六种方法的区别&quot;&gt;&lt;a href=&quot;#六种方法的区别&quot; class=&quot;headerlink&quot; title=&quot;六种方法的区别&quot;&gt;&lt;/a&gt;六种方法的区别&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;判断原理&lt;/th&gt;
+&lt;th&gt;需要权限&lt;/th&gt;
+&lt;th&gt;可以判断其他应用位于前台&lt;/th&gt;
+&lt;th&gt;特点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;方法一&lt;/td&gt;
+&lt;td&gt;RunningTask&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;Android4.0系列可以,5.0以上机器不行&lt;/td&gt;
+&lt;td&gt;5.0此方法被废弃&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;方法二&lt;/td&gt;
+&lt;td&gt;RunningProcess&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;当App存在后台常驻的Service时失效&lt;/td&gt;
+&lt;td&gt;无&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;方法三&lt;/td&gt;
+&lt;td&gt;ActivityLifecycleCallbacks&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;简单有效,代码最少&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;方法四&lt;/td&gt;
+&lt;td&gt;UsageStatsManager&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;td&gt;需要用户手动授权&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;方法五&lt;/td&gt;
+&lt;td&gt;通过Android无障碍功能实现&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;td&gt;需要用户手动授权&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;方法六&lt;/td&gt;
+&lt;td&gt;读取/proc目录下的信息&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;td&gt;当proc目录下文件夹过多时,过多的IO操作会引起耗时&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&quot;方法一：通过RunningTask&quot;&gt;&lt;a href=&quot;#方法一：通过RunningTask&quot; class=&quot;headerlink&quot; title=&quot;方法一：通过RunningTask&quot;&gt;&lt;/a&gt;方法一：通过RunningTask&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;br&gt;当一个App处于前台的时候，会处于RunningTask的这个栈的栈顶，所以我们可以取出RunningTask的栈顶的任务进程，看他与我们的想要判断的App的包名是否相同，来达到效果&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;br&gt;getRunningTask方法在Android5.0以上已经被废弃，只会返回自己和系统的一些不敏感的task，不再返回其他应用的task，用此方法来判断自身App是否处于后台，仍然是有效的，但是无法判断其他应用是否位于前台，因为不再能获取信息&lt;/p&gt;
+&lt;h2 id=&quot;方法二：通过RunningProcess&quot;&gt;&lt;a href=&quot;#方法二：通过RunningProcess&quot; class=&quot;headerlink&quot; title=&quot;方法二：通过RunningProcess&quot;&gt;&lt;/a&gt;方法二：通过RunningProcess&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/mw690/691cc151gw1f09z4vmmcgg20bc0h07wh.gif&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;br&gt;通过runningProcess获取到一个当前正在运行的进程的List，我们遍历这个List中的每一个进程，判断这个进程的一个importance 属性是否是前台进程，并且包名是否与我们判断的APP的包名一样，如果这两个条件都符合，那么这个App就处于前台&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;：&lt;br&gt;在聊天类型的App中，常常需要常驻后台来不间断的获取服务器的消息，这就需要我们把Service设置成START_STICKY，kill 后会被重启（等待5秒左右）来保证Service常驻后台。如果Service设置了这个属性，这个App的进程就会被判断是前台，代码上的表现就是appProcess.importance的值永远是 ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND，这样就永远无法判断出到底哪个是前台了。&lt;/p&gt;
+&lt;h2 id=&quot;方法三：通过ActivityLifecycleCallbacks&quot;&gt;&lt;a href=&quot;#方法三：通过ActivityLifecycleCallbacks&quot; class=&quot;headerlink&quot; title=&quot;方法三：通过ActivityLifecycleCallbacks&quot;&gt;&lt;/a&gt;方法三：通过ActivityLifecycleCallbacks&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/mw690/691cc151gw1f09z59b1pzg20bc0h04qp.gif&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;br&gt;AndroidSDK14在Application类里增加了ActivityLifecycleCallbacks，我们可以通过这个Callback拿到App所有Activity的生命周期回调。&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ActivityLifecycleCallbacks&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onActivityCreated&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Activity activity, Bundle savedInstanceState)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onActivityStarted&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Activity activity)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onActivityResumed&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Activity activity)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onActivityPaused&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Activity activity)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onActivityStopped&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Activity activity)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onActivitySaveInstanceState&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Activity activity, Bundle outState)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onActivityDestroyed&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Activity activity)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;知道这些信息，我们就可以用更官方的办法来解决问题，当然还是利用方案二里的Activity生命周期的特性，我们只需要在Application的onCreate()里去注册上述接口，然后由Activity回调回来运行状态即可。&lt;/p&gt;
+&lt;p&gt;可能还有人在纠结，我用back键切到后台和用Home键切到后台，一样吗？以上方法适用吗？在Android应用开发中一般认为back键是可以捕获的，而Home键是不能捕获的（除非修改framework）,但是上述方法从Activity生命周期着手解决问题，虽然这两种方式的Activity生命周期并不相同，但是二者都会执行onStop（）；所以并不关心到底是触发了哪个键切入后台的。另外,Application是否被销毁,都不会影响判断的正确性&lt;/p&gt;
+&lt;h2 id=&quot;方法四：通过使用UsageStatsManager获取&quot;&gt;&lt;a href=&quot;#方法四：通过使用UsageStatsManager获取&quot; class=&quot;headerlink&quot; title=&quot;方法四：通过使用UsageStatsManager获取&quot;&gt;&lt;/a&gt;方法四：通过使用UsageStatsManager获取&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/mw690/691cc151gw1f09z5v4g7mg20bc0h0npd.gif&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;br&gt;通过使用UsageStatsManager获取，此方法是Android5.0之后提供的新API，可以获取一个时间段内的应用统计信息，但是必须满足一下要求&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用前提&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;此方法只在android5.0以上有效 &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;AndroidManifest中加入此权限 &lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;uses-permission  android:name=&lt;span class=&quot;string&quot;&gt;&quot;android.permission.PACKAGE_USAGE_STATS&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;打开手机设置，点击安全-高级，在有权查看使用情况的应用中，为这个App打上勾&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/wenmingvs/AndroidProcess/master/sample/3.PNG&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;方法五：通过Android自带的无障碍功能&quot;&gt;&lt;a href=&quot;#方法五：通过Android自带的无障碍功能&quot; class=&quot;headerlink&quot; title=&quot;方法五：通过Android自带的无障碍功能&quot;&gt;&lt;/a&gt;方法五：通过Android自带的无障碍功能&lt;/h2&gt;&lt;p&gt;非常感谢&lt;a href=&quot;http://weibo.com/hatewx?refer_flag=1005050005_&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@EffectiveMatrix&lt;/a&gt;大神带来的新的判断前后台的方法  &lt;/p&gt;
+&lt;p&gt;此方法属于他原创，具体的博文参照这里&lt;a href=&quot;http://effmx.com/articles/tong-guo-android-fu-zhu-gong-neng-accessibility-service-jian-ce-ren-yi-qian-tai-jie-mian/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://effmx.com/articles/tong-guo-android-fu-zhu-gong-neng-accessibility-service-jian-ce-ren-yi-qian-tai-jie-mian/&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;此方法无法直观的通过下拉通知视图来进行前后台的观察，请到LogCat中进行观察即可，以下是LogCat中打印的信息&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/691cc151gw1f0uiy60md3j20fs07omzj.jpg&quot; alt=&quot;enter image description here&quot;&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;br&gt;Android 辅助功能(AccessibilityService) 为我们提供了一系列的事件回调，帮助我们指示一些用户界面的状态变化。 我们可以派生辅助功能类，进而对不同的 AccessibilityEvent 进行处理。 同样的，这个服务就可以用来判断当前的前台应用&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优势&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AccessibilityService 有非常广泛的 ROM 覆盖，特别是非国产手机，从 Android API Level 8(Android 2.2) 到 Android Api Level 23(Android 6.0)  &lt;/li&gt;
+&lt;li&gt;AccessibilityService 不再需要轮询的判断当前的应用是不是在前台，系统会在窗口状态发生变化的时候主动回调，耗时和资源消耗都极小  &lt;/li&gt;
+&lt;li&gt;不需要权限请求  &lt;/li&gt;
+&lt;li&gt;它是一个稳定的方法，与 “方法6”读取 /proc 目录不同，它并非利用 Android 一些设计上的漏洞，可以长期使用的可能很大  &lt;/li&gt;
+&lt;li&gt;可以用来判断任意应用甚至 Activity, PopupWindow, Dialog 对象是否处于前台  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;劣势&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;需要要用户开启辅助功能  &lt;/li&gt;
+&lt;li&gt;辅助功能会伴随应用被“强行停止”而剥夺  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;方法六：读取Linux系统内核保存在-proc目录下的process进程信息&quot;&gt;&lt;a href=&quot;#方法六：读取Linux系统内核保存在-proc目录下的process进程信息&quot; class=&quot;headerlink&quot; title=&quot;方法六：读取Linux系统内核保存在/proc目录下的process进程信息&quot;&gt;&lt;/a&gt;方法六：读取Linux系统内核保存在/proc目录下的process进程信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/mw690/691cc151gw1f09z6bjz9rg20bc0h0b29.gif&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;p&gt;此方法并非我原创，原作者是国外的大神，&lt;a href=&quot;https://github.com/jaredrummler/AndroidProcesses&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub项目在这里&lt;/a&gt;，也一并加入到工程中，供大家做全面的参考选择&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;br&gt;无意中看到乌云上有人提的一个漏洞，Linux系统内核会把process进程信息保存在/proc目录下，Shell命令去获取的他，再根据进程的属性判断是否为前台&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不需要任何权限  &lt;/li&gt;
+&lt;li&gt;可以判断任意一个应用是否在前台，而不局限在自身应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;当/proc下文件夹过多时,此方法是耗时操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;用法&lt;/strong&gt;&lt;br&gt;获取一系列正在运行的App的进程&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;AndroidAppProcess&amp;gt; processes = ProcessManager.getRunningAppProcesses();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;获取任一正在运行的App进程的详细信息&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;AndroidAppProcess process = processes.get(location);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;String processName = process.name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Stat stat = process.stat();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; pid = stat.getPid();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; parentProcessId = stat.ppid();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; startTime = stat.stime();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; policy = stat.policy();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; state = stat.state();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Statm statm = process.statm();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; totalSizeOfProcess = statm.getSize();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; residentSetSize = statm.getResidentSetSize();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PackageInfo packageInfo = process.getPackageInfo(context, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;String appName = packageInfo.applicationInfo.loadLabel(pm).toString();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;判断是否在前台&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (ProcessManager.isMyProcessInTheForeground()) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;// do stuff&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;获取一系列正在运行的App进程的详细信息&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;ActivityManager.RunningAppProcessInfo&amp;gt; processes = ProcessManager.getRunningAppProcessInfo(ctx);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Gradle-构建&quot;&gt;&lt;a href=&quot;#Gradle-构建&quot; class=&quot;headerlink&quot; title=&quot;Gradle 构建&quot;&gt;&lt;/a&gt;Gradle 构建&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;版本&lt;ul&gt;
+&lt;li&gt;最新 Android SDK&lt;/li&gt;
+&lt;li&gt;最新 Gradle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;环境变量&lt;ul&gt;
+&lt;li&gt;ANDROID_HOME&lt;/li&gt;
+&lt;li&gt;GRADLE_HOME，同时把bin放入path变量&lt;/li&gt;
+&lt;li&gt;Android SDK 安装，都更新到最新&lt;/li&gt;
+&lt;li&gt;Android SDK Build-tools更新到最新&lt;/li&gt;
+&lt;li&gt;Google Repository更新到最新&lt;/li&gt;
+&lt;li&gt;Android Support Repository更新到最新&lt;/li&gt;
+&lt;li&gt;Android Support Library更新到最新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;相信未来&quot;&gt;&lt;a href=&quot;#相信未来&quot; class=&quot;headerlink&quot; title=&quot;相信未来&quot;&gt;&lt;/a&gt;相信未来&lt;/h2&gt;&lt;p&gt;当蜘蛛网无情地查封了我的炉台&lt;br&gt;当灰烬的余烟叹息着贫困的悲哀&lt;br&gt;我依然固执地铺平失望的灰烬&lt;br&gt;用美丽的雪花写下：相信未来   &lt;/p&gt;
+&lt;p&gt;当我的紫葡萄化为深秋的露水&lt;br&gt;当我的鲜花依偎在别人的情怀&lt;br&gt;我依然固执地用凝霜的枯藤&lt;br&gt;在凄凉的大地上写下：相信未来   &lt;/p&gt;
+&lt;p&gt;我要用手指那涌向天边的排浪&lt;br&gt;我要用手掌那托住太阳的大海&lt;br&gt;摇曳着曙光那枝温暖漂亮的笔杆&lt;br&gt;用孩子的笔体写下：相信未来   &lt;/p&gt;
+&lt;p&gt;我之所以坚定地相信未来&lt;br&gt;是我相信未来人们的眼睛&lt;br&gt;她有拨开历史风尘的睫毛&lt;br&gt;她有看透岁月篇章的瞳孔  &lt;/p&gt;
+&lt;p&gt;不管人们对于我们腐烂的皮肉&lt;br&gt;那些迷途的惆怅、失败的苦痛&lt;br&gt;是寄予感动的热泪、深切的同情&lt;br&gt;还是给以轻蔑的微笑、辛辣的嘲讽   &lt;/p&gt;
+&lt;p&gt;我坚信人们对于我们的脊骨&lt;br&gt;那无数次的探索、迷途、失败和成功&lt;br&gt;一定会给予热情、客观、公正的评定&lt;br&gt;是的，我焦急地等待着他们的评定  &lt;/p&gt;
+&lt;p&gt;朋友，坚定地相信未来吧&lt;br&gt;相信不屈不挠的努力&lt;br&gt;相信战胜死亡的年轻&lt;br&gt;相信未来、热爱生命  &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;原文链接：&lt;a href=&quot;https://github.com/wenmingvs/AndroidProcess&quot;&gt;AndroidProcess&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;AndroidProcess&quot;&gt;&lt;a href=&quot;#AndroidProcess&quot; class=&quot;headerlink&quot; title=&quot;AndroidProcess&quot;&gt;&lt;/a&gt;AndroidProcess&lt;/h1&gt;&lt;p&gt;提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用&lt;/p&gt;
+&lt;p&gt;最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，&lt;a href=&quot;https://github.com/jaredrummler/AndroidProcesses&quot;&gt;GitHub项目在这里&lt;/a&gt;，也一并加入到工程中，供大家做全面的参考选择   &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2016.2.11更新——感谢&lt;a href=&quot;http://weibo.com/hatewx?refer_flag=1005050005_&quot;&gt;@EffectiveMatrix&lt;/a&gt;大神带来的新的判断前后台的方法&lt;/strong&gt;  &lt;/p&gt;
+&lt;h2 id=&quot;预览图&quot;&gt;&lt;a href=&quot;#预览图&quot; class=&quot;headerlink&quot; title=&quot;预览图&quot;&gt;&lt;/a&gt;预览图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;用法&quot;&gt;&lt;a href=&quot;#用法&quot; class=&quot;headerlink&quot; title=&quot;用法&quot;&gt;&lt;/a&gt;用法&lt;/h2&gt;&lt;p&gt;传入Context参数与想要判断是否位于前台的App的包名,会返回ture或者false表示App是否位于前台&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//六种方法任选其一&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法一&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getRunningTask(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法二&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getRunningAppProcesses(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法三&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getApplicationValue(context);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法四&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.queryUsageStats(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法五&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getFromAccessibilityService(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用方法六&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Boolean isForeground = BackgroundUtil.getLinuxCoreInfo(context, packageName);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>ADB命令学习资料</title>
@@ -926,9 +1097,9 @@
       <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
     
     
-      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
-    
       <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
     
   </entry>
   

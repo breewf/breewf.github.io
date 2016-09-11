@@ -1,0 +1,927 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="总结," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="原文链接：AndroidProcess
+AndroidProcess提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用
+最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，GitHub项目在这里，也一并加入到工程中，供大家做全面的参考选择   
+2016.2.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="判断App位于前台或后台的6种方法">
+<meta property="og:url" content="http://yoursite.com/2016/09/11/judge-app-background/index.html">
+<meta property="og:site_name" content="那一抹、记忆">
+<meta property="og:description" content="原文链接：AndroidProcess
+AndroidProcess提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用
+最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，GitHub项目在这里，也一并加入到工程中，供大家做全面的参考选择   
+2016.2.1">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/691cc151gw1f09z4vmmcgg20bc0h07wh.gif">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/691cc151gw1f09z59b1pzg20bc0h04qp.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/691cc151gw1f09z5v4g7mg20bc0h0npd.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/wenmingvs/AndroidProcess/master/sample/3.PNG">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/691cc151gw1f0uiy60md3j20fs07omzj.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/691cc151gw1f09z6bjz9rg20bc0h0b29.gif">
+<meta property="og:updated_time" content="2016-09-11T12:15:46.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="判断App位于前台或后台的6种方法">
+<meta name="twitter:description" content="原文链接：AndroidProcess
+AndroidProcess提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用
+最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，GitHub项目在这里，也一并加入到工程中，供大家做全面的参考选择   
+2016.2.1">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 判断App位于前台或后台的6种方法 | 那一抹、记忆 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4adc0e01c4193676b336ddf961eadc45";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">那一抹、记忆</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Android小白一枚</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                判断App位于前台或后台的6种方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-11T20:04:14+08:00" content="2016-09-11">
+              2016-09-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安卓/" itemprop="url" rel="index">
+                    <span itemprop="name">安卓</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/11/judge-app-background/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/11/judge-app-background/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="https://github.com/wenmingvs/AndroidProcess" target="_blank" rel="external">AndroidProcess</a></p>
+<h1 id="AndroidProcess"><a href="#AndroidProcess" class="headerlink" title="AndroidProcess"></a>AndroidProcess</h1><p>提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用</p>
+<p>最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，<a href="https://github.com/jaredrummler/AndroidProcesses" target="_blank" rel="external">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择   </p>
+<p><strong>2016.2.11更新——感谢<a href="http://weibo.com/hatewx?refer_flag=1005050005_" target="_blank" rel="external">@EffectiveMatrix</a>大神带来的新的判断前后台的方法</strong>  </p>
+<h2 id="预览图"><a href="#预览图" class="headerlink" title="预览图"></a>预览图</h2><p><img src="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif" alt="enter image description here"></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>传入Context参数与想要判断是否位于前台的App的包名,会返回ture或者false表示App是否位于前台</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//六种方法任选其一</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用方法一</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getRunningTask(context, packageName);</span><br><span class="line"><span class="comment">//使用方法二</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getRunningAppProcesses(context, packageName);</span><br><span class="line"><span class="comment">//使用方法三</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getApplicationValue(context);</span><br><span class="line"><span class="comment">//使用方法四</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.queryUsageStats(context, packageName);</span><br><span class="line"><span class="comment">//使用方法五</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getFromAccessibilityService(context, packageName);</span><br><span class="line"><span class="comment">//使用方法六</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getLinuxCoreInfo(context, packageName);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="六种方法的区别"><a href="#六种方法的区别" class="headerlink" title="六种方法的区别"></a>六种方法的区别</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>判断原理</th>
+<th>需要权限</th>
+<th>可以判断其他应用位于前台</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方法一</td>
+<td>RunningTask</td>
+<td>否</td>
+<td>Android4.0系列可以,5.0以上机器不行</td>
+<td>5.0此方法被废弃</td>
+</tr>
+<tr>
+<td>方法二</td>
+<td>RunningProcess</td>
+<td>否</td>
+<td>当App存在后台常驻的Service时失效</td>
+<td>无</td>
+</tr>
+<tr>
+<td>方法三</td>
+<td>ActivityLifecycleCallbacks</td>
+<td>否</td>
+<td>否</td>
+<td>简单有效,代码最少</td>
+</tr>
+<tr>
+<td>方法四</td>
+<td>UsageStatsManager</td>
+<td>是</td>
+<td>是</td>
+<td>需要用户手动授权</td>
+</tr>
+<tr>
+<td>方法五</td>
+<td>通过Android无障碍功能实现</td>
+<td>否</td>
+<td>是</td>
+<td>需要用户手动授权</td>
+</tr>
+<tr>
+<td>方法六</td>
+<td>读取/proc目录下的信息</td>
+<td>否</td>
+<td>是</td>
+<td>当proc目录下文件夹过多时,过多的IO操作会引起耗时</td>
+</tr>
+</tbody>
+</table>
+<h2 id="方法一：通过RunningTask"><a href="#方法一：通过RunningTask" class="headerlink" title="方法一：通过RunningTask"></a>方法一：通过RunningTask</h2><p><img src="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>当一个App处于前台的时候，会处于RunningTask的这个栈的栈顶，所以我们可以取出RunningTask的栈顶的任务进程，看他与我们的想要判断的App的包名是否相同，来达到效果</p>
+<p><strong>缺点</strong><br>getRunningTask方法在Android5.0以上已经被废弃，只会返回自己和系统的一些不敏感的task，不再返回其他应用的task，用此方法来判断自身App是否处于后台，仍然是有效的，但是无法判断其他应用是否位于前台，因为不再能获取信息</p>
+<h2 id="方法二：通过RunningProcess"><a href="#方法二：通过RunningProcess" class="headerlink" title="方法二：通过RunningProcess"></a>方法二：通过RunningProcess</h2><p><img src="http://ww1.sinaimg.cn/mw690/691cc151gw1f09z4vmmcgg20bc0h07wh.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>通过runningProcess获取到一个当前正在运行的进程的List，我们遍历这个List中的每一个进程，判断这个进程的一个importance 属性是否是前台进程，并且包名是否与我们判断的APP的包名一样，如果这两个条件都符合，那么这个App就处于前台</p>
+<p><strong>缺点</strong>：<br>在聊天类型的App中，常常需要常驻后台来不间断的获取服务器的消息，这就需要我们把Service设置成START_STICKY，kill 后会被重启（等待5秒左右）来保证Service常驻后台。如果Service设置了这个属性，这个App的进程就会被判断是前台，代码上的表现就是appProcess.importance的值永远是 ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND，这样就永远无法判断出到底哪个是前台了。</p>
+<h2 id="方法三：通过ActivityLifecycleCallbacks"><a href="#方法三：通过ActivityLifecycleCallbacks" class="headerlink" title="方法三：通过ActivityLifecycleCallbacks"></a>方法三：通过ActivityLifecycleCallbacks</h2><p><img src="http://ww2.sinaimg.cn/mw690/691cc151gw1f09z59b1pzg20bc0h04qp.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>AndroidSDK14在Application类里增加了ActivityLifecycleCallbacks，我们可以通过这个Callback拿到App所有Activity的生命周期回调。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ActivityLifecycleCallbacks</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityCreated</span><span class="params">(Activity activity, Bundle savedInstanceState)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityStarted</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityResumed</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityPaused</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityStopped</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivitySaveInstanceState</span><span class="params">(Activity activity, Bundle outState)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityDestroyed</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>知道这些信息，我们就可以用更官方的办法来解决问题，当然还是利用方案二里的Activity生命周期的特性，我们只需要在Application的onCreate()里去注册上述接口，然后由Activity回调回来运行状态即可。</p>
+<p>可能还有人在纠结，我用back键切到后台和用Home键切到后台，一样吗？以上方法适用吗？在Android应用开发中一般认为back键是可以捕获的，而Home键是不能捕获的（除非修改framework）,但是上述方法从Activity生命周期着手解决问题，虽然这两种方式的Activity生命周期并不相同，但是二者都会执行onStop（）；所以并不关心到底是触发了哪个键切入后台的。另外,Application是否被销毁,都不会影响判断的正确性</p>
+<h2 id="方法四：通过使用UsageStatsManager获取"><a href="#方法四：通过使用UsageStatsManager获取" class="headerlink" title="方法四：通过使用UsageStatsManager获取"></a>方法四：通过使用UsageStatsManager获取</h2><p><img src="http://ww1.sinaimg.cn/mw690/691cc151gw1f09z5v4g7mg20bc0h0npd.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>通过使用UsageStatsManager获取，此方法是Android5.0之后提供的新API，可以获取一个时间段内的应用统计信息，但是必须满足一下要求</p>
+<p><strong>使用前提</strong>  </p>
+<ol>
+<li>此方法只在android5.0以上有效 </li>
+<li><p>AndroidManifest中加入此权限 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission  android:name=<span class="string">"android.permission.PACKAGE_USAGE_STATS"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开手机设置，点击安全-高级，在有权查看使用情况的应用中，为这个App打上勾</p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/wenmingvs/AndroidProcess/master/sample/3.PNG" alt="enter image description here"></p>
+<h2 id="方法五：通过Android自带的无障碍功能"><a href="#方法五：通过Android自带的无障碍功能" class="headerlink" title="方法五：通过Android自带的无障碍功能"></a>方法五：通过Android自带的无障碍功能</h2><p>非常感谢<a href="http://weibo.com/hatewx?refer_flag=1005050005_" target="_blank" rel="external">@EffectiveMatrix</a>大神带来的新的判断前后台的方法  </p>
+<p>此方法属于他原创，具体的博文参照这里<a href="http://effmx.com/articles/tong-guo-android-fu-zhu-gong-neng-accessibility-service-jian-ce-ren-yi-qian-tai-jie-mian/" target="_blank" rel="external">http://effmx.com/articles/tong-guo-android-fu-zhu-gong-neng-accessibility-service-jian-ce-ren-yi-qian-tai-jie-mian/</a>  </p>
+<p>此方法无法直观的通过下拉通知视图来进行前后台的观察，请到LogCat中进行观察即可，以下是LogCat中打印的信息</p>
+<p><img src="http://ww3.sinaimg.cn/large/691cc151gw1f0uiy60md3j20fs07omzj.jpg" alt="enter image description here">  </p>
+<p><strong>原理</strong><br>Android 辅助功能(AccessibilityService) 为我们提供了一系列的事件回调，帮助我们指示一些用户界面的状态变化。 我们可以派生辅助功能类，进而对不同的 AccessibilityEvent 进行处理。 同样的，这个服务就可以用来判断当前的前台应用</p>
+<p><strong>优势</strong>  </p>
+<ol>
+<li>AccessibilityService 有非常广泛的 ROM 覆盖，特别是非国产手机，从 Android API Level 8(Android 2.2) 到 Android Api Level 23(Android 6.0)  </li>
+<li>AccessibilityService 不再需要轮询的判断当前的应用是不是在前台，系统会在窗口状态发生变化的时候主动回调，耗时和资源消耗都极小  </li>
+<li>不需要权限请求  </li>
+<li>它是一个稳定的方法，与 “方法6”读取 /proc 目录不同，它并非利用 Android 一些设计上的漏洞，可以长期使用的可能很大  </li>
+<li>可以用来判断任意应用甚至 Activity, PopupWindow, Dialog 对象是否处于前台  </li>
+</ol>
+<p><strong>劣势</strong>  </p>
+<ol>
+<li>需要要用户开启辅助功能  </li>
+<li>辅助功能会伴随应用被“强行停止”而剥夺  </li>
+</ol>
+<h2 id="方法六：读取Linux系统内核保存在-proc目录下的process进程信息"><a href="#方法六：读取Linux系统内核保存在-proc目录下的process进程信息" class="headerlink" title="方法六：读取Linux系统内核保存在/proc目录下的process进程信息"></a>方法六：读取Linux系统内核保存在/proc目录下的process进程信息</h2><p><img src="http://ww3.sinaimg.cn/mw690/691cc151gw1f09z6bjz9rg20bc0h0b29.gif" alt="enter image description here"></p>
+<p>此方法并非我原创，原作者是国外的大神，<a href="https://github.com/jaredrummler/AndroidProcesses" target="_blank" rel="external">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择</p>
+<p><strong>原理</strong><br>无意中看到乌云上有人提的一个漏洞，Linux系统内核会把process进程信息保存在/proc目录下，Shell命令去获取的他，再根据进程的属性判断是否为前台</p>
+<p><strong>优点</strong>  </p>
+<ol>
+<li>不需要任何权限  </li>
+<li>可以判断任意一个应用是否在前台，而不局限在自身应用</li>
+</ol>
+<p><strong>缺点</strong>  </p>
+<ol>
+<li>当/proc下文件夹过多时,此方法是耗时操作</li>
+</ol>
+<p><strong>用法</strong><br>获取一系列正在运行的App的进程<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;AndroidAppProcess&gt; processes = ProcessManager.getRunningAppProcesses();</span><br></pre></td></tr></table></figure></p>
+<p>获取任一正在运行的App进程的详细信息<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">AndroidAppProcess process = processes.get(location);</span><br><span class="line">String processName = process.name;</span><br><span class="line"></span><br><span class="line">Stat stat = process.stat();</span><br><span class="line"><span class="keyword">int</span> pid = stat.getPid();</span><br><span class="line"><span class="keyword">int</span> parentProcessId = stat.ppid();</span><br><span class="line"><span class="keyword">long</span> startTime = stat.stime();</span><br><span class="line"><span class="keyword">int</span> policy = stat.policy();</span><br><span class="line"><span class="keyword">char</span> state = stat.state();</span><br><span class="line"></span><br><span class="line">Statm statm = process.statm();</span><br><span class="line"><span class="keyword">long</span> totalSizeOfProcess = statm.getSize();</span><br><span class="line"><span class="keyword">long</span> residentSetSize = statm.getResidentSetSize();</span><br><span class="line"></span><br><span class="line">PackageInfo packageInfo = process.getPackageInfo(context, <span class="number">0</span>);</span><br><span class="line">String appName = packageInfo.applicationInfo.loadLabel(pm).toString();</span><br></pre></td></tr></table></figure></p>
+<p>判断是否在前台<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ProcessManager.isMyProcessInTheForeground()) &#123;</span><br><span class="line">  <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>获取一系列正在运行的App进程的详细信息<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ActivityManager.RunningAppProcessInfo&gt; processes = ProcessManager.getRunningAppProcessInfo(ctx);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Gradle-构建"><a href="#Gradle-构建" class="headerlink" title="Gradle 构建"></a>Gradle 构建</h2><ul>
+<li>版本<ul>
+<li>最新 Android SDK</li>
+<li>最新 Gradle</li>
+</ul>
+</li>
+<li>环境变量<ul>
+<li>ANDROID_HOME</li>
+<li>GRADLE_HOME，同时把bin放入path变量</li>
+<li>Android SDK 安装，都更新到最新</li>
+<li>Android SDK Build-tools更新到最新</li>
+<li>Google Repository更新到最新</li>
+<li>Android Support Repository更新到最新</li>
+<li>Android Support Library更新到最新</li>
+</ul>
+</li>
+</ul>
+<h2 id="相信未来"><a href="#相信未来" class="headerlink" title="相信未来"></a>相信未来</h2><p>当蜘蛛网无情地查封了我的炉台<br>当灰烬的余烟叹息着贫困的悲哀<br>我依然固执地铺平失望的灰烬<br>用美丽的雪花写下：相信未来   </p>
+<p>当我的紫葡萄化为深秋的露水<br>当我的鲜花依偎在别人的情怀<br>我依然固执地用凝霜的枯藤<br>在凄凉的大地上写下：相信未来   </p>
+<p>我要用手指那涌向天边的排浪<br>我要用手掌那托住太阳的大海<br>摇曳着曙光那枝温暖漂亮的笔杆<br>用孩子的笔体写下：相信未来   </p>
+<p>我之所以坚定地相信未来<br>是我相信未来人们的眼睛<br>她有拨开历史风尘的睫毛<br>她有看透岁月篇章的瞳孔  </p>
+<p>不管人们对于我们腐烂的皮肉<br>那些迷途的惆怅、失败的苦痛<br>是寄予感动的热泪、深切的同情<br>还是给以轻蔑的微笑、辛辣的嘲讽   </p>
+<p>我坚信人们对于我们的脊骨<br>那无数次的探索、迷途、失败和成功<br>一定会给予热情、客观、公正的评定<br>是的，我焦急地等待着他们的评定  </p>
+<p>朋友，坚定地相信未来吧<br>相信不屈不挠的努力<br>相信战胜死亡的年轻<br>相信未来、热爱生命  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag">#总结</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/10/adb-command-data/" rel="next" title="ADB命令学习资料">
+                <i class="fa fa-chevron-left"></i> ADB命令学习资料
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/11/judge-app-background/"
+           data-title="判断App位于前台或后台的6种方法" data-url="http://yoursite.com/2016/09/11/judge-app-background/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img4.duitang.com/uploads/item/201501/20/20150120180628_Uy5in.jpeg"
+               alt="HYGao" />
+          <p class="site-author-name" itemprop="name">HYGao</p>
+          <p class="site-description motion-element" itemprop="description">阳光温热，岁月静好。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/breewf" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gold.xitu.io/#/" target="_blank">稀土掘金</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AndroidProcess"><span class="nav-number">1.</span> <span class="nav-text">AndroidProcess</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预览图"><span class="nav-number">1.1.</span> <span class="nav-text">预览图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六种方法的区别"><span class="nav-number">1.3.</span> <span class="nav-text">六种方法的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：通过RunningTask"><span class="nav-number">1.4.</span> <span class="nav-text">方法一：通过RunningTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：通过RunningProcess"><span class="nav-number">1.5.</span> <span class="nav-text">方法二：通过RunningProcess</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法三：通过ActivityLifecycleCallbacks"><span class="nav-number">1.6.</span> <span class="nav-text">方法三：通过ActivityLifecycleCallbacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法四：通过使用UsageStatsManager获取"><span class="nav-number">1.7.</span> <span class="nav-text">方法四：通过使用UsageStatsManager获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法五：通过Android自带的无障碍功能"><span class="nav-number">1.8.</span> <span class="nav-text">方法五：通过Android自带的无障碍功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法六：读取Linux系统内核保存在-proc目录下的process进程信息"><span class="nav-number">1.9.</span> <span class="nav-text">方法六：读取Linux系统内核保存在/proc目录下的process进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle-构建"><span class="nav-number">1.10.</span> <span class="nav-text">Gradle 构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相信未来"><span class="nav-number">1.11.</span> <span class="nav-text">相信未来</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYGao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"breewf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+
+</body>
+</html>
