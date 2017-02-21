@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-11T12:15:46.570Z</updated>
+  <updated>2017-02-21T04:48:53.265Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,132 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Freeline-Android平台上的秒级编译方案</title>
+    <link href="http://yoursite.com/2017/02/21/freeline-use/"/>
+    <id>http://yoursite.com/2017/02/21/freeline-use/</id>
+    <published>2017-02-21T04:36:14.409Z</published>
+    <updated>2017-02-21T04:48:53.265Z</updated>
+    
+    <content type="html">&lt;p&gt;原文链接：&lt;a href=&quot;https://github.com/alibaba/freeline/blob/master/README-zh.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Freeline&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Freeline&quot;&gt;&lt;a href=&quot;#Freeline&quot; class=&quot;headerlink&quot; title=&quot;Freeline&quot;&gt;&lt;/a&gt;Freeline&lt;/h1&gt;&lt;p&gt;Freeline 是 Android 平台上的秒级编译方案，Instant Run 的替代品，也可以从 &lt;a href=&quot;https://www.freelinebuild.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Freeline 官方主页&lt;/a&gt;来获取更多的信息。&lt;/p&gt;
+&lt;p&gt;Freeline 由&lt;a href=&quot;https://www.antfortune.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蚂蚁聚宝&lt;/a&gt; Android 团队开发，它可以充分利用缓存文件，在几秒钟内迅速地对代码的改动进行编译并部署到设备上，有效地减少了日常开发中的大量重新编译与安装的耗时。&lt;/p&gt;
+&lt;p&gt;Freeline能够为Android开发者节省很多喝杯咖啡的时间 : )&lt;/p&gt;
+&lt;h2 id=&quot;Freeline-Insights&quot;&gt;&lt;a href=&quot;#Freeline-Insights&quot; class=&quot;headerlink&quot; title=&quot;Freeline Insights&quot;&gt;&lt;/a&gt;Freeline Insights&lt;/h2&gt;&lt;p&gt;Freeline 将整个编译过程拆分成多个小模块，根据模块间的依赖关系并发进行编译任务。它可以对所有编译缓存文件做到充分地利用，真正地做到了“增量”编译。同时，它也提取了 buck 的部分组件（dx 与 DexMerger），来加速构建流程。Freeline 会在 app 运行时启动一条独立进程来运行 Socket Server 以进行开发机与 app 的通信，同时也能确保即使在 app 出现 crash 之后，仍然能够使增量编译持续生效。&lt;/p&gt;
+&lt;p&gt;Freeline 是通过 multi-dex 的方案来实现 Java 代码的增量更新的。与此同时，我们也专门对 aapt 工具做了深度优化，给出了独立的 FreelineAapt 资源打包工具用来生成增量的资源包以及加快资源包的打包速度。运行期的资源替换，Freeline 中使用了 Instant Run 的方案。除此之外，Freeline 也支持运行期动态更新 so 文件。&lt;/p&gt;
+&lt;p&gt;Freeline 会根据代码文件的变更情况，自动在全量编译与增量编译中进行切换。&lt;/p&gt;
+&lt;p&gt;实际上，Freeline 可以在经过简单的改造之后，作为线上热修复方案，通过动态下发增量资源，来对应用进行修复或者资源替换。经过压缩后的增量资源通常都会在 100kb 以下，用户可以在移动网络的环境下直接接收到热补丁。蚂蚁聚宝已经基于 Freeline 打造了完整的热修复框架，应用于线上问题修复以及 A/B Test。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://yq.aliyun.com/articles/59122?spm=5176.8091938.0.0.1Bw3mU&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;中文原理说明&lt;/a&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;Features&quot;&gt;&lt;a href=&quot;#Features&quot; class=&quot;headerlink&quot; title=&quot;Features&quot;&gt;&lt;/a&gt;Features&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;支持标准的多模块 Gradle 工程的增量构建&lt;/li&gt;
+&lt;li&gt;并发执行增量编译任务&lt;/li&gt;
+&lt;li&gt;进程级别异常隔离机制&lt;/li&gt;
+&lt;li&gt;支持 so 动态更新&lt;/li&gt;
+&lt;li&gt;支持 resource.arsc 缓存&lt;/li&gt;
+&lt;li&gt;支持 retrolambda&lt;/li&gt;
+&lt;li&gt;支持 DataBinding&lt;/li&gt;
+&lt;li&gt;支持各类主流注解库&lt;/li&gt;
+&lt;li&gt;支持 Windows，Linux，Mac 平台&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以下列表为 Freeline 支持的热更新情况：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Java&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;drawable, layout, etc.&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;res/values&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;native so&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;add&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;change&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;remove&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;√&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;x&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Freeline 已经分别在 API 17，19，22，23 的 Android 模拟器、Android 6.0 Nexus 6P 以及 Android 4.4 锤子手机上经过测试。如果想要充分体验 Freeline 增量编译的速度的话，最好使用 Android 5.0+ 的设备。&lt;/p&gt;
+&lt;h2 id=&quot;Download&quot;&gt;&lt;a href=&quot;#Download&quot; class=&quot;headerlink&quot; title=&quot;Download&quot;&gt;&lt;/a&gt;Download&lt;/h2&gt;&lt;p&gt;配置 project-level 的 build.gradle，加入 freeline-gradle 的依赖：&lt;/p&gt;
+&lt;figure class=&quot;highlight gradle&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;buildscript&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;repositories&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        jcenter()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;dependencies&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;classpath&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;com.antfortune.freeline:gradle:0.8.6&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后，在你的主 module 的 build.gradle 中，应用 freeline 插件的依赖：&lt;/p&gt;
+&lt;figure class=&quot;highlight gradle&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;apply plugin: &lt;span class=&quot;string&quot;&gt;&#39;com.antfortune.freeline&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;android &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;最后，在命令行执行以下命令来下载 freeline 的 python 和二进制依赖。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows[CMD]: gradlew initFreeline&lt;/li&gt;
+&lt;li&gt;Linux/Mac: ./gradlew initFreeline&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于国内的用户来说，如果你的下载的时候速度很慢，你也可以加上参数，执行&lt;code&gt;gradlew initFreeline -Pmirror&lt;/code&gt;，这样就会从国内镜像地址来下载。&lt;/p&gt;
+&lt;p&gt;你也可以使用参数&lt;code&gt;-PfreelineVersion={your-specific-version}&lt;/code&gt;来下载特定版本的 freeline 依赖。&lt;/p&gt;
+&lt;p&gt;如果你的工程结构较为复杂，在第一次使用 freeline 编译的时候报错了的话，你可以添加一些 freeline 提供的配置项，来适配你的工程。具体可以看 &lt;a href=&quot;https://github.com/alibaba/freeline/wiki/Freeline-DSL-References&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Freeline DSL References&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;Usage&quot;&gt;&lt;a href=&quot;#Usage&quot; class=&quot;headerlink&quot; title=&quot;Usage&quot;&gt;&lt;/a&gt;Usage&lt;/h2&gt;&lt;p&gt;Freeline 最快捷的使用方法就是直接安装 Android Studio 插件。&lt;/p&gt;
+&lt;p&gt;在 Android Studio 中，通过以下路径：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;MacOS&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Android Studio → Preferences… → Plugins → Browse repositories…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Windows 和 Linux&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;File → Settings… → Plugins → Browse repositories…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;并搜索“freeline”，并安装。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/65e4f1e6gw1f82eknaeudj20tk01omxe.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;直接点击 &lt;code&gt;Run Freeline&lt;/code&gt; 的按钮，就可以享受 Freeline 带来的开发效率的提升啦（当然，你可能会先需要一个较为耗时的全量编译过程）。&lt;/p&gt;
+&lt;p&gt;插件也会提示你 Freeline 最新的版本是多少，你也可以通过插件来对 Freeline 进行更新。&lt;/p&gt;
+&lt;p&gt;非常感谢 &lt;a href=&quot;https://github.com/pengwei1024&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@pengwei1024&lt;/a&gt; 和 &lt;a href=&quot;https://github.com/act262&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@act262&lt;/a&gt; 帮助我们开发了这个非常棒的 Freeline 插件。&lt;/p&gt;
+&lt;p&gt;除此之外，你也可以通过在命令行执行 Python 脚本的方式来使用 Freeline，具体可以看我们的相应的链接 &lt;a href=&quot;https://github.com/alibaba/freeline/wiki/Freeline-CLI-Usage&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Freeline CLI Usage&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;Sample-Usage&quot;&gt;&lt;a href=&quot;#Sample-Usage&quot; class=&quot;headerlink&quot; title=&quot;Sample Usage&quot;&gt;&lt;/a&gt;Sample Usage&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git clone git@github.com:alibaba/freeline.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd freeline/sample&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;./gradlew initFreeline&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;python freeline.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Troubleshooting&quot;&gt;&lt;a href=&quot;#Troubleshooting&quot; class=&quot;headerlink&quot; title=&quot;Troubleshooting&quot;&gt;&lt;/a&gt;Troubleshooting&lt;/h2&gt;&lt;p&gt;See &lt;a href=&quot;https://github.com/alibaba/freeline/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Thanks&quot;&gt;&lt;a href=&quot;#Thanks&quot; class=&quot;headerlink&quot; title=&quot;Thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.android.com/studio/run/index.html#instant-run&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Instant Run&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/facebook/buck&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Buck&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mmin18/LayoutCast&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;LayoutCast&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;原文链接：&lt;a href=&quot;https://github.com/alibaba/freeline/blob/master/README-zh.md&quot;&gt;Freeline&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Freeline&quot;&gt;&lt;a href=&quot;#Freeline&quot; class=&quot;headerlink&quot; title=&quot;Freeline&quot;&gt;&lt;/a&gt;Freeline&lt;/h1&gt;&lt;p&gt;Freeline 是 Android 平台上的秒级编译方案，Instant Run 的替代品，也可以从 &lt;a href=&quot;https://www.freelinebuild.com/&quot;&gt;Freeline 官方主页&lt;/a&gt;来获取更多的信息。&lt;/p&gt;
+&lt;p&gt;Freeline 由&lt;a href=&quot;https://www.antfortune.com/&quot;&gt;蚂蚁聚宝&lt;/a&gt; Android 团队开发，它可以充分利用缓存文件，在几秒钟内迅速地对代码的改动进行编译并部署到设备上，有效地减少了日常开发中的大量重新编译与安装的耗时。&lt;/p&gt;
+&lt;p&gt;Freeline能够为Android开发者节省很多喝杯咖啡的时间 : )&lt;/p&gt;
+&lt;h2 id=&quot;Freeline-Insights&quot;&gt;&lt;a href=&quot;#Freeline-Insights&quot; class=&quot;headerlink&quot; title=&quot;Freeline Insights&quot;&gt;&lt;/a&gt;Freeline Insights&lt;/h2&gt;&lt;p&gt;Freeline 将整个编译过程拆分成多个小模块，根据模块间的依赖关系并发进行编译任务。它可以对所有编译缓存文件做到充分地利用，真正地做到了“增量”编译。同时，它也提取了 buck 的部分组件（dx 与 DexMerger），来加速构建流程。Freeline 会在 app 运行时启动一条独立进程来运行 Socket Server 以进行开发机与 app 的通信，同时也能确保即使在 app 出现 crash 之后，仍然能够使增量编译持续生效。&lt;/p&gt;
+&lt;p&gt;Freeline 是通过 multi-dex 的方案来实现 Java 代码的增量更新的。与此同时，我们也专门对 aapt 工具做了深度优化，给出了独立的 FreelineAapt 资源打包工具用来生成增量的资源包以及加快资源包的打包速度。运行期的资源替换，Freeline 中使用了 Instant Run 的方案。除此之外，Freeline 也支持运行期动态更新 so 文件。&lt;/p&gt;
+&lt;p&gt;Freeline 会根据代码文件的变更情况，自动在全量编译与增量编译中进行切换。&lt;/p&gt;
+&lt;p&gt;实际上，Freeline 可以在经过简单的改造之后，作为线上热修复方案，通过动态下发增量资源，来对应用进行修复或者资源替换。经过压缩后的增量资源通常都会在 100kb 以下，用户可以在移动网络的环境下直接接收到热补丁。蚂蚁聚宝已经基于 Freeline 打造了完整的热修复框架，应用于线上问题修复以及 A/B Test。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://yq.aliyun.com/articles/59122?spm=5176.8091938.0.0.1Bw3mU&quot;&gt;中文原理说明&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>判断App位于前台或后台的6种方法</title>
@@ -1097,9 +1223,9 @@
       <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
     
     
-      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
-    
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
+    
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
