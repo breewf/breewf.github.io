@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-01T10:55:39.996Z</updated>
+  <updated>2017-03-13T02:27:00.613Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/01/jenkins-build-apk-pgyer/"/>
     <id>http://yoursite.com/2017/03/01/jenkins-build-apk-pgyer/</id>
     <published>2017-03-01T07:36:48.000Z</published>
-    <updated>2017-03-01T10:55:39.996Z</updated>
+    <updated>2017-03-13T02:27:00.613Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;Jenkins是一个开源软件项目，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。&lt;/p&gt;
@@ -34,7 +34,7 @@
 &lt;h2 id=&quot;安装插件&quot;&gt;&lt;a href=&quot;#安装插件&quot; class=&quot;headerlink&quot; title=&quot;安装插件&quot;&gt;&lt;/a&gt;安装插件&lt;/h2&gt;&lt;p&gt;jenkins支持多种插件，联网安装后即可使用，常见的有git插件，gradle插件，maven插件等等。&lt;br&gt;在jenkins主页左上角，点击系统管理–&amp;gt;管理插件&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301170221.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;新版本的Jenkins首次使用时会默认弹出选择插件页面，有推荐设置和自定义设置，选择推荐设置自动下载常用插件即可。插件下载完毕即可进入Jenkins主页。&lt;/p&gt;
 &lt;p&gt;注：如遇到编码问题，可修改tomcat的server.xml配置，在Connector标签添加上URIEncoding=”UTF-8”&lt;/p&gt;
-&lt;h2 id=&quot;创建项目&quot;&gt;&lt;a href=&quot;#创建项目&quot; class=&quot;headerlink&quot; title=&quot;创建项目&quot;&gt;&lt;/a&gt;创建项目&lt;/h2&gt;&lt;p&gt;选择新建，输入要构建的项目名称，选择第一个构建一个自由风格的软件项目。点击OK后，进入配置页面。&lt;br&gt;添加项目描述，以及选择项目来源，这里可以选择git或svn等。&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172112.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172206.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172508.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;br&gt;输入仓库地址和分支名称&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172735.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;创建项目&quot;&gt;&lt;a href=&quot;#创建项目&quot; class=&quot;headerlink&quot; title=&quot;创建项目&quot;&gt;&lt;/a&gt;创建项目&lt;/h2&gt;&lt;p&gt;选择新建，输入要构建的项目名称，选择第一个构建一个自由风格的软件项目。点击OK后，进入配置页面。&lt;br&gt;添加项目描述，以及选择项目来源，这里可以选择git或svn等。&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172112.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172206.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172508.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;br&gt;输入仓库地址和分支名称&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301172735.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;构建触发器&quot;&gt;&lt;a href=&quot;#构建触发器&quot; class=&quot;headerlink&quot; title=&quot;构建触发器&quot;&gt;&lt;/a&gt;构建触发器&lt;/h2&gt;&lt;p&gt;构建触发器有5中方案可选，这里使用第五种Poll SCM（固定时间检查，如果有更新，则构建，没有更新不构建），也可以同时使用多种构建方式。&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301174013.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;br&gt;每隔10分钟检查构建（若有更新）一次。&lt;/p&gt;
 &lt;p&gt;可参考：&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/wudj810818/article/details/50962920/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jenkins – 配置构建触发器&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_71bc9d680102x0n1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jenkins之构建触发器配置&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;构建&quot;&gt;&lt;a href=&quot;#构建&quot; class=&quot;headerlink&quot; title=&quot;构建&quot;&gt;&lt;/a&gt;构建&lt;/h2&gt;&lt;p&gt;构建中选择“Execute Windows Batch Command”，然后在输入框中输入要打包的命令即可。&lt;br&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301174905.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -45,7 +45,7 @@
 &lt;p&gt;注：1，apk文件路径；2，蒲公英User Key；3，蒲公英API Key&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://github.com/breewf/ScreenshotHouse/blob/master/app/src/main/java/com/ghy/screenshothouse/jenkins/QQ20170301175051.png?raw=true&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;官方文档：&lt;a href=&quot;https://www.pgyer.com/doc/view/jenkins&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.pgyer.com/doc/view/jenkins&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;其它：&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/441e75f527f2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jjenkins配合蒲公英实现APK的自动发布&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/zz0412/tag/jenkins/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jenkins进阶系列&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其它：&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/441e75f527f2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jenkins配合蒲公英实现APK的自动发布&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/zz0412/tag/jenkins/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jenkins进阶系列&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -1275,9 +1275,9 @@
       <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
     
     
-      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
-    
       <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
     
   </entry>
   
