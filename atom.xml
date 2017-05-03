@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-13T02:27:00.613Z</updated>
+  <updated>2017-05-03T07:36:02.575Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>消息提醒NotificationMessage</title>
+    <link href="http://yoursite.com/2017/05/03/notification_message_use/"/>
+    <id>http://yoursite.com/2017/05/03/notification_message_use/</id>
+    <published>2017-05-03T07:28:48.000Z</published>
+    <updated>2017-05-03T07:36:02.575Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;NotificationMessage&quot;&gt;&lt;a href=&quot;#NotificationMessage&quot; class=&quot;headerlink&quot; title=&quot;NotificationMessage&quot;&gt;&lt;/a&gt;NotificationMessage&lt;/h2&gt;&lt;h4 id=&quot;Show-a-message-at-the-top-of-your-phone-that-supports-multiple-message-types&quot;&gt;&lt;a href=&quot;#Show-a-message-at-the-top-of-your-phone-that-supports-multiple-message-types&quot; class=&quot;headerlink&quot; title=&quot;Show a message at the top of your phone that supports multiple message types.&quot;&gt;&lt;/a&gt;Show a message at the top of your phone that supports multiple message types.&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/breewf/NotificationMessage/blob/master/app/src/main/java/com/ghy/notificationmessage/gif/notification_message_demo.gif?raw=true&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;NotificationMessage message = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; NotificationMessage.Builder(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;).setTitle(&lt;span class=&quot;string&quot;&gt;&quot;标题标题&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .setContent(&lt;span class=&quot;string&quot;&gt;&quot;您已经进入了没有网络的异次元&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .setBgColor(ContextCompat.getColor(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, R.color.colorAccent))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .setMessageType(NotificationMessage.MESSAGE_TYPE_SUCCESS)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                .setClickListener(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; NotificationMessage.MessageClickListener() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    public &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; onMessageClick() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        Toast.makeText(MainActivity.this, &lt;span class=&quot;string&quot;&gt;&quot;再点一下，手机爆炸！&quot;&lt;/span&gt;, Toast.LENGTH_SHORT).show();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;#125;).build();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        message.showNotification();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Notice: setBgColor() &amp;gt; setMessageType()&lt;/p&gt;
+&lt;h5 id=&quot;Add-dependency-and-enjoy-it&quot;&gt;&lt;a href=&quot;#Add-dependency-and-enjoy-it&quot; class=&quot;headerlink&quot; title=&quot;Add dependency and enjoy it&quot;&gt;&lt;/a&gt;Add dependency and enjoy it&lt;/h5&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;com.ghy:NotificationMessage:1.0&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/breewf/NotificationMessage&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub地址&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;NotificationMessage&quot;&gt;&lt;a href=&quot;#NotificationMessage&quot; class=&quot;headerlink&quot; title=&quot;NotificationMessage&quot;&gt;&lt;/a&gt;NotificationMessage&lt;/h2&gt;&lt;h4 i
+    
+    </summary>
+    
+      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
+    
+    
+      <category term="开源项目" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Jenkins自动化打包并上传蒲公英</title>
@@ -1235,49 +1262,6 @@
       <category term="RxJava" scheme="http://yoursite.com/tags/RxJava/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android Studio实用插件推荐</title>
-    <link href="http://yoursite.com/2016/03/03/android-studio-plugin/"/>
-    <id>http://yoursite.com/2016/03/03/android-studio-plugin/</id>
-    <published>2016-03-03T05:18:10.000Z</published>
-    <updated>2016-03-11T01:21:21.151Z</updated>
-    
-    <content type="html">&lt;p&gt;Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
-&lt;font color=&quot;#ff0000&quot; size=&quot;3&quot;&gt;注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
-
-&lt;h3 id=&quot;ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife Zelezny&quot;&gt;&lt;/a&gt;ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;GsonFormat&quot;&gt;&lt;a href=&quot;#GsonFormat&quot; class=&quot;headerlink&quot; title=&quot;GsonFormat&quot;&gt;&lt;/a&gt;GsonFormat&lt;/h3&gt;&lt;p&gt;现在大多数服务端api都以json数据格式返回，而客户端需要根据api接口生成相应的实体类，这个插件把这个过程自动化了，赶紧使用起来吧。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/gson_format.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;SelectorChapek&quot;&gt;&lt;a href=&quot;#SelectorChapek&quot; class=&quot;headerlink&quot; title=&quot;SelectorChapek&quot;&gt;&lt;/a&gt;SelectorChapek&lt;/h3&gt;&lt;p&gt;设计师给我们提供好了各种资源，每个按钮都要写一个selector是不是很麻烦？这么这个插件就为解决这个问题而生，你只需要做的是告诉设计师们按照规范命名就好了，其它一键搞定。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/select_option.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Parcelable&quot;&gt;&lt;a href=&quot;#Parcelable&quot; class=&quot;headerlink&quot; title=&quot;Parcelable&quot;&gt;&lt;/a&gt;Parcelable&lt;/h3&gt;&lt;p&gt;Android中的序列化有两种方式，分别是实现Serializable接口和Parcelable接口，但在Android中是推荐使用Parcelable，只不过我们这种方式要比Serializable方式要繁琐，那么有了这个插件一切就ok了。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/parcelable_generator.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;CodeGlance&quot;&gt;&lt;a href=&quot;#CodeGlance&quot; class=&quot;headerlink&quot; title=&quot;CodeGlance&quot;&gt;&lt;/a&gt;CodeGlance&lt;/h3&gt;&lt;p&gt;可用于快速定位代码，类似于Sublime编辑器右侧定位视图。&lt;br&gt;&lt;img src=&quot;http://www.jcodecraeer.com/uploads/20151009/1444358792122227.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;JsonOnlineViewer&quot;&gt;&lt;a href=&quot;#JsonOnlineViewer&quot; class=&quot;headerlink&quot; title=&quot;JsonOnlineViewer&quot;&gt;&lt;/a&gt;JsonOnlineViewer&lt;/h3&gt;&lt;p&gt;可实现直接在android studio中调试接口数据，可以选择请求类型，自定义请求头及请求体，json数据格式化后展示，配合着Gsonformat会不会不错呢？&lt;br&gt;&lt;img src=&quot;http://www.jcodecraeer.com/uploads/20151009/1444358760462935.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;lint-cleaner-plugin&quot;&gt;&lt;a href=&quot;#lint-cleaner-plugin&quot; class=&quot;headerlink&quot; title=&quot;lint-cleaner-plugin&quot;&gt;&lt;/a&gt;lint-cleaner-plugin&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/marcoRS/lint-cleaner-plugin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;lint-cleaner-plugin&lt;/a&gt;&lt;br&gt;移除Android中无用资源。&lt;/p&gt;
-&lt;h3 id=&quot;LeakCanary&quot;&gt;&lt;a href=&quot;#LeakCanary&quot; class=&quot;headerlink&quot; title=&quot;LeakCanary&quot;&gt;&lt;/a&gt;LeakCanary&lt;/h3&gt;&lt;p&gt;良心企业Square开源的一个非常有用的工具，强烈推荐，帮助你在开发阶段方便的检测出内存泄露的问题，使用起来简单方便。&lt;/p&gt;
-&lt;p&gt;中文版&lt;a href=&quot;http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;LeakCanary 中文使用说明&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://stormzhang.com/image/leakcaneray.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Genymotion&quot;&gt;&lt;a href=&quot;#Genymotion&quot; class=&quot;headerlink&quot; title=&quot;Genymotion&quot;&gt;&lt;/a&gt;Genymotion&lt;/h3&gt;&lt;p&gt;强大的安卓模拟器！&lt;br&gt;中文官网：&lt;a href=&quot;http://www.genymotion.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Genymotion&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;参考文章：&lt;br&gt;&lt;a href=&quot;http://stormzhang.com/android/2015/05/26/android-tools/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;推荐几个非常有用的工具&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/28026027&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;有什么好用的Android Studio的插件值得推荐？&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/Android_Studio/2015/1009/3557.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;推荐几款实用的Android Studio 插件&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Android Studio更新迭代速度非常快，现在的最新版是2.0Beta6，2.0版本也有很多重要的改进，正式版也是千呼万唤还未来。言归正传，好用的插件工具能够显著提高工作效率，减少重复繁琐的工作量，以及能够对项目进行优化、提高项目稳定性等等。&lt;/p&gt;
-&lt;font color=#ff0000 size=3&gt;注：以下插件可以在studio中打开Preferences → Plugins → Browse repositories，然后搜索你要安装的插件名称下载安装即可，安装插件后需要重启studio。&lt;/font&gt;
-
-&lt;h3 id=&quot;ButterKnife-Zelezny&quot;&gt;&lt;a href=&quot;#ButterKnife-Zelezny&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife Zelezny&quot;&gt;&lt;/a&gt;ButterKnife Zelezny&lt;/h3&gt;&lt;p&gt;ButterKnife注解生成器，一键从对应xml布局文件中生成对View的声明和ButterKnife的注解，使用起来非常简单方便。&lt;br&gt;&lt;img src=&quot;http://stormzhang.com/image/zelezny_animated.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="安卓" scheme="http://yoursite.com/categories/%E5%AE%89%E5%8D%93/"/>
-    
-    
-      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
     
   </entry>
   
