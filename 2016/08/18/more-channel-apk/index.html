@@ -1,113 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Gradle、Python脚本多渠道自动化打包 | 微凉</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="为什么要多渠道打包？众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。 使用gradle打包配置AndroidManifes">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Gradle、Python脚本多渠道自动化打包">
-<meta property="og:url" content="https://github.com/breewf/2016/08/18/more-channel-apk/index.html">
-<meta property="og:site_name" content="微凉">
-<meta property="og:description" content="为什么要多渠道打包？众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。 使用gradle打包配置AndroidManifes">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://tech.meituan.com/img/dzh/apk_packaging2.jpg">
-<meta property="og:image" content="http://tech.meituan.com/img/dzh/apk_packaging3.jpg">
-<meta property="article:published_time" content="2016-08-18T05:47:12.000Z">
-<meta property="article:modified_time" content="2016-08-18T07:53:25.000Z">
-<meta property="article:author" content="haiygao">
-<meta property="article:tag" content="Gradle">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://tech.meituan.com/img/dzh/apk_packaging2.jpg">
-  
-    <link rel="alternate" href="/breewf/atom.xml" title="微凉" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/breewf/favicon.png">
-  
-  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="白日梦重度患者">
+    <meta name="author" content="breewf">
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
+    <title>
+        
+            Gradle、Python脚本多渠道自动化打包 |
+        
+        breewf
+    </title>
+    
 <link rel="stylesheet" href="/breewf/css/style.css">
 
-  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4">
     
-<link rel="stylesheet" href="/breewf/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/breewf/css/font-awesome.min.css">
 
-  
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"github.com","root":"/breewf/","language":"zh-CN"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","favicon":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/breewf/" id="logo">微凉</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/breewf/" id="subtitle">Android</a>
-        </h2>
-      
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                breewf
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/breewf/">Home</a>
-        
-          <a class="main-nav-link" href="/breewf/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/breewf/atom.xml" title="RSS 订阅"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/breewf"></form>
-      </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/about">关于</a>
+                </li>
+            
+        </ul>
     </div>
-  </div>
+
+    <div class="window-mask"></div>
+
 </header>
 
-      <div class="outer">
-        <section id="main"><article id="post-more-channel-apk" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/breewf/2016/08/18/more-channel-apk/" class="article-date">
-  <time class="dt-published" datetime="2016-08-18T05:47:12.000Z" itemprop="datePublished">2016-08-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Gradle、Python脚本多渠道自动化打包</span>
+        </div>
+
         
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Gradle、Python脚本多渠道自动化打包
-    </h1>
-  
-
-      </header>
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">breewf</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2016-08-18 13:47:12
+    </span>
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="为什么要多渠道打包？"><a href="#为什么要多渠道打包？" class="headerlink" title="为什么要多渠道打包？"></a>为什么要多渠道打包？</h2><p>众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。</p>
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/breewf/tags/Gradle/">Gradle</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="为什么要多渠道打包？"><a href="#为什么要多渠道打包？" class="headerlink" title="为什么要多渠道打包？"></a>为什么要多渠道打包？</h2><p>众所周知，由于Google play在国内无法使用，国内Android应用市场群雄纷争，存在着众多的应用市场，在不同的市场可能有着不同的统计需求，需要为每个应用市场的Android包设定一个可以区分应用市场的标识，为此Android开发人员需要为每个应用市场发布一个安装包（渠道包），这就是为什么Android需要多渠道打包。</p>
 <h2 id="使用gradle打包"><a href="#使用gradle打包" class="headerlink" title="使用gradle打包"></a>使用gradle打包</h2><h3 id="配置AndroidManifest-xml"><a href="#配置AndroidManifest-xml" class="headerlink" title="配置AndroidManifest.xml"></a>配置AndroidManifest.xml</h3><p>在Androidmanifest.xml中定义mate-data标签：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:Android=<span class="string">&quot;http://schemas.Android.com/apk/res/Android&quot;</span>    </span><br><span class="line">    package=<span class="string">&quot;com.package.name&quot;</span>&gt;    </span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">application</span>&gt;</span>    </span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">meta-data</span> <span class="attr">android:name</span>=<span class="string">&quot;UMENG_CHANNEL&quot;</span> <span class="attr">android:value</span>=<span class="string">&quot;xiaomi&quot;</span> /&gt;</span>   </span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span>    </span><br><span class="line">&lt;/manifest&gt; </span><br></pre></td></tr></table></figure>
 <p>如果不使用多渠道打包方法，那就需要我们手动一个一个去修改value中的值，比如xiaomi，360，qq，wandoujia等等。<br>使用多渠道打包的方式，就需要把上面的value配置成下面的方式：</p>
@@ -154,157 +259,197 @@
 <p>好啦，还没有体验过的小伙伴赶紧使用体验一下吧！</p>
 <p>参考文章：<br><a class="link"   target="_blank" rel="noopener" href="http://tech.meituan.com/mt-apk-packaging.html" >美团Android自动化之旅—生成渠道包<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="http://blog.csdn.net/javazejian/article/details/50760590" > 详解高速神器python脚步打包android apk，超级快！！（打包系列教程之六）<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5NDkxMTgyNw==&mid=2653057549&idx=1&sn=456fa138f2fd307a3ff94eddc5ff2e73&scene=21#wechat_redirect" >Android Studio 使用Gradle多渠道打包<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="http://blog.csdn.net/qq_23547831/article/details/51569261" >Android产品研发（五）–&gt;多渠道打包<i class="fas fa-external-link-alt"></i></a></p>
 
-      
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/breewf/2016/09/10/adb-command-data/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADB命令学习资料</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/breewf/2016/08/16/android-splash/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">APP闪屏页的正确打开方式</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
     </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/breewf/2016/08/18/more-channel-apk/" data-id="ckrrjpakj000ru01n65p36jk5" data-title="Gradle、Python脚本多渠道自动化打包" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/breewf/tags/Gradle/" rel="tag">Gradle</a></li></ul>
+</div>
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/breewf/2016/09/10/adb-command-data/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">breewf</a>
+        </div>
         
-          ADB命令学习资料
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
         
-      </div>
-    </a>
-  
-  
-    <a href="/breewf/2016/08/16/android-splash/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">APP闪屏页的正确打开方式</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/breewf/categories/%E6%96%87%E7%AB%A0/">文章</a></li></ul>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/Gradle/" rel="tag">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/Retrofit/" rel="tag">Retrofit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/RxJava/" rel="tag">RxJava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/View/" rel="tag">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/%E5%85%B6%E5%AE%83/" rel="tag">其它</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/%E6%80%A7%E8%83%BD-%E4%BC%98%E5%8C%96/" rel="tag">性能&优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/breewf/tags/%E6%96%87%E7%AB%A0/" rel="tag">文章</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/breewf/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/breewf/tags/Retrofit/" style="font-size: 13.33px;">Retrofit</a> <a href="/breewf/tags/RxJava/" style="font-size: 16.67px;">RxJava</a> <a href="/breewf/tags/View/" style="font-size: 10px;">View</a> <a href="/breewf/tags/%E5%85%B6%E5%AE%83/" style="font-size: 10px;">其它</a> <a href="/breewf/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/breewf/tags/%E6%80%A7%E8%83%BD-%E4%BC%98%E5%8C%96/" style="font-size: 13.33px;">性能&优化</a> <a href="/breewf/tags/%E6%80%BB%E7%BB%93/" style="font-size: 20px;">总结</a> <a href="/breewf/tags/%E6%96%87%E7%AB%A0/" style="font-size: 10px;">文章</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/breewf/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/breewf/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/breewf/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/breewf/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/breewf/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/breewf/archives/2016/03/">三月 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/breewf/2021/07/31/ViewBinding/">ViewBinding</a>
-          </li>
-        
-          <li>
-            <a href="/breewf/2021/07/31/%E5%8A%A8%E7%94%BBAnimation/">动画Animation</a>
-          </li>
-        
-          <li>
-            <a href="/breewf/2016/09/11/judge-app-background/">判断App位于前台或后台的6种方法</a>
-          </li>
-        
-          <li>
-            <a href="/breewf/2016/09/10/adb-command-data/">ADB命令学习资料</a>
-          </li>
-        
-          <li>
-            <a href="/breewf/2016/08/18/more-channel-apk/">Gradle、Python脚本多渠道自动化打包</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 haiygao<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
 
+        </div>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/breewf/" class="mobile-nav-link">Home</a>
-  
-    <a href="/breewf/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
 
-<script src="/breewf/js/jquery-3.4.1.min.js"></script>
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么要多渠道打包？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8gradle%E6%89%93%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">使用gradle打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEAndroidManifest-xml"><span class="nav-number">2.1.</span> <span class="nav-text">配置AndroidManifest.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8build-gradle%E8%AE%BE%E7%BD%AEproductFlavors"><span class="nav-number">2.2.</span> <span class="nav-text">在build.gradle设置productFlavors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E6%B8%A0%E9%81%93%E5%8C%85"><span class="nav-number">2.3.</span> <span class="nav-text">一次生成所有渠道包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E7%AD%BE%E5%90%8D%E7%9A%84%E6%B8%A0%E9%81%93%E5%8C%85"><span class="nav-number">2.4.</span> <span class="nav-text">带签名的渠道包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%BC%E5%87%BA%E5%8C%85%E7%9A%84apk%E5%90%8D%E7%A7%B0"><span class="nav-number">2.5.</span> <span class="nav-text">修改导出包的apk名称</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E6%89%93%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">使用python脚本打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%94%B1%E6%9D%A5"><span class="nav-number">3.1.</span> <span class="nav-text">问题由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.2.</span> <span class="nav-text">简单介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">如何使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEPaython%E7%8E%AF%E5%A2%83"><span class="nav-number">3.3.1.</span> <span class="nav-text">配置Paython环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">3.3.2.</span> <span class="nav-text">编写脚本命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A1%AB%E5%86%99%E6%B8%A0%E9%81%93%E5%88%97%E8%A1%A8"><span class="nav-number">3.3.3.</span> <span class="nav-text">填写渠道列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E8%BF%9B%E8%A1%8C%E6%89%93%E5%8C%85"><span class="nav-number">3.3.4.</span> <span class="nav-text">执行脚本进行打包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%B8%A0%E9%81%93%E5%8C%85%E5%90%8D%E7%A7%B0"><span class="nav-number">3.3.5.</span> <span class="nav-text">获取渠道包名称</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
 
 
 
-  
-<script src="/breewf/fancybox/jquery.fancybox.min.js"></script>
+
+<script src="/breewf/js/utils.js"></script>
+
+<script src="/breewf/js/main.js"></script>
+
+<script src="/breewf/js/header-shrink.js"></script>
+
+<script src="/breewf/js/back2top.js"></script>
+
+<script src="/breewf/js/dark-light-toggle.js"></script>
 
 
 
 
-<script src="/breewf/js/script.js"></script>
+
+    
+<script src="/breewf/js/code-copy.js"></script>
 
 
 
 
 
-  </div>
+<div class="post-scripts">
+    
+        
+<script src="/breewf/js/left-side-toggle.js"></script>
+
+<script src="/breewf/js/libs/anime.min.js"></script>
+
+<script src="/breewf/js/toc.js"></script>
+
+    
+</div>
+
+
+
 </body>
 </html>
