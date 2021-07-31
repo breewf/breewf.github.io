@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="白日梦重度患者">
+    <meta name="author" content="breewf">
+    
+    <title>
+        
+        breewf
+    </title>
+    
+<link rel="stylesheet" href="/breewf/css/style.css">
+
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4">
+    
+<link rel="stylesheet" href="/breewf/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"github.com","root":"/breewf/","language":"zh-CN"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","favicon":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                breewf
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/breewf/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/breewf/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/breewf/2016/03/10/first-use-Retrofit-and-RxJava/">
+                        Android使用Retrofit+RxJava网络请求小结
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <blockquote>
+<p>注：由于Retrofit2.0相较之前版本改进较大，以下方法使用Retrofit2.0的方法</p>
+</blockquote>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>定义接口：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface GitHubService &#123;</span><br><span class="line">  @GET(<span class="string">&quot;users/&#123;user&#125;/repos&quot;</span>)</span><br><span class="line">  Call&lt;List&lt;Repo&gt;&gt; listRepos(@Path(<span class="string">&quot;user&quot;</span>) <span class="built_in">String</span> user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用类 Retrofit 生成接口 GitHubService 的实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">    .baseUrl(<span class="string">&quot;https://api.github.com/&quot;</span>)</span><br><span class="line">    .build();</span><br><span class="line">GitHubService service = retrofit.create(GitHubService.class);</span><br></pre></td></tr></table></figure>
+<p>之后就可以直接调用生成的GitHubServcie实例去发送请求：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">&quot;octocat&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>注意：baseUrl和注解中url连接的”/“最好写在baseUrl的后面，而不是注解中url的前面，否则可能会出现不可预知的错误。</strong></p>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Mar 10 2016 17:19:48 GMT+0800">2016-03-10</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/tags/RxJava/">RxJava</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/breewf/tags/Retrofit/">Retrofit</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/breewf/2016/03/10/first-use-Retrofit-and-RxJava/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/breewf/2016/03/04/code-snippets/">
+                        Android开发常用代码片段
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <h4 id="拨打电话"><a href="#拨打电话" class="headerlink" title="拨打电话"></a>拨打电话</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> <span class="function"><span class="title">call</span>(<span class="params">Context context, <span class="built_in">String</span> phoneNumber</span>)</span> &#123;</span><br><span class="line">        context.startActivity(<span class="keyword">new</span> Intent(Intent.ACTION_CALL, Uri.parse(<span class="string">&quot;tel:&quot;</span> + phoneNumber)));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="跳转至拨号界面"><a href="#跳转至拨号界面" class="headerlink" title="跳转至拨号界面"></a>跳转至拨号界面</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> <span class="function"><span class="title">callDial</span>(<span class="params">Context context, <span class="built_in">String</span> phoneNumber</span>)</span> &#123;</span><br><span class="line">        context.startActivity(<span class="keyword">new</span> Intent(Intent.ACTION_DIAL, Uri.parse(<span class="string">&quot;tel:&quot;</span> + phoneNumber)));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="发送短信"><a href="#发送短信" class="headerlink" title="发送短信"></a>发送短信</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> <span class="function"><span class="title">sendSms</span>(<span class="params">Context context, <span class="built_in">String</span> phoneNumber, <span class="built_in">String</span> content</span>)</span> &#123;</span><br><span class="line">	Uri uri = Uri.parse(<span class="string">&quot;smsto:&quot;</span> + (TextUtils.isEmpty(phoneNumber) ? <span class="string">&quot;&quot;</span> : phoneNumber));</span><br><span class="line">	Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SENDTO, uri);</span><br><span class="line">	intent.putExtra(<span class="string">&quot;sms_body&quot;</span>, TextUtils.isEmpty(content) ? <span class="string">&quot;&quot;</span> : content);</span><br><span class="line">	context.startActivity(intent);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断当前App处于前台还是后台状态"><a href="#判断当前App处于前台还是后台状态" class="headerlink" title="判断当前App处于前台还是后台状态"></a>判断当前App处于前台还是后台状态</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> boolean <span class="function"><span class="title">isApplicationBackground</span>(<span class="params">final Context context</span>)</span> &#123;</span><br><span class="line">        ActivityManager am = (ActivityManager) context</span><br><span class="line">                .getSystemService(Context.ACTIVITY_SERVICE);</span><br><span class="line">        @SuppressWarnings(<span class="string">&quot;deprecation&quot;</span>)</span><br><span class="line">        List&lt;ActivityManager.RunningTaskInfo&gt; tasks = am.getRunningTasks(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (!tasks.isEmpty()) &#123;</span><br><span class="line">            ComponentName topActivity = tasks.get(<span class="number">0</span>).topActivity;</span><br><span class="line">            <span class="keyword">if</span> (!topActivity.getPackageName().equals(context.getPackageName())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Mar 04 2016 12:58:46 GMT+0800">2016-03-04</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/tags/%E6%80%BB%E7%BB%93/">总结</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/breewf/2016/03/04/code-snippets/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/breewf/2016/03/04/RxJava-Retrofit/">
+                        RxJava、Retrofit学习资料
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        RxJava、Retrofit学习资料总结：
+给Android开发者的RxJava详解
+学习Retrofit和RxJava小记
+Retrofit笔记
+RxJava专题_泡在网上的日子
+RxJava_大头鬼Bruce
+Retrofit2.0：有史以来最...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Mar 04 2016 09:28:04 GMT+0800">2016-03-04</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/tags/RxJava/">RxJava</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/breewf/tags/Retrofit/">Retrofit</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/breewf/2016/03/04/RxJava-Retrofit/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/breewf/2016/03/03/my-first-blog/">
+                        测试Blog
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        这是一篇测试Blog
+这是一篇成功建立个人博客站点并能正常访问的测试Blog
+使用工具：Github PagesHexo博客主题NexT
+参考文章：
+如何在一天之内搭建以你自己名字为域名且具备cool属性的个人博客
+
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Mar 03 2016 11:17:30 GMT+0800">2016-03-03</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/categories/%E6%96%87%E7%AB%A0/">文章</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/breewf/tags/%E6%96%87%E7%AB%A0/">文章</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/breewf/2016/03/03/my-first-blog/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
+    
+        <a class="prev btn"
+           href="/breewf/"
+        >上一页</a>
+    
+
+    
+</div>
+
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">breewf</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+
+<script src="/breewf/js/utils.js"></script>
+
+<script src="/breewf/js/main.js"></script>
+
+<script src="/breewf/js/header-shrink.js"></script>
+
+<script src="/breewf/js/back2top.js"></script>
+
+<script src="/breewf/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/breewf/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

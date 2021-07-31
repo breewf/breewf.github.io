@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="白日梦重度患者">
+    <meta name="author" content="breewf">
+    
+    <title>
+        
+            判断App位于前台或后台的6种方法 |
+        
+        breewf
+    </title>
+    
+<link rel="stylesheet" href="/breewf/css/style.css">
+
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4">
+    
+<link rel="stylesheet" href="/breewf/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"github.com","root":"/breewf/","language":"zh-CN"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","favicon":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                breewf
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">判断App位于前台或后台的6种方法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">breewf</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2016-09-11 20:04:14
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/breewf/tags/%E6%80%BB%E7%BB%93/">总结</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>原文链接：<a href="https://github.com/wenmingvs/AndroidProcess">AndroidProcess</a></p>
+<h1 id="AndroidProcess"><a href="#AndroidProcess" class="headerlink" title="AndroidProcess"></a>AndroidProcess</h1><p>提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用</p>
+<p>最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，<a href="https://github.com/jaredrummler/AndroidProcesses">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择   </p>
+<p><strong>2016.2.11更新——感谢<a class="link"   target="_blank" rel="noopener" href="http://weibo.com/hatewx?refer_flag=1005050005_" >@EffectiveMatrix<i class="fas fa-external-link-alt"></i></a>大神带来的新的判断前后台的方法</strong>  </p>
+<h2 id="预览图"><a href="#预览图" class="headerlink" title="预览图"></a>预览图</h2><p><img src="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif" alt="enter image description here"></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>传入Context参数与想要判断是否位于前台的App的包名,会返回ture或者false表示App是否位于前台</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//六种方法任选其一</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用方法一</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getRunningTask(context, packageName);</span><br><span class="line"><span class="comment">//使用方法二</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getRunningAppProcesses(context, packageName);</span><br><span class="line"><span class="comment">//使用方法三</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getApplicationValue(context);</span><br><span class="line"><span class="comment">//使用方法四</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.queryUsageStats(context, packageName);</span><br><span class="line"><span class="comment">//使用方法五</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getFromAccessibilityService(context, packageName);</span><br><span class="line"><span class="comment">//使用方法六</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getLinuxCoreInfo(context, packageName);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="六种方法的区别"><a href="#六种方法的区别" class="headerlink" title="六种方法的区别"></a>六种方法的区别</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>判断原理</th>
+<th>需要权限</th>
+<th>可以判断其他应用位于前台</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法一</td>
+<td>RunningTask</td>
+<td>否</td>
+<td>Android4.0系列可以,5.0以上机器不行</td>
+<td>5.0此方法被废弃</td>
+</tr>
+<tr>
+<td>方法二</td>
+<td>RunningProcess</td>
+<td>否</td>
+<td>当App存在后台常驻的Service时失效</td>
+<td>无</td>
+</tr>
+<tr>
+<td>方法三</td>
+<td>ActivityLifecycleCallbacks</td>
+<td>否</td>
+<td>否</td>
+<td>简单有效,代码最少</td>
+</tr>
+<tr>
+<td>方法四</td>
+<td>UsageStatsManager</td>
+<td>是</td>
+<td>是</td>
+<td>需要用户手动授权</td>
+</tr>
+<tr>
+<td>方法五</td>
+<td>通过Android无障碍功能实现</td>
+<td>否</td>
+<td>是</td>
+<td>需要用户手动授权</td>
+</tr>
+<tr>
+<td>方法六</td>
+<td>读取/proc目录下的信息</td>
+<td>否</td>
+<td>是</td>
+<td>当proc目录下文件夹过多时,过多的IO操作会引起耗时</td>
+</tr>
+</tbody></table>
+<h2 id="方法一：通过RunningTask"><a href="#方法一：通过RunningTask" class="headerlink" title="方法一：通过RunningTask"></a>方法一：通过RunningTask</h2><p><img src="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>当一个App处于前台的时候，会处于RunningTask的这个栈的栈顶，所以我们可以取出RunningTask的栈顶的任务进程，看他与我们的想要判断的App的包名是否相同，来达到效果</p>
+<p><strong>缺点</strong><br>getRunningTask方法在Android5.0以上已经被废弃，只会返回自己和系统的一些不敏感的task，不再返回其他应用的task，用此方法来判断自身App是否处于后台，仍然是有效的，但是无法判断其他应用是否位于前台，因为不再能获取信息</p>
+<h2 id="方法二：通过RunningProcess"><a href="#方法二：通过RunningProcess" class="headerlink" title="方法二：通过RunningProcess"></a>方法二：通过RunningProcess</h2><p><img src="http://ww1.sinaimg.cn/mw690/691cc151gw1f09z4vmmcgg20bc0h07wh.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>通过runningProcess获取到一个当前正在运行的进程的List，我们遍历这个List中的每一个进程，判断这个进程的一个importance 属性是否是前台进程，并且包名是否与我们判断的APP的包名一样，如果这两个条件都符合，那么这个App就处于前台</p>
+<p><strong>缺点</strong>：<br>在聊天类型的App中，常常需要常驻后台来不间断的获取服务器的消息，这就需要我们把Service设置成START_STICKY，kill 后会被重启（等待5秒左右）来保证Service常驻后台。如果Service设置了这个属性，这个App的进程就会被判断是前台，代码上的表现就是appProcess.importance的值永远是 ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND，这样就永远无法判断出到底哪个是前台了。</p>
+<h2 id="方法三：通过ActivityLifecycleCallbacks"><a href="#方法三：通过ActivityLifecycleCallbacks" class="headerlink" title="方法三：通过ActivityLifecycleCallbacks"></a>方法三：通过ActivityLifecycleCallbacks</h2><p><img src="http://ww2.sinaimg.cn/mw690/691cc151gw1f09z59b1pzg20bc0h04qp.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>AndroidSDK14在Application类里增加了ActivityLifecycleCallbacks，我们可以通过这个Callback拿到App所有Activity的生命周期回调。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ActivityLifecycleCallbacks</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityCreated</span><span class="params">(Activity activity, Bundle savedInstanceState)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityStarted</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityResumed</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityPaused</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityStopped</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivitySaveInstanceState</span><span class="params">(Activity activity, Bundle outState)</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">onActivityDestroyed</span><span class="params">(Activity activity)</span></span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>知道这些信息，我们就可以用更官方的办法来解决问题，当然还是利用方案二里的Activity生命周期的特性，我们只需要在Application的onCreate()里去注册上述接口，然后由Activity回调回来运行状态即可。</p>
+<p>可能还有人在纠结，我用back键切到后台和用Home键切到后台，一样吗？以上方法适用吗？在Android应用开发中一般认为back键是可以捕获的，而Home键是不能捕获的（除非修改framework）,但是上述方法从Activity生命周期着手解决问题，虽然这两种方式的Activity生命周期并不相同，但是二者都会执行onStop（）；所以并不关心到底是触发了哪个键切入后台的。另外,Application是否被销毁,都不会影响判断的正确性</p>
+<h2 id="方法四：通过使用UsageStatsManager获取"><a href="#方法四：通过使用UsageStatsManager获取" class="headerlink" title="方法四：通过使用UsageStatsManager获取"></a>方法四：通过使用UsageStatsManager获取</h2><p><img src="http://ww1.sinaimg.cn/mw690/691cc151gw1f09z5v4g7mg20bc0h0npd.gif" alt="enter image description here"></p>
+<p><strong>原理</strong><br>通过使用UsageStatsManager获取，此方法是Android5.0之后提供的新API，可以获取一个时间段内的应用统计信息，但是必须满足一下要求</p>
+<p><strong>使用前提</strong>  </p>
+<ol>
+<li>此方法只在android5.0以上有效 </li>
+<li>AndroidManifest中加入此权限 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission  android:name=<span class="string">&quot;android.permission.PACKAGE_USAGE_STATS&quot;</span> /&gt;</span><br></pre></td></tr></table></figure></li>
+<li>打开手机设置，点击安全-高级，在有权查看使用情况的应用中，为这个App打上勾</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/wenmingvs/AndroidProcess/master/sample/3.PNG" alt="enter image description here"></p>
+<h2 id="方法五：通过Android自带的无障碍功能"><a href="#方法五：通过Android自带的无障碍功能" class="headerlink" title="方法五：通过Android自带的无障碍功能"></a>方法五：通过Android自带的无障碍功能</h2><p>非常感谢<a class="link"   target="_blank" rel="noopener" href="http://weibo.com/hatewx?refer_flag=1005050005_" >@EffectiveMatrix<i class="fas fa-external-link-alt"></i></a>大神带来的新的判断前后台的方法  </p>
+<p>此方法属于他原创，具体的博文参照这里<a class="link"   target="_blank" rel="noopener" href="http://effmx.com/articles/tong-guo-android-fu-zhu-gong-neng-accessibility-service-jian-ce-ren-yi-qian-tai-jie-mian/" >http://effmx.com/articles/tong-guo-android-fu-zhu-gong-neng-accessibility-service-jian-ce-ren-yi-qian-tai-jie-mian/<i class="fas fa-external-link-alt"></i></a>  </p>
+<p>此方法无法直观的通过下拉通知视图来进行前后台的观察，请到LogCat中进行观察即可，以下是LogCat中打印的信息</p>
+<p><img src="http://ww3.sinaimg.cn/large/691cc151gw1f0uiy60md3j20fs07omzj.jpg" alt="enter image description here">  </p>
+<p><strong>原理</strong><br>Android 辅助功能(AccessibilityService) 为我们提供了一系列的事件回调，帮助我们指示一些用户界面的状态变化。 我们可以派生辅助功能类，进而对不同的 AccessibilityEvent 进行处理。 同样的，这个服务就可以用来判断当前的前台应用</p>
+<p><strong>优势</strong>  </p>
+<ol>
+<li>AccessibilityService 有非常广泛的 ROM 覆盖，特别是非国产手机，从 Android API Level 8(Android 2.2) 到 Android Api Level 23(Android 6.0)  </li>
+<li> AccessibilityService 不再需要轮询的判断当前的应用是不是在前台，系统会在窗口状态发生变化的时候主动回调，耗时和资源消耗都极小  </li>
+<li>不需要权限请求  </li>
+<li>它是一个稳定的方法，与 “方法6”读取 /proc 目录不同，它并非利用 Android 一些设计上的漏洞，可以长期使用的可能很大  </li>
+<li>可以用来判断任意应用甚至 Activity, PopupWindow, Dialog 对象是否处于前台  </li>
+</ol>
+<p><strong>劣势</strong>  </p>
+<ol>
+<li>需要要用户开启辅助功能  </li>
+<li>辅助功能会伴随应用被“强行停止”而剥夺  </li>
+</ol>
+<h2 id="方法六：读取Linux系统内核保存在-proc目录下的process进程信息"><a href="#方法六：读取Linux系统内核保存在-proc目录下的process进程信息" class="headerlink" title="方法六：读取Linux系统内核保存在/proc目录下的process进程信息"></a>方法六：读取Linux系统内核保存在/proc目录下的process进程信息</h2><p><img src="http://ww3.sinaimg.cn/mw690/691cc151gw1f09z6bjz9rg20bc0h0b29.gif" alt="enter image description here"></p>
+<p>此方法并非我原创，原作者是国外的大神，<a href="https://github.com/jaredrummler/AndroidProcesses">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择</p>
+<p><strong>原理</strong><br>无意中看到乌云上有人提的一个漏洞，Linux系统内核会把process进程信息保存在/proc目录下，Shell命令去获取的他，再根据进程的属性判断是否为前台</p>
+<p><strong>优点</strong>  </p>
+<ol>
+<li>不需要任何权限  </li>
+<li>可以判断任意一个应用是否在前台，而不局限在自身应用</li>
+</ol>
+<p><strong>缺点</strong>  </p>
+<ol>
+<li>当/proc下文件夹过多时,此方法是耗时操作</li>
+</ol>
+<p><strong>用法</strong><br>获取一系列正在运行的App的进程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;AndroidAppProcess&gt; processes = ProcessManager.getRunningAppProcesses();</span><br></pre></td></tr></table></figure>
+
+<p>获取任一正在运行的App进程的详细信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">AndroidAppProcess process = processes.get(location);</span><br><span class="line">String processName = process.name;</span><br><span class="line"></span><br><span class="line">Stat stat = process.stat();</span><br><span class="line"><span class="keyword">int</span> pid = stat.getPid();</span><br><span class="line"><span class="keyword">int</span> parentProcessId = stat.ppid();</span><br><span class="line"><span class="keyword">long</span> startTime = stat.stime();</span><br><span class="line"><span class="keyword">int</span> policy = stat.policy();</span><br><span class="line"><span class="keyword">char</span> state = stat.state();</span><br><span class="line"></span><br><span class="line">Statm statm = process.statm();</span><br><span class="line"><span class="keyword">long</span> totalSizeOfProcess = statm.getSize();</span><br><span class="line"><span class="keyword">long</span> residentSetSize = statm.getResidentSetSize();</span><br><span class="line"></span><br><span class="line">PackageInfo packageInfo = process.getPackageInfo(context, <span class="number">0</span>);</span><br><span class="line">String appName = packageInfo.applicationInfo.loadLabel(pm).toString();</span><br></pre></td></tr></table></figure>
+
+<p>判断是否在前台</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ProcessManager.isMyProcessInTheForeground()) &#123;</span><br><span class="line">  <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取一系列正在运行的App进程的详细信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ActivityManager.RunningAppProcessInfo&gt; processes = ProcessManager.getRunningAppProcessInfo(ctx);</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/breewf/2021/07/31/%E5%8A%A8%E7%94%BBAnimation/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">动画Animation</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/breewf/2016/09/10/adb-command-data/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADB命令学习资料</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">breewf</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AndroidProcess"><span class="nav-number">1.</span> <span class="nav-text">AndroidProcess</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E8%A7%88%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">预览图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E7%A7%8D%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.</span> <span class="nav-text">六种方法的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E9%80%9A%E8%BF%87RunningTask"><span class="nav-number">1.4.</span> <span class="nav-text">方法一：通过RunningTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E9%80%9A%E8%BF%87RunningProcess"><span class="nav-number">1.5.</span> <span class="nav-text">方法二：通过RunningProcess</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9A%E9%80%9A%E8%BF%87ActivityLifecycleCallbacks"><span class="nav-number">1.6.</span> <span class="nav-text">方法三：通过ActivityLifecycleCallbacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%9B%9B%EF%BC%9A%E9%80%9A%E8%BF%87%E4%BD%BF%E7%94%A8UsageStatsManager%E8%8E%B7%E5%8F%96"><span class="nav-number">1.7.</span> <span class="nav-text">方法四：通过使用UsageStatsManager获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%94%EF%BC%9A%E9%80%9A%E8%BF%87Android%E8%87%AA%E5%B8%A6%E7%9A%84%E6%97%A0%E9%9A%9C%E7%A2%8D%E5%8A%9F%E8%83%BD"><span class="nav-number">1.8.</span> <span class="nav-text">方法五：通过Android自带的无障碍功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%85%AD%EF%BC%9A%E8%AF%BB%E5%8F%96Linux%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8%E4%BF%9D%E5%AD%98%E5%9C%A8-proc%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84process%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">1.9.</span> <span class="nav-text">方法六：读取Linux系统内核保存在&#x2F;proc目录下的process进程信息</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/breewf/js/utils.js"></script>
+
+<script src="/breewf/js/main.js"></script>
+
+<script src="/breewf/js/header-shrink.js"></script>
+
+<script src="/breewf/js/back2top.js"></script>
+
+<script src="/breewf/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/breewf/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/breewf/js/left-side-toggle.js"></script>
+
+<script src="/breewf/js/libs/anime.min.js"></script>
+
+<script src="/breewf/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
