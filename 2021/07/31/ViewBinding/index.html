@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="白日梦重度患者">
+    <meta name="author" content="breewf">
+    
+    <title>
+        
+            ViewBinding |
+        
+        breewf
+    </title>
+    
+<link rel="stylesheet" href="/breewf/css/style.css">
+
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4">
+    
+<link rel="stylesheet" href="/breewf/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"github.com","root":"/breewf/","language":"zh-CN"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","favicon":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                breewf
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/breewf/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/breewf/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">ViewBinding</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">breewf</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-07-31 17:20:00
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/breewf/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Android绑定View的发展史"><a href="#Android绑定View的发展史" class="headerlink" title="Android绑定View的发展史"></a>Android绑定View的发展史</h2><p>从Android系统诞生至今，在代码中findView一直是Android开发者无法绕开的一道程序。从最初的findViewbyId到如今炙手可热的ViewBinding，期间涌现出了许多findView的方式，它们让findView变得更加简单，也让我们的代码变得更加简洁。但随着Android新技术的发展，这些findView的方法也正在被一个一个的抛弃。本节内容我们就来回顾一下Android开发中findView的发展史。</p>
+<h3 id="findViewById"><a href="#findViewById" class="headerlink" title="findViewById"></a>findViewById</h3><p>findViewById是Android开发中最原始，也是最基础的一种获取View的方法。它由Google官方提供，在Android开发生态的早期也是唯一一种能够获取View的方式。虽然它使用简单且根正苗红，贯穿古今，但由于高度重复的代码结构深受开发者诟病。在一个复杂布局的页面仅仅是findViewById的代码就很多。开发者无时无刻不想着弃用这一方案，因此后续衍生出了多种获取View的方式来简化代码。但万变不离其宗，归根结底，这些方式最终都还是通过findViewById来实现的。</p>
+<h3 id="ButterKnife"><a href="#ButterKnife" class="headerlink" title="ButterKnife"></a>ButterKnife</h3><p>就在大家都在唾弃findViewById的大量重复代码时，一个插件横空出世。它通过一个BindView注解，传入一个Resource Id就能轻松获取到Id对应的View。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">  @BindView(R.id.text_view) TextView mTextView;</span><br><span class="line"> </span><br><span class="line">     @Override</span><br><span class="line">     protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">         super.onCreate(savedInstanceState);</span><br><span class="line">         setContentView(R.layout.activity_main);</span><br><span class="line">         ButterKnife.bind(this);</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>它就是红极一时，时至今日大家依然还在用着的ButterKnife。ButterKnife通过Java编译时注解处理器，在编译时自动生成findViewById的代码。例如，上边的例子通过ButterKnife会生成一个MainActivity_ViewBinding 类，在这个类中通过findViewById为mTextView赋值，其代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity_ViewBinding implements Unbinder &#123;</span><br><span class="line">  private MainActivity target;</span><br><span class="line"></span><br><span class="line">  @UiThread</span><br><span class="line">  public MainActivity_ViewBinding(MainActivity target) &#123;</span><br><span class="line">    this(target, target.getWindow().getDecorView());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @UiThread</span><br><span class="line">  public MainActivity_ViewBinding(MainActivity target, View source) &#123;</span><br><span class="line">    this.target = target;</span><br><span class="line"></span><br><span class="line">    target.mTextView = Utils.findRequiredViewAsType(source, R.id.text_view, &quot;field &#x27;mTextView&#x27;&quot;, TextView.class);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  @CallSuper</span><br><span class="line">  public void unbind() &#123;</span><br><span class="line">    MainActivity target = this.target;</span><br><span class="line">    if (target == null) throw new IllegalStateException(&quot;Bindings already cleared.&quot;);</span><br><span class="line">    this.target = null;</span><br><span class="line"></span><br><span class="line">    target.mTextView = null;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这一操作省去了开发者手动编写findViewById的时间，大大简化了代码，同时提高了开发效率。在开发者看来ButterKnife不得不说是一个神器，以至于到后来成了Android项目开发的标配。</p>
+<p>但是Android Studio更新到了4.1版本后，发现项目中使用ButterKnife注解id的代码出现了警告，警告信息如下：</p>
+<blockquote>
+<p>Resource IDs will be non-final in Android Gradle Plugin version 5.0, avoid using them as annotation attributes</p>
+</blockquote>
+<p>从警告信息中可以看到在<strong>Gradle 5.0的插件中Resource的Id值将不会再是final类型</strong>，<strong>因此应该避免在注解属性中使用Id</strong>。这意味着当我们把Gradle插件升级到5.0版本之后ButterKnife将无法再被使用！同时，我们在ButterKnife的官方文档上也看到了ButterKnife被标注弃用的信息：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0736b1397ab947ff9a6ed20ce2226f47~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>陪伴我们多年，曾经辉煌一时，不可一世的ButterKnife也要寿终正寝，即将迎来它生命的终点。</p>
+<h3 id="DataBinding"><a href="#DataBinding" class="headerlink" title="DataBinding"></a>DataBinding</h3><p>DataBinding是Google官方在2015年谷歌I/O大会上发布的一个数据绑定框架，它并非专为findView而生，而是作为MVVM架构的双向绑定数据的工具。findView的功能仅仅是DataBinding的一个附赠品。</p>
+<p>开发者一般会在MVVM架构的项目中使用DataBinding来获取View。但是它也有很多诟病，比如需要修改xml的结构，在xml外部嵌套一个标签。并且很多情况下需要手动build才能生成DataBinding相关类。诸如此类问题，自然不会得到开发者的青睐。</p>
+<p>关于DataBinding的详细使用在这里不做探讨。</p>
+<h3 id="Kotlin-Android-Extensions"><a href="#Kotlin-Android-Extensions" class="headerlink" title="Kotlin Android Extensions"></a>Kotlin Android Extensions</h3><p>2017年Google I/O开发者大会中，Google宣布Kotlin成为Android开发的一级语言，自此，Kotlin “转正”与Java并驾齐驱。而JetBrain推出的Kotlin Android Extension(以下简称KAE)插件成为了有史以来最简单的获取View的方法，简单到无需任何代码，直接通过id作为View使用。这一功能足以让所有Android开发者抓狂，纷纷感叹这才是findView的未来啊，终于可以和裹挟开发者十多年的findViewById说拜拜了！ 作为一个Android开发者，不知道你是否会好奇Kotlin是如何将Id作为View的？我们不妨写一个简单的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class MainActivity : AppCompatActivity() &#123;</span><br><span class="line">    override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        textView.text = &quot;Test&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>布局文件中TextView的id设置为“textView”，则在Activity中可以直接将textView作为一个TextView来使用。我们通过Android Studio的工具将kotlin的字节码反编译成Java代码看下。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/adfef7fa3aef45d7960649a7da1a3c78~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>通过上述操作，打开kotlin的字节码后，再通过Decompile反编译成Java代码，则会得到如下图所示的结果：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/89242a36d09045f38af57b5dcb0e6165~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>通过反编译得到的Java代码我们发现Kotlin的这一操作其实也是通过findViewById实现的。只是通过插件的方式让我们感觉上是用了View的Id。</p>
+<p>通过Kotlin的扩展插件来find view,无疑是一种优秀的方案。但这一方案并不是无懈可击。它存在以下几个缺点：</p>
+<ul>
+<li>类型安全：res下的任何id都可以被访问，有可能因访问了非当前Layout下的id而出错</li>
+<li>空安全：这主要体现在配置中的对应布局不全时，运行时可能出现NPE</li>
+<li>兼容性：只能在kotlin中使用，java不友好</li>
+<li>局限性：不能跨module使用</li>
+</ul>
+<p>也正是这几个缺点导致了KAE的大溃败。随着Google对亲儿子ViewBinding的大力推广，KAE最终也招架不住，只能缴械投降—Jetbrains在官网宣布废弃KAE，并推荐开发者使用ViewBinding。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/48eb63b0434a41b5a8d4bd7b54154651~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="ViewBinding"><a href="#ViewBinding" class="headerlink" title="ViewBinding"></a>ViewBinding</h3><p>ViewBinding是Google在2019年I/O大会上公布的一款Android视图绑定工具。它的使用方式有点类似DataBinding，但相比DataBinding，ViewBinding是一个更轻量级、更纯粹的findViewById的替代方案。它具有以下几个优点：</p>
+<ul>
+<li>类型安全: ViewBinding会基于布局中的View生成类型正确的属性。比如，在布局中放入了一个 TextView ，视图绑定就会暴露出一个 TextView 类型的属性供开发者使用。</li>
+<li>空安全：ViewBinding会检测某个视图是不是只在一些配置下存在，并依据结果生成带有 @Nullable 注解的属性。所以即使在多种配置下定义的布局文件，视图绑定依然能够保证空安全。</li>
+<li>ViewBinding生成的绑定类是一个Java类，并且添加了Kotlin的注解，可以很好的支持 Java 和 Kotlin 两种编程语言。</li>
+</ul>
+<p>同时，Google官方还给出了一个ViewBinding、ButterKnife以及KAE的对比，如下图：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/08acb2b737c6451f9742fb9fa46858e0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="ViewBinding使用详解"><a href="#ViewBinding使用详解" class="headerlink" title="ViewBinding使用详解"></a>ViewBinding使用详解</h2><h3 id="开启ViewBinding"><a href="#开启ViewBinding" class="headerlink" title="开启ViewBinding"></a>开启ViewBinding</h3><p>Android Studio对于ViewBinding的支持是从3.6版本开始的，AS 3.6版本内置了Gradle插件。只需要在build.gradle中通过以下配置即可开启ViewBinding：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 需要 Android Gradle Plugin 3.6.0</span><br><span class="line">android &#123;</span><br><span class="line">    viewBinding &#123;</span><br><span class="line">        enabled = true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Android Studio 4.0 中，viewBinding 变成属性被整合到了 buildFeatures 选项中，所以配置要改成:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Android Studio 4.0</span><br><span class="line">android &#123;</span><br><span class="line">    buildFeatures &#123;</span><br><span class="line">        viewBinding = true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果，你的项目存在多个模块，则需要在每个模块的gradle中添加上述配置。完成以上配置后ViewBinding会为所有布局文件自动生成对应的绑定类。且无须修改原有布局的 XML 文件，ViewBinding会根据现有的布局自动完成所有工作。</p>
+<h3 id="在Activity中使用ViewBinding"><a href="#在Activity中使用ViewBinding" class="headerlink" title="在Activity中使用ViewBinding"></a>在Activity中使用ViewBinding</h3><p>首先编写activity_main.xml的布局文件，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/text_view&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;Hello World!&quot;</span><br><span class="line">        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintRight_toRightOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p>完成后gradle插件会自动生成一个名为ActivityMainBinding的Java类，在Activity中通过ActivityMainBinding获取Binding实例，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState)</span><br><span class="line">        val binding = ActivityMainBinding.inflate(layoutInflater)</span><br><span class="line">        setContentView(binding.root)</span><br><span class="line">        binding.textView.text = &quot;Hello World&quot;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ViewBinding与include标签"><a href="#ViewBinding与include标签" class="headerlink" title="ViewBinding与include标签"></a>ViewBinding与include标签</h3><p>在项目开发中，通常我们会使用include标签来简化布局文件，那么在使用了include标签的布局文件中，应该如何使用ViewBinding呢？且看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// activity_main.xml</span><br><span class="line">&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;include</span><br><span class="line">        android:id=&quot;@+id/include&quot;</span><br><span class="line">        layout=&quot;@layout/layout_include&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// layout_include.xml</span><br><span class="line">&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/tv_text&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;Hello World!&quot;</span><br><span class="line">        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintRight_toRightOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上述两个布局文件会分别生成ActivityMainBinding与LayoutIncludeBinding两个Java类，并且ActivityMainBinding类中通过组合依赖了LayoutIncludeBinding类。因此，使用方式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState)</span><br><span class="line">        val binding = ActivityMainBinding.inflate(layoutInflater)</span><br><span class="line">        setContentView(binding.root)</span><br><span class="line">        // 从ActivityMainBinding中获取LayoutIncludeBinding</span><br><span class="line">        val include = binding.include</span><br><span class="line">        // 通过LayoutIncludeBinding为TextView赋值</span><br><span class="line">        include.tvText.text = &quot;Hello World&quot;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果layout_include.xml文件位于子模块，经实践与以上代码的使用方式并无任何差异，但一定要在子模块中开启ViewBinding才行。</p>
+<h3 id="ViewBinding在Fragment中的使用"><a href="#ViewBinding在Fragment中的使用" class="headerlink" title="ViewBinding在Fragment中的使用"></a>ViewBinding在Fragment中的使用</h3><p>在Fragment中使用ViewBinding与Activity中有些差异，这里为了简便，我们使用上述中的activity_main.xml作为Fragment的布局文件，则Fragment的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private lateinit var binding: ActivityMainBinding</span><br><span class="line">    override fun onCreateView(</span><br><span class="line">        inflater: LayoutInflater,</span><br><span class="line">        container: ViewGroup?,</span><br><span class="line">        savedInstanceState: Bundle?</span><br><span class="line">    ): View? &#123;</span><br><span class="line">        binding = ActivityMainBinding.inflate(inflater, container, false)</span><br><span class="line">        return binding.root</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onViewCreated(view: View, savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onViewCreated(view, savedInstanceState)</span><br><span class="line">        binding.textView.text=&quot;Hello World&quot;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ViewBinding在RecyclerView-Adapter中的使用"><a href="#ViewBinding在RecyclerView-Adapter中的使用" class="headerlink" title="ViewBinding在RecyclerView#Adapter中的使用"></a>ViewBinding在RecyclerView#Adapter中的使用</h3><p>布局文件不再贴出，直接看Adapter的代码，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class TestAdapter : RecyclerView.Adapter&lt;TestViewHolder&gt;() &#123;</span><br><span class="line">    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder &#123;</span><br><span class="line">        val binding =</span><br><span class="line">            ItemTestBinding.inflate(LayoutInflater.from(parent.context))</span><br><span class="line">        return TestViewHolder(binding)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onBindViewHolder(holder: TestViewHolder, position: Int) &#123;</span><br><span class="line">        holder.binding.textView.text = &quot;Hello World&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun getItemCount(): Int &#123;</span><br><span class="line">        return 10</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class TestViewHolder(var binding: ItemTestBinding) :</span><br><span class="line">        RecyclerView.ViewHolder(binding.root)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过以上几个实例可以看到ViewBinding的使用是非常简单的。而ViewBinding的实现原理也并不难，Gradle插件会根据布局文件在项目的build目录下生成相应的ViewBinding类，并且，最终也是通过findViewById来完成View的获取的。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6900229136199974926" >ButterKnife被弃用，ViewBinding才是findView的未来？<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6844904088128192525" >使用视图绑定替代 findViewById<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/breewf/2021/07/31/%E5%8A%A8%E7%94%BBAnimation/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">动画Animation</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">breewf</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android%E7%BB%91%E5%AE%9AView%E7%9A%84%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">Android绑定View的发展史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#findViewById"><span class="nav-number">1.1.</span> <span class="nav-text">findViewById</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ButterKnife"><span class="nav-number">1.2.</span> <span class="nav-text">ButterKnife</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataBinding"><span class="nav-number">1.3.</span> <span class="nav-text">DataBinding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin-Android-Extensions"><span class="nav-number">1.4.</span> <span class="nav-text">Kotlin Android Extensions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewBinding"><span class="nav-number">1.5.</span> <span class="nav-text">ViewBinding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewBinding%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">ViewBinding使用详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AFViewBinding"><span class="nav-number">2.1.</span> <span class="nav-text">开启ViewBinding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Activity%E4%B8%AD%E4%BD%BF%E7%94%A8ViewBinding"><span class="nav-number">2.2.</span> <span class="nav-text">在Activity中使用ViewBinding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewBinding%E4%B8%8Einclude%E6%A0%87%E7%AD%BE"><span class="nav-number">2.3.</span> <span class="nav-text">ViewBinding与include标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewBinding%E5%9C%A8Fragment%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">ViewBinding在Fragment中的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewBinding%E5%9C%A8RecyclerView-Adapter%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text">ViewBinding在RecyclerView#Adapter中的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/breewf/js/utils.js"></script>
+
+<script src="/breewf/js/main.js"></script>
+
+<script src="/breewf/js/header-shrink.js"></script>
+
+<script src="/breewf/js/back2top.js"></script>
+
+<script src="/breewf/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/breewf/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/breewf/js/left-side-toggle.js"></script>
+
+<script src="/breewf/js/libs/anime.min.js"></script>
+
+<script src="/breewf/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
