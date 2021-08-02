@@ -159,61 +159,6 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2016/03/28/view-measure/">
-                        Android获取View宽高的几种方式
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        <p>通常，在我们想要获取一个view的宽高时，我们都会想到在oncreate()中使用view.getWidth()和view.getHeight()方法来获取。这看起来并没有什么问题，但它们的值却都为0，并不是我们想要的结果。为什么会这样呢？这是因为在oncreate()时view的绘制工作还未完成，也就获取不到我们想要view的宽高了。</p>
-<p>我们可以使用下面几种方式来获取view的宽高：</p>
-<h4 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h4><p>重写Activity中的onWindowFocusChanged()方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public <span class="keyword">void</span> <span class="function"><span class="title">onWindowFocusChanged</span>(<span class="params">boolean hasFocus</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onWindowFocusChanged(hasFocus);</span><br><span class="line">        Log.i(<span class="string">&quot;textView&quot;</span>, <span class="string">&quot;width--&gt;&gt;&quot;</span> + textView.getWidth() + <span class="string">&quot;--height--&gt;&gt;&quot;</span> + textView.getHeight());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Mar 28 2016 15:00:04 GMT+0800">2016-03-28</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/View/">View</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2016/03/28/view-measure/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2016/03/10/first-use-Retrofit-and-RxJava/">
                         Android使用Retrofit+RxJava网络请求小结
                     </a>

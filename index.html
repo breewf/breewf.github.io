@@ -253,64 +253,6 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2016/09/11/judge-app-background/">
-                        判断App位于前台或后台的6种方法
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        <p>原文链接：<a href="https://github.com/wenmingvs/AndroidProcess">AndroidProcess</a></p>
-<h1 id="AndroidProcess"><a href="#AndroidProcess" class="headerlink" title="AndroidProcess"></a>AndroidProcess</h1><p>提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用</p>
-<p>最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，<a href="https://github.com/jaredrummler/AndroidProcesses">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择   </p>
-<p><strong>2016.2.11更新——感谢<a class="link"   target="_blank" rel="noopener" href="http://weibo.com/hatewx?refer_flag=1005050005_" >@EffectiveMatrix<i class="fas fa-external-link-alt"></i></a>大神带来的新的判断前后台的方法</strong>  </p>
-<h2 id="预览图"><a href="#预览图" class="headerlink" title="预览图"></a>预览图</h2><p><img src="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif" alt="enter image description here"></p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>传入Context参数与想要判断是否位于前台的App的包名,会返回ture或者false表示App是否位于前台</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//六种方法任选其一</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用方法一</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getRunningTask(context, packageName);</span><br><span class="line"><span class="comment">//使用方法二</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getRunningAppProcesses(context, packageName);</span><br><span class="line"><span class="comment">//使用方法三</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getApplicationValue(context);</span><br><span class="line"><span class="comment">//使用方法四</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.queryUsageStats(context, packageName);</span><br><span class="line"><span class="comment">//使用方法五</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getFromAccessibilityService(context, packageName);</span><br><span class="line"><span class="comment">//使用方法六</span></span><br><span class="line">Boolean isForeground = BackgroundUtil.getLinuxCoreInfo(context, packageName);</span><br></pre></td></tr></table></figure>
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Sep 11 2016 20:04:14 GMT+0800">2016-09-11</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%80%BB%E7%BB%93/">总结</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2016/09/11/judge-app-background/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2016/09/10/adb-command-data/">
                         ADB命令学习资料
                     </a>
@@ -682,6 +624,61 @@ hexo new “postName” #新建文章
     </div>
 
     <a href="/2016/04/06/app-dev-third-sup/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2016/03/28/view-measure/">
+                        Android获取View宽高的几种方式
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <p>通常，在我们想要获取一个view的宽高时，我们都会想到在oncreate()中使用view.getWidth()和view.getHeight()方法来获取。这看起来并没有什么问题，但它们的值却都为0，并不是我们想要的结果。为什么会这样呢？这是因为在oncreate()时view的绘制工作还未完成，也就获取不到我们想要view的宽高了。</p>
+<p>我们可以使用下面几种方式来获取view的宽高：</p>
+<h4 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h4><p>重写Activity中的onWindowFocusChanged()方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public <span class="keyword">void</span> <span class="function"><span class="title">onWindowFocusChanged</span>(<span class="params">boolean hasFocus</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onWindowFocusChanged(hasFocus);</span><br><span class="line">        Log.i(<span class="string">&quot;textView&quot;</span>, <span class="string">&quot;width--&gt;&gt;&quot;</span> + textView.getWidth() + <span class="string">&quot;--height--&gt;&gt;&quot;</span> + textView.getHeight());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Mar 28 2016 15:00:04 GMT+0800">2016-03-28</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/View/">View</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2016/03/28/view-measure/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
