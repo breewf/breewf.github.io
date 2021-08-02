@@ -22,7 +22,7 @@
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"breewf.github.io","root":"/breewf.github.io/","language":"zh-CN"};
+    KEEP.hexo_config = {"hostname":"github.com","root":"/breewf.github.io/","language":"zh-CN"};
     KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","favicon":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
   </script>
@@ -215,11 +215,11 @@
             <ul>
 <li>原文链接 : <a class="link"   target="_blank" rel="noopener" href="http://www.thedroidsonroids.com/blog/android/rxjava-production-line/" >RxJava – the production line<i class="fas fa-external-link-alt"></i></a></li>
 <li>原文作者 : <a href="">Mateusz Budzar</a></li>
-<li>译文出自 : <a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner">掘金翻译计划</a></li>
-<li>译者 : <a target="_blank" rel="noopener" href="https://github.com/Sausure">Sausure</a></li>
-<li>校对者 : <a target="_blank" rel="noopener" href="https://github.com/huanglizhuo">lizhuo</a>, <a target="_blank" rel="noopener" href="https://github.com/rockzhai">Rocky</a></li>
+<li>译文出自 : <a href="https://github.com/xitu/gold-miner">掘金翻译计划</a></li>
+<li>译者 : <a href="https://github.com/Sausure">Sausure</a></li>
+<li>校对者 : <a href="https://github.com/huanglizhuo">lizhuo</a>, <a href="https://github.com/rockzhai">Rocky</a></li>
 </ul>
-<h2 id="为什么另写一篇-RxJava-的文章"><a href="#为什么另写一篇-RxJava-的文章" class="headerlink" title="为什么另写一篇 RxJava 的文章?"></a>为什么另写一篇 RxJava 的文章?</h2><p>已经有很多<a target="_blank" rel="noopener" href="https://github.com/ReactiveX/RxJava"> RxJava </a>的文章通过例子阐述了什么是 RxJava 以及怎么去用，但它们大多数只有代码。虽然也会通过类比来解释，例如最出名的就是“流”。通常情况下代码能完美地让人理解（我们都是程序员，对吧？），但是 RxJava 十分不同于以往的 Android 开发。在最开始时通过代码是很难让人理解的，用“流”来类比并不足够，即使是<a class="link"   target="_blank" rel="noopener" href="http://rxmarbles.com/" > marbles <i class="fas fa-external-link-alt"></i></a>的例子也还远远不够。我可以保证自己能理解，但对于别人，老实说，难道你们不需要更多结合实际的例子？难道你们不想在脑海中举一个例子来让自己更好地理解 RxJava 吗？我做了，并且我想和你们分享。</p>
+<h2 id="为什么另写一篇-RxJava-的文章"><a href="#为什么另写一篇-RxJava-的文章" class="headerlink" title="为什么另写一篇 RxJava 的文章?"></a>为什么另写一篇 RxJava 的文章?</h2><p>已经有很多<a href="https://github.com/ReactiveX/RxJava"> RxJava </a>的文章通过例子阐述了什么是 RxJava 以及怎么去用，但它们大多数只有代码。虽然也会通过类比来解释，例如最出名的就是“流”。通常情况下代码能完美地让人理解（我们都是程序员，对吧？），但是 RxJava 十分不同于以往的 Android 开发。在最开始时通过代码是很难让人理解的，用“流”来类比并不足够，即使是<a class="link"   target="_blank" rel="noopener" href="http://rxmarbles.com/" > marbles <i class="fas fa-external-link-alt"></i></a>的例子也还远远不够。我可以保证自己能理解，但对于别人，老实说，难道你们不需要更多结合实际的例子？难道你们不想在脑海中举一个例子来让自己更好地理解 RxJava 吗？我做了，并且我想和你们分享。</p>
 <h2 id="工厂流水线"><a href="#工厂流水线" class="headerlink" title="工厂流水线"></a>工厂流水线</h2><p>好吧，我说谎了。为了理解 RxJava，我在脑海里举了不仅仅一个例子。例如我尝试观察动物园笼子的动物，尝试观察河流里的鱼，也尝试去观察蝙蝠侠里的犯罪（额，这不是现实生活中的，但不失为一个很好的例子）。但我还是认为工厂流水线是最好的例子。</p>
 <p><img src="http://ww1.sinaimg.cn/large/a490147fjw1f2ty3u29rzj20sg0fx0t6.jpg"></p>
 <span id="more"></span>
@@ -269,7 +269,7 @@
 </ul>
 <p>现在我们再仔细分析我们用过的每个操作符</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.map(<span class="keyword">new</span> Func1&lt;CatFactResponse, List&lt;String&gt;&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">call</span><span class="params">(CatFactResponse catFactResponse)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> catFactResponse.getFacts();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>有可能你会不适应那花俏的箭头所以我将完整的实现展开了（当然我们可以通过 Java8 的 lambda 表达式实现那种语法 - 详情见<a target="_blank" rel="noopener" href="https://github.com/evant/gradle-retrolambda"> retrolambda </a>）</p>
+<p>有可能你会不适应那花俏的箭头所以我将完整的实现展开了（当然我们可以通过 Java8 的 lambda 表达式实现那种语法 - 详情见<a href="https://github.com/evant/gradle-retrolambda"> retrolambda </a>）</p>
 <p>正如你说看到的， <em>mCatFactsService.getCatFacts()</em> 返回一串数据并被传到 <em>CatFactResponse</em> 中，但因为现在我们不需要 HTTP 状态码，所以我们通过 <strong>MAP</strong> （转换）操作符将 CatFactResponse 对象转换成别的对象 - 在这个例子中是 List <string> 对象。下一个操作符将会处理这个对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.flatMap(<span class="keyword">new</span> Func1&lt;List&lt;String&gt;, Observable&lt;? extends String&gt;&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Observable&lt;? extends String&gt; call(List&lt;String&gt; catFacts) &#123;</span><br><span class="line">            <span class="keyword">return</span> Observable.from(catFacts);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p><code>flatMap</code> 操作符接受猫的信息列表作为参数，分别取出列表的每条数据并抛给下一个操作符。所以我们拿到并抛出的数据都是 <strong>FROM</strong> （来自）这个列表的。</p>

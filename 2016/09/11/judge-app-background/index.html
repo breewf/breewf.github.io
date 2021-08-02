@@ -22,7 +22,7 @@
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"breewf.github.io","root":"/breewf.github.io/","language":"zh-CN"};
+    KEEP.hexo_config = {"hostname":"github.com","root":"/breewf.github.io/","language":"zh-CN"};
     KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","favicon":"https://avatars.githubusercontent.com/u/10130323?s=400&u=90608a86412bc1da2ca6aafec22b20e068463ce8&v=4","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
   </script>
@@ -212,9 +212,9 @@
         
 
         <div class="article-content markdown-body">
-            <p>原文链接：<a target="_blank" rel="noopener" href="https://github.com/wenmingvs/AndroidProcess">AndroidProcess</a></p>
+            <p>原文链接：<a href="https://github.com/wenmingvs/AndroidProcess">AndroidProcess</a></p>
 <h1 id="AndroidProcess"><a href="#AndroidProcess" class="headerlink" title="AndroidProcess"></a>AndroidProcess</h1><p>提供6种方法来判断App处于前台还是后台，并且封装成工具类供大家使用</p>
-<p>最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，<a target="_blank" rel="noopener" href="https://github.com/jaredrummler/AndroidProcesses">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择   </p>
+<p>最后一种方法堪称Android黑科技（非原创），既可以突破Android5.0以上的权限封锁，获取任意前台App的包名，又不需要权限，此方法并非我原创，原作者是国外的大神，<a href="https://github.com/jaredrummler/AndroidProcesses">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择   </p>
 <p><strong>2016.2.11更新——感谢<a class="link"   target="_blank" rel="noopener" href="http://weibo.com/hatewx?refer_flag=1005050005_" >@EffectiveMatrix<i class="fas fa-external-link-alt"></i></a>大神带来的新的判断前后台的方法</strong>  </p>
 <h2 id="预览图"><a href="#预览图" class="headerlink" title="预览图"></a>预览图</h2><p><img src="http://ww2.sinaimg.cn/large/691cc151gw1f09z4gz35mg20bc0h01kx.gif" alt="enter image description here"></p>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>传入Context参数与想要判断是否位于前台的App的包名,会返回ture或者false表示App是否位于前台</p>
@@ -314,7 +314,7 @@
 <li>辅助功能会伴随应用被“强行停止”而剥夺  </li>
 </ol>
 <h2 id="方法六：读取Linux系统内核保存在-proc目录下的process进程信息"><a href="#方法六：读取Linux系统内核保存在-proc目录下的process进程信息" class="headerlink" title="方法六：读取Linux系统内核保存在/proc目录下的process进程信息"></a>方法六：读取Linux系统内核保存在/proc目录下的process进程信息</h2><p><img src="http://ww3.sinaimg.cn/mw690/691cc151gw1f09z6bjz9rg20bc0h0b29.gif" alt="enter image description here"></p>
-<p>此方法并非我原创，原作者是国外的大神，<a target="_blank" rel="noopener" href="https://github.com/jaredrummler/AndroidProcesses">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择</p>
+<p>此方法并非我原创，原作者是国外的大神，<a href="https://github.com/jaredrummler/AndroidProcesses">GitHub项目在这里</a>，也一并加入到工程中，供大家做全面的参考选择</p>
 <p><strong>原理</strong><br>无意中看到乌云上有人提的一个漏洞，Linux系统内核会把process进程信息保存在/proc目录下，Shell命令去获取的他，再根据进程的属性判断是否为前台</p>
 <p><strong>优点</strong>  </p>
 <ol>
